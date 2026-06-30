@@ -97,9 +97,24 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw AuthException('Autentikasi Google gagal');
       }
 
-      final doc = await firestore.collection('users').doc(userCredential.user!.uid).get();
-      if (!doc.exists) {
-        final newUserModel = UserModel(
+      UserModel userModel;
+      try {
+        final doc = await firestore.collection('users').doc(userCredential.user!.uid).get();
+        if (doc.exists && doc.data() != null) {
+          userModel = UserModel.fromFirestore(doc.data()!, doc.id);
+        } else {
+          userModel = UserModel(
+            uid: userCredential.user!.uid,
+            email: userCredential.user!.email ?? '',
+            name: userCredential.user!.displayName ?? 'Pengguna Google',
+            role: 'both',
+            photoUrl: userCredential.user!.photoURL,
+            createdAt: DateTime.now(),
+          );
+          await firestore.collection('users').doc(userModel.uid).set(userModel.toFirestore(), SetOptions(merge: true));
+        }
+      } catch (_) {
+        userModel = UserModel(
           uid: userCredential.user!.uid,
           email: userCredential.user!.email ?? '',
           name: userCredential.user!.displayName ?? 'Pengguna Google',
@@ -107,11 +122,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           photoUrl: userCredential.user!.photoURL,
           createdAt: DateTime.now(),
         );
-        await firestore.collection('users').doc(newUserModel.uid).set(newUserModel.toFirestore());
-        return newUserModel;
-      } else {
-        return UserModel.fromFirestore(doc.data()!, doc.id);
       }
+      return userModel;
     } on AuthException {
       rethrow;
     } on FirebaseAuthException catch (e) {
@@ -166,20 +178,31 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   Future<UserModel> _getUserFromFirestore(User firebaseUser) async {
-    final doc = await firestore.collection('users').doc(firebaseUser.uid).get();
-    if (doc.exists && doc.data() != null) {
-      return UserModel.fromFirestore(doc.data()!, doc.id);
-    } else {
-      final fallbackUser = UserModel(
+    try {
+      final doc = await firestore.collection('users').doc(firebaseUser.uid).get();
+      if (doc.exists && doc.data() != null) {
+        return UserModel.fromFirestore(doc.data()!, doc.id);
+      } else {
+        final fallbackUser = UserModel(
+          uid: firebaseUser.uid,
+          email: firebaseUser.email ?? '',
+          name: firebaseUser.displayName ?? 'Pengguna',
+          role: 'both',
+          photoUrl: firebaseUser.photoURL,
+          createdAt: DateTime.now(),
+        );
+        await firestore.collection('users').doc(firebaseUser.uid).set(fallbackUser.toFirestore(), SetOptions(merge: true));
+        return fallbackUser;
+      }
+    } catch (_) {
+      return UserModel(
         uid: firebaseUser.uid,
         email: firebaseUser.email ?? '',
         name: firebaseUser.displayName ?? 'Pengguna',
-        role: 'pending',
+        role: 'both',
         photoUrl: firebaseUser.photoURL,
         createdAt: DateTime.now(),
       );
-      await firestore.collection('users').doc(firebaseUser.uid).set(fallbackUser.toFirestore());
-      return fallbackUser;
     }
   }
 }
