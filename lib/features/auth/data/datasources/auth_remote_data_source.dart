@@ -77,22 +77,32 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           'Login dengan Google tidak didukung di aplikasi Desktop Windows/Linux. Silakan gunakan Login dengan Email & Kata Sandi atau jalankan di Android / Web.');
     }
     try {
+      UserCredential userCredential;
+      // Coba dengan googleSignIn plugin terlebih dahulu (Android)
       try {
-        await googleSignIn.signOut();
-      } catch (_) {}
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      if (googleUser == null) {
-        throw AuthException('Login Google dibatalkan pengguna');
+        try {
+          await googleSignIn.signOut();
+        } catch (_) {}
+        final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+        if (googleUser == null) {
+          throw AuthException('Login Google dibatalkan pengguna');
+        }
+        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+        if (googleAuth.idToken == null && googleAuth.accessToken == null) {
+          throw AuthException('Token otentikasi Google tidak ditemukan');
+        }
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        userCredential = await firebaseAuth.signInWithCredential(credential);
+      } on AuthException {
+        rethrow;
+      } catch (_) {
+        // Fallback: gunakan Firebase signInWithProvider langsung
+        final GoogleAuthProvider googleProvider = GoogleAuthProvider();
+        userCredential = await firebaseAuth.signInWithProvider(googleProvider);
       }
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      if (googleAuth.idToken == null && googleAuth.accessToken == null) {
-        throw AuthException('Token otentikasi Google tidak ditemukan');
-      }
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      final userCredential = await firebaseAuth.signInWithCredential(credential);
       if (userCredential.user == null) {
         throw AuthException('Autentikasi Google gagal');
       }
