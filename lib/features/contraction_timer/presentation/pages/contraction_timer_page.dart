@@ -184,7 +184,7 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
                       decoration: BoxDecoration(
-                        color: isContraction ? AppTheme.primaryRose.withValues(alpha: 0.08) : Colors.white,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(28),
                         border: Border.all(
                           color: isContraction ? AppTheme.primaryRose : const Color(0xFFE2E8F0),
@@ -192,7 +192,7 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: (isContraction ? AppTheme.primaryRose : const Color(0xFF0F172A)).withValues(alpha: isContraction ? 0.15 : 0.04),
+                            color: const Color(0xFF0F172A).withValues(alpha: 0.04),
                             blurRadius: 20,
                             offset: const Offset(0, 8),
                           ),
@@ -300,12 +300,16 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                 Container(
                   padding: const EdgeInsets.all(22),
                   decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFFE0F2FE), Color(0xFFBAE6FD)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
+                    border: Border.all(color: const Color(0xFFE2E8F0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF0F172A).withValues(alpha: 0.04),
+                        blurRadius: 16,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
