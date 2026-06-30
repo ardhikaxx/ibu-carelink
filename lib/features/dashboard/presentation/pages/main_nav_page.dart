@@ -42,6 +42,34 @@ class _MainNavPageState extends State<MainNavPage> {
                   fit: BoxFit.cover,
                 ),
               ),
+              actions: [
+                InkWell(
+                  onTap: () => setState(() => _currentIndex = 3),
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    width: 38,
+                    height: 38,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppTheme.primaryRose.withValues(alpha: 0.35),
+                        width: 1.5,
+                      ),
+                    ),
+                    child: ClipOval(
+                      child: (widget.user.photoUrl != null && widget.user.photoUrl!.isNotEmpty)
+                          ? Image.network(
+                              widget.user.photoUrl!,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return _buildHeaderAvatar(widget.user.name);
+                              },
+                            )
+                          : _buildHeaderAvatar(widget.user.name),
+                    ),
+                  ),
+                ),
+              ],
             )
           : null,
       body: Column(
@@ -130,6 +158,22 @@ class _MainNavPageState extends State<MainNavPage> {
               ),
             ],
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeaderAvatar(String name) {
+    final initial = name.trim().isNotEmpty ? name.trim()[0].toUpperCase() : 'I';
+    return Container(
+      alignment: Alignment.center,
+      color: AppTheme.primaryRose.withValues(alpha: 0.12),
+      child: Text(
+        initial,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w800,
+          color: AppTheme.primaryRose,
         ),
       ),
     );
