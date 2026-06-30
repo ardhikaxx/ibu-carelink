@@ -78,8 +78,17 @@ class _EducationPageState extends State<EducationPage> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ClipOval(
-              child: Image.asset('assets/images/logo.png', width: 28, height: 28, fit: BoxFit.cover),
+            Container(
+              width: 36,
+              height: 36,
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.35), width: 1.5),
+              ),
+              child: ClipOval(
+                child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
+              ),
             ),
             const SizedBox(width: 10),
             const Text(
