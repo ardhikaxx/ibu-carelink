@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/constants.dart';
 import '../../../../core/utils/date_helper.dart';
 import '../../../../core/utils/theme.dart';
+import '../../../../core/widgets/custom_floating_header.dart';
 import '../../domain/entities/child_entity.dart';
 import '../../domain/entities/growth_log_entity.dart';
 
@@ -22,38 +23,30 @@ class GrowthChartPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         backgroundColor: const Color(0xFFF8FAFC),
-        appBar: AppBar(
-          title: Text(
-            'Kurva WHO (${child.name})',
-            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A)),
-          ),
-          backgroundColor: Colors.white,
-          foregroundColor: const Color(0xFF0F172A),
-          elevation: 0,
-          centerTitle: true,
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(56),
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xFFF1F5F9),
+        appBar: CustomFloatingHeader(
+          title: 'Kurva WHO (${child.name})',
+          showBackButton: true,
+          bottomHeight: 52,
+          bottomWidget: Container(
+            margin: const EdgeInsets.only(top: 4),
+            height: 40,
+            decoration: BoxDecoration(
+              color: const Color(0xFFF1F5F9),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: TabBar(
+              indicator: BoxDecoration(
+                color: const Color(0xFF0F172A),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: TabBar(
-                indicator: BoxDecoration(
-                  color: const Color(0xFF0F172A),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                indicatorSize: TabBarIndicatorSize.tab,
-                dividerColor: Colors.transparent,
-                labelStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12.5, color: Colors.white),
-                unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5, color: Color(0xFF64748B)),
-                tabs: const [
-                  Tab(text: 'Tinggi Badan (TB/U)'),
-                  Tab(text: 'Berat Badan (BB/U)'),
-                ],
-              ),
+              indicatorSize: TabBarIndicatorSize.tab,
+              dividerColor: Colors.transparent,
+              labelStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12.5, color: Colors.white),
+              unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5, color: Color(0xFF64748B)),
+              tabs: const [
+                Tab(text: 'Tinggi Badan (TB/U)'),
+                Tab(text: 'Berat Badan (BB/U)'),
+              ],
             ),
           ),
         ),

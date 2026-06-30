@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/utils/theme.dart';
+import '../../../../core/widgets/custom_floating_header.dart';
 
 class Article {
   final String title;
@@ -74,36 +75,20 @@ class _EducationPageState extends State<EducationPage> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 36,
-              height: 36,
-              padding: const EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.35), width: 1.5),
-              ),
-              child: ClipOval(
-                child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
-              ),
-            ),
-            const SizedBox(width: 10),
-            const Text(
-              'Edukasi Ibu CareLink',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A)),
-            ),
-          ],
-        ),
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF0F172A),
-        elevation: 0,
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(color: const Color(0xFFE2E8F0), height: 1),
+      appBar: CustomFloatingHeader(
+        title: 'Edukasi Ibu CareLink',
+        showBackButton: false,
+        leading: Container(
+          width: 36,
+          height: 36,
+          padding: const EdgeInsets.all(2),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.35), width: 1.5),
+          ),
+          child: ClipOval(
+            child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
+          ),
         ),
       ),
       body: Column(

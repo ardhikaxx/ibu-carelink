@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../core/utils/date_helper.dart';
 import '../../../../core/utils/theme.dart';
+import '../../../../core/widgets/custom_floating_header.dart';
 import '../../domain/entities/child_entity.dart';
 import '../../domain/entities/growth_log_entity.dart';
 import '../bloc/child_growth_bloc.dart';
@@ -85,19 +86,9 @@ class _AddGrowthLogPageState extends State<AddGrowthLogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        title: Text(
-          widget.initialLog != null ? 'Edit Pengukuran (${widget.child.name})' : 'Catat Antropometri (${widget.child.name})',
-          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A)),
-        ),
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF0F172A),
-        elevation: 0,
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(color: const Color(0xFFE2E8F0), height: 1),
-        ),
+      appBar: CustomFloatingHeader(
+        title: widget.initialLog != null ? 'Edit Pengukuran (${widget.child.name})' : 'Catat Antropometri (${widget.child.name})',
+        showBackButton: true,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),

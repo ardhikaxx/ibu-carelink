@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/date_helper.dart';
 import '../../../../core/utils/theme.dart';
+import '../../../../core/widgets/custom_floating_header.dart';
 import '../bloc/contraction_timer_bloc.dart';
 import '../bloc/contraction_timer_event.dart';
 import '../bloc/contraction_timer_state.dart';
@@ -39,16 +40,9 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        title: const Text('Pengatur Waktu Kontraksi', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A))),
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF0F172A),
-        elevation: 0,
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(color: const Color(0xFFF1F5F9), height: 1),
-        ),
+      appBar: const CustomFloatingHeader(
+        title: 'Pengatur Waktu Kontraksi',
+        showBackButton: true,
       ),
       body: BlocConsumer<ContractionTimerBloc, ContractionTimerState>(
         listener: (context, state) {

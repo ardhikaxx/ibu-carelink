@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/utils/theme.dart';
+import '../../../../core/widgets/custom_floating_header.dart';
 import '../../../auth/domain/entities/user_entity.dart';
 import '../../../child_growth/presentation/pages/child_dashboard_page.dart';
 import '../../../education/presentation/pages/education_page.dart';
@@ -30,40 +31,20 @@ class _MainNavPageState extends State<MainNavPage> {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: (_currentIndex == 0 || _currentIndex == 1)
-          ? AppBar(
-              backgroundColor: Colors.white,
-              foregroundColor: const Color(0xFF0F172A),
-              elevation: 0,
-              centerTitle: false,
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(1),
-                child: Container(color: const Color(0xFFF1F5F9), height: 1),
-              ),
-              title: Row(
-                children: [
-                  Container(
-                    width: 38,
-                    height: 38,
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.35), width: 1.5),
-                    ),
-                    child: ClipOval(
-                      child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  const Text(
-                    'Ibu CareLink',
-                    style: TextStyle(
-                      color: Color(0xFF0F172A),
-                      fontWeight: FontWeight.w900,
-                      fontSize: 19,
-                      letterSpacing: -0.4,
-                    ),
-                  ),
-                ],
+          ? CustomFloatingHeader(
+              title: 'Ibu CareLink',
+              showBackButton: false,
+              leading: Container(
+                width: 36,
+                height: 36,
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.35), width: 1.5),
+                ),
+                child: ClipOval(
+                  child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
+                ),
               ),
             )
           : null,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/theme.dart';
+import '../../../../core/widgets/custom_floating_header.dart';
 import '../../../child_growth/domain/entities/child_entity.dart';
 import '../bloc/milestone_bloc.dart';
 import '../bloc/milestone_event.dart';
@@ -32,16 +33,9 @@ class _MilestonePageState extends State<MilestonePage> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        title: Text('Perkembangan KPSP (${widget.child.name})', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 17, color: Color(0xFF0F172A))),
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF0F172A),
-        elevation: 0,
-        centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(color: const Color(0xFFF1F5F9), height: 1),
-        ),
+      appBar: CustomFloatingHeader(
+        title: 'Perkembangan KPSP (${widget.child.name})',
+        showBackButton: true,
       ),
       body: BlocBuilder<MilestoneBloc, MilestoneState>(
         builder: (context, state) {
