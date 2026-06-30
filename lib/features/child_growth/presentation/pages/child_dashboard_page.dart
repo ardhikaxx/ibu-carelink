@@ -687,7 +687,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: state.logs.length,
                         itemBuilder: (context, index) {
-                          final item = state.logs[state.logs.length - 1 - index];
+                          final item = state.logs.reversed.elementAt(index);
                           final zSt = item.evaluation?.hfaStatus ?? ZScoreClassification.normal;
                           final isNormal = zSt == ZScoreClassification.normal;
                           return Material(

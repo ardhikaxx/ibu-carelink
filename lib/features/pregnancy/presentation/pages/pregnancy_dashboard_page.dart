@@ -509,6 +509,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.symptomLogs.length,
                         itemBuilder: (context, index) {
                           final log = state.symptomLogs[index];
                           return Material(
