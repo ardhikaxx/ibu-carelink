@@ -82,24 +82,27 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Logo / Icon Header
+                      // Logo Header
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        width: 110,
+                        height: 110,
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: AppTheme.primaryRose.withValues(alpha: 0.2),
+                              color: AppTheme.primaryTeal.withValues(alpha: 0.25),
                               blurRadius: 24,
                               offset: const Offset(0, 10),
                             ),
                           ],
                         ),
-                        child: const Icon(
-                          Icons.favorite_rounded,
-                          size: 56,
-                          color: AppTheme.primaryRose,
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/images/logo.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -165,45 +168,54 @@ class _LoginPageState extends State<LoginPage> {
                             const SizedBox(height: 24),
                             BlocBuilder<AuthBloc, AuthState>(
                               builder: (context, state) {
-                                if (state is AuthLoading) {
-                                  return const Center(child: CircularProgressIndicator(color: AppTheme.primaryRose));
-                                }
-                                return SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    onPressed: _onLogin,
-                                    child: const Text('Masuk ke Akun'),
-                                  ),
+                                final isLoading = state is AuthLoading;
+                                return Column(
+                                  children: [
+                                    if (isLoading)
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 12),
+                                        child: CircularProgressIndicator(color: AppTheme.primaryRose),
+                                      )
+                                    else ...[
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: ElevatedButton(
+                                          onPressed: _onLogin,
+                                          child: const Text('Masuk ke Akun'),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Row(
+                                        children: [
+                                          Expanded(child: Divider(color: Colors.grey.shade300)),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                                            child: Text('ATAU', style: TextStyle(color: Colors.grey.shade500, fontSize: 12)),
+                                          ),
+                                          Expanded(child: Divider(color: Colors.grey.shade300)),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 16),
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: OutlinedButton.icon(
+                                          style: OutlinedButton.styleFrom(
+                                            padding: const EdgeInsets.symmetric(vertical: 14),
+                                            side: BorderSide(color: Colors.grey.shade300, width: 1.5),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                          ),
+                                          onPressed: _onGoogleLogin,
+                                          icon: const Icon(Icons.g_mobiledata_rounded, size: 28, color: Color(0xFFEA4335)),
+                                          label: const Text(
+                                            'Masuk dengan Google',
+                                            style: TextStyle(color: Color(0xFF0F172A), fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ],
                                 );
                               },
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Expanded(child: Divider(color: Colors.grey.shade300)),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                                  child: Text('ATAU', style: TextStyle(color: Colors.grey.shade500, fontSize: 12)),
-                                ),
-                                Expanded(child: Divider(color: Colors.grey.shade300)),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            SizedBox(
-                              width: double.infinity,
-                              child: OutlinedButton.icon(
-                                style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 14),
-                                  side: BorderSide(color: Colors.grey.shade300, width: 1.5),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                                ),
-                                onPressed: _onGoogleLogin,
-                                icon: const Icon(Icons.g_mobiledata_rounded, size: 28, color: Color(0xFFEA4335)),
-                                label: const Text(
-                                  'Masuk dengan Google',
-                                  style: TextStyle(color: Color(0xFF0F172A), fontWeight: FontWeight.w600),
-                                ),
-                              ),
                             ),
                           ],
                         ),
