@@ -10,6 +10,7 @@ import 'features/auth/presentation/pages/login_page.dart';
 import 'features/child_growth/presentation/bloc/child_growth_bloc.dart';
 import 'features/contraction_timer/presentation/bloc/contraction_timer_bloc.dart';
 import 'features/dashboard/presentation/pages/main_nav_page.dart';
+import 'features/emergency/presentation/bloc/emergency_bloc.dart';
 import 'features/immunization/presentation/bloc/immunization_bloc.dart';
 import 'features/kick_counter/presentation/bloc/kick_counter_bloc.dart';
 import 'features/milestones/presentation/bloc/milestone_bloc.dart';
@@ -54,6 +55,9 @@ class IbuCareLinkApp extends StatelessWidget {
         ),
         BlocProvider<SyncBloc>(
           create: (_) => di.sl<SyncBloc>(),
+        ),
+        BlocProvider<EmergencyBloc>(
+          create: (_) => di.sl<EmergencyBloc>(),
         ),
       ],
       child: MaterialApp(

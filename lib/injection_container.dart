@@ -63,6 +63,15 @@ import 'features/milestones/presentation/bloc/milestone_bloc.dart';
 // Sync
 import 'features/sync/presentation/bloc/sync_bloc.dart';
 
+// Emergency
+import 'features/emergency/data/datasources/emergency_remote_data_source.dart';
+import 'features/emergency/data/repositories/emergency_repository_impl.dart';
+import 'features/emergency/data/services/location_service_impl.dart';
+import 'features/emergency/domain/repositories/emergency_repository.dart';
+import 'features/emergency/domain/services/location_service.dart';
+import 'features/emergency/domain/usecases/trigger_sos_alert.dart';
+import 'features/emergency/presentation/bloc/emergency_bloc.dart';
+
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -116,6 +125,12 @@ Future<void> init() async {
   sl.registerLazySingleton<MilestoneRemoteDataSource>(
     () => MilestoneRemoteDataSourceImpl(firestore: sl()),
   );
+  sl.registerLazySingleton<EmergencyRemoteDataSource>(
+    () => EmergencyRemoteDataSourceImpl(firestore: sl(), auth: sl()),
+  );
+  sl.registerLazySingleton<LocationService>(
+    () => LocationServiceImpl(),
+  );
 
   //! Repositories
   sl.registerLazySingleton<AuthRepository>(
@@ -138,6 +153,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<MilestoneRepository>(
     () => MilestoneRepositoryImpl(remoteDataSource: sl(), localDataSource: sl()),
+  );
+  sl.registerLazySingleton<EmergencyRepository>(
+    () => EmergencyRepositoryImpl(remoteDataSource: sl()),
   );
 
   //! Use Cases
@@ -169,6 +187,7 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => GetMilestonesUseCase(sl()));
   sl.registerLazySingleton(() => ToggleMilestoneUseCase(sl()));
+  sl.registerLazySingleton(() => TriggerSosAlert(repository: sl(), locationService: sl()));
 
   //! BLoCs
   sl.registerFactory(() => AuthBloc(
@@ -207,5 +226,6 @@ Future<void> init() async {
         getMilestonesUseCase: sl(),
         toggleMilestoneUseCase: sl(),
       ));
+  sl.registerFactory(() => EmergencyBloc(triggerSosAlert: sl()));
   sl.registerLazySingleton(() => SyncBloc());
 }

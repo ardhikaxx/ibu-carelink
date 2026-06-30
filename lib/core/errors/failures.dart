@@ -27,3 +27,7 @@ class NetworkFailure extends Failure {
 class ValidationFailure extends Failure {
   const ValidationFailure(super.message);
 }
+
+class PermissionFailure extends Failure {
+  const PermissionFailure([super.message = 'Izin akses ditolak']);
+}
