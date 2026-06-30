@@ -102,23 +102,28 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: AppTheme.primaryRose.withValues(alpha: 0.12),
-                              borderRadius: BorderRadius.circular(10),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: AppTheme.primaryRose.withValues(alpha: 0.12),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(Icons.sick_rounded, color: AppTheme.primaryRose, size: 20),
                             ),
-                            child: const Icon(Icons.sick_rounded, color: AppTheme.primaryRose, size: 20),
-                          ),
-                          const SizedBox(width: 12),
-                          const Text(
-                            'Tingkat Mual / Morning Sickness',
-                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF0F172A)),
-                          ),
-                        ],
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Text(
+                                'Tingkat Mual / Morning Sickness',
+                                style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF0F172A)),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
@@ -178,23 +183,28 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: AppTheme.primaryTeal.withValues(alpha: 0.12),
-                              borderRadius: BorderRadius.circular(10),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(Icons.battery_3_bar_rounded, color: AppTheme.primaryTeal, size: 20),
                             ),
-                            child: const Icon(Icons.battery_3_bar_rounded, color: AppTheme.primaryTeal, size: 20),
-                          ),
-                          const SizedBox(width: 12),
-                          const Text(
-                            'Tingkat Kelelahan Fisik',
-                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF0F172A)),
-                          ),
-                        ],
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Text(
+                                'Tingkat Kelelahan Fisik',
+                                style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF0F172A)),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
