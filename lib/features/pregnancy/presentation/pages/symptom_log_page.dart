@@ -10,17 +10,32 @@ class SymptomLogPage extends StatefulWidget {
   final String pregnancyId;
   final String userId;
 
-  const SymptomLogPage({super.key, required this.pregnancyId, required this.userId});
+  final SymptomLogEntity? initialLog;
+
+  const SymptomLogPage({super.key, required this.pregnancyId, required this.userId, this.initialLog});
 
   @override
   State<SymptomLogPage> createState() => _SymptomLogPageState();
 }
 
 class _SymptomLogPageState extends State<SymptomLogPage> {
+  DateTime _date = DateTime.now();
   int _nauseaLevel = 1;
   int _fatigueLevel = 1;
   final _moodController = TextEditingController();
   final List<String> _selectedTriggers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialLog != null) {
+      _date = widget.initialLog!.date;
+      _nauseaLevel = widget.initialLog!.nauseaLevel;
+      _fatigueLevel = widget.initialLog!.fatigueLevel;
+      _moodController.text = widget.initialLog!.moodNote;
+      _selectedTriggers.addAll(widget.initialLog!.triggers);
+    }
+  }
 
   final List<String> _commonTriggers = [
     'Bau Masakan',
@@ -40,9 +55,9 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
 
   void _saveLog() {
     final log = SymptomLogEntity(
-      id: const Uuid().v4(),
+      id: widget.initialLog?.id ?? const Uuid().v4(),
       pregnancyId: widget.pregnancyId,
-      date: DateTime.now(),
+      date: _date,
       nauseaLevel: _nauseaLevel,
       fatigueLevel: _fatigueLevel,
       moodNote: _moodController.text.trim(),
@@ -58,9 +73,9 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: const Text(
-          'Catat Gejala Harian',
-          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A)),
+        title: Text(
+          widget.initialLog != null ? 'Edit Gejala Harian' : 'Catat Gejala Harian',
+          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A)),
         ),
         backgroundColor: Colors.white,
         foregroundColor: const Color(0xFF0F172A),
@@ -374,7 +389,7 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                 ),
                 onPressed: _saveLog,
                 icon: const Icon(Icons.check_circle_rounded, size: 20),
-                label: const Text('Simpan Catatan Gejala', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                label: Text(widget.initialLog != null ? 'Simpan Perubahan Gejala' : 'Simpan Catatan Gejala', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
               ),
             ),
             const SizedBox(height: 20),

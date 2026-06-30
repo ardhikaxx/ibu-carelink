@@ -77,6 +77,11 @@ class ChildGrowthRepositoryImpl implements ChildGrowthRepository {
         childOrder: child.childOrder,
       );
       final remote = await remoteDataSource.logGrowth(logModel, childModel, userId);
+      try {
+        final existing = await localDataSource.getCachedGrowthLogs(child.id);
+        final updated = [remote, ...existing.where((x) => x.id != remote.id)];
+        await localDataSource.cacheGrowthLogs(child.id, updated);
+      } catch (_) {}
       return Right(remote);
     } catch (e) {
       return Left(ServerFailure(e.toString()));

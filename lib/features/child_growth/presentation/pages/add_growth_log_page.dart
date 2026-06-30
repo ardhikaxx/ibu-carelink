@@ -12,7 +12,9 @@ class AddGrowthLogPage extends StatefulWidget {
   final ChildEntity child;
   final String userId;
 
-  const AddGrowthLogPage({super.key, required this.child, required this.userId});
+  final GrowthLogEntity? initialLog;
+
+  const AddGrowthLogPage({super.key, required this.child, required this.userId, this.initialLog});
 
   @override
   State<AddGrowthLogPage> createState() => _AddGrowthLogPageState();
@@ -23,6 +25,19 @@ class _AddGrowthLogPageState extends State<AddGrowthLogPage> {
   final _weightController = TextEditingController();
   final _heightController = TextEditingController();
   final _headController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialLog != null) {
+      _date = widget.initialLog!.measurementDate;
+      _weightController.text = widget.initialLog!.weightKg.toString();
+      _heightController.text = widget.initialLog!.heightCm.toString();
+      if (widget.initialLog!.headCircumferenceCm > 0) {
+        _headController.text = widget.initialLog!.headCircumferenceCm.toString();
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -50,7 +65,7 @@ class _AddGrowthLogPageState extends State<AddGrowthLogPage> {
     }
 
     final log = GrowthLogEntity(
-      id: const Uuid().v4(),
+      id: widget.initialLog?.id ?? const Uuid().v4(),
       childId: widget.child.id,
       measurementDate: _date,
       weightKg: w,
@@ -72,7 +87,7 @@ class _AddGrowthLogPageState extends State<AddGrowthLogPage> {
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
         title: Text(
-          'Catat Antropometri (${widget.child.name})',
+          widget.initialLog != null ? 'Edit Pengukuran (${widget.child.name})' : 'Catat Antropometri (${widget.child.name})',
           style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A)),
         ),
         backgroundColor: Colors.white,
@@ -352,7 +367,7 @@ class _AddGrowthLogPageState extends State<AddGrowthLogPage> {
                 ),
                 onPressed: _saveLog,
                 icon: const Icon(Icons.check_circle_rounded, size: 20),
-                label: const Text('Simpan & Evaluasi Z-Score', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                label: Text(widget.initialLog != null ? 'Simpan Perubahan' : 'Simpan & Evaluasi Z-Score', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
               ),
             ),
             const SizedBox(height: 20),

@@ -640,7 +640,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                       children: [
                         const Text(
                           'Riwayat Pengukuran',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF0F172A)),
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppTheme.primaryRose),
                         ),
                         InkWell(
                           onTap: () {
@@ -690,61 +690,84 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                           final item = state.logs[state.logs.length - 1 - index];
                           final zSt = item.evaluation?.hfaStatus ?? ZScoreClassification.normal;
                           final isNormal = zSt == ZScoreClassification.normal;
-                          return Container(
-                            margin: const EdgeInsets.only(bottom: 12),
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
+                          return Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => AddGrowthLogPage(child: selected, userId: widget.userId, initialLog: item),
+                                  ),
+                                );
+                              },
                               borderRadius: BorderRadius.circular(18),
-                              border: Border.all(color: const Color(0xFFF1F5F9)),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    color: isNormal ? const Color(0xFFECFDF5) : const Color(0xFFFEF2F2),
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  child: Icon(
-                                    Icons.straighten_rounded,
-                                    color: isNormal ? AppTheme.successGreen : AppTheme.errorRed,
-                                    size: 20,
-                                  ),
+                              child: Container(
+                                margin: const EdgeInsets.only(bottom: 12),
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(18),
+                                  border: Border.all(color: const Color(0xFFF1F5F9)),
                                 ),
-                                const SizedBox(width: 14),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${item.weightKg} kg • ${item.heightCm} cm • LK ${item.headCircumferenceCm} cm',
-                                        style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF0F172A)),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: isNormal ? const Color(0xFFECFDF5) : const Color(0xFFFEF2F2),
+                                        borderRadius: BorderRadius.circular(14),
                                       ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        DateHelper.formatIndonesianDate(item.measurementDate),
-                                        style: const TextStyle(color: Color(0xFF64748B), fontSize: 12),
+                                      child: Icon(
+                                        Icons.straighten_rounded,
+                                        color: isNormal ? AppTheme.successGreen : AppTheme.errorRed,
+                                        size: 20,
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                    color: isNormal ? const Color(0xFFECFDF5) : const Color(0xFFFEF2F2),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    isNormal ? 'WHO Normal' : 'WHO Perhatian',
-                                    style: TextStyle(
-                                      color: isNormal ? AppTheme.successGreen : AppTheme.errorRed,
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w700,
                                     ),
-                                  ),
+                                    const SizedBox(width: 14),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '${item.weightKg} kg • ${item.heightCm} cm • LK ${item.headCircumferenceCm} cm',
+                                            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: AppTheme.primaryRose),
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            DateHelper.formatIndonesianDate(item.measurementDate),
+                                            style: const TextStyle(color: Color(0xFF64748B), fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      decoration: BoxDecoration(
+                                        color: isNormal ? const Color(0xFFECFDF5) : const Color(0xFFFEF2F2),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Text(
+                                        isNormal ? 'WHO Normal' : 'Perhatian',
+                                        style: TextStyle(
+                                          color: isNormal ? AppTheme.successGreen : AppTheme.errorRed,
+                                          fontSize: 10.5,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Container(
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.primaryRose.withValues(alpha: 0.1),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: const Icon(Icons.edit_rounded, size: 16, color: AppTheme.primaryRose),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           );
                         },

@@ -459,7 +459,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                       children: [
                         const Text(
                           'Diari Gejala Maternal',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF0F172A)),
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppTheme.primaryRose),
                         ),
                         InkWell(
                           onTap: () {
@@ -509,60 +509,82 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.symptomLogs.length,
                         itemBuilder: (context, index) {
                           final log = state.symptomLogs[index];
-                          return Container(
-                            margin: const EdgeInsets.only(bottom: 12),
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
+                          return Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => SymptomLogPage(pregnancyId: pregnancy.id, userId: widget.userId, initialLog: log),
+                                  ),
+                                );
+                              },
                               borderRadius: BorderRadius.circular(18),
-                              border: Border.all(color: const Color(0xFFF1F5F9)),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              child: Container(
+                                margin: const EdgeInsets.only(bottom: 12),
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(18),
+                                  border: Border.all(color: const Color(0xFFF1F5F9)),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      DateHelper.formatIndonesianDate(log.date),
-                                      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF0F172A)),
-                                    ),
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        _buildBadge('Mual ${log.nauseaLevel}/5', AppTheme.primaryRose),
-                                        const SizedBox(width: 6),
-                                        _buildBadge('Lelah ${log.fatigueLevel}/5', AppTheme.primaryRose),
+                                        Text(
+                                          DateHelper.formatIndonesianDate(log.date),
+                                          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: AppTheme.primaryRose),
+                                        ),
+                                        Row(
+                                          children: [
+                                            _buildBadge('Mual ${log.nauseaLevel}/5', AppTheme.primaryRose),
+                                            const SizedBox(width: 6),
+                                            _buildBadge('Lelah ${log.fatigueLevel}/5', AppTheme.primaryRose),
+                                            const SizedBox(width: 8),
+                                            Container(
+                                              padding: const EdgeInsets.all(6),
+                                              decoration: BoxDecoration(
+                                                color: AppTheme.primaryRose.withValues(alpha: 0.1),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: const Icon(Icons.edit_rounded, size: 16, color: AppTheme.primaryRose),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
+                                    if (log.triggers.isNotEmpty) ...[
+                                      const SizedBox(height: 12),
+                                      Wrap(
+                                        spacing: 6,
+                                        runSpacing: 6,
+                                        children: log.triggers.map((t) => Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFF8FAFC),
+                                            borderRadius: BorderRadius.circular(8),
+                                            border: Border.all(color: const Color(0xFFF1F5F9)),
+                                          ),
+                                          child: Text(t, style: const TextStyle(fontSize: 11, color: Color(0xFF475569), fontWeight: FontWeight.w600)),
+                                        )).toList(),
+                                      ),
+                                    ],
+                                    if (log.moodNote.isNotEmpty) ...[
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        '"${log.moodNote}"',
+                                        style: const TextStyle(fontStyle: FontStyle.italic, color: Color(0xFF64748B), fontSize: 12),
+                                      ),
+                                    ],
                                   ],
                                 ),
-                                if (log.triggers.isNotEmpty) ...[
-                                  const SizedBox(height: 12),
-                                  Wrap(
-                                    spacing: 6,
-                                    runSpacing: 6,
-                                    children: log.triggers.map((t) => Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFF8FAFC),
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(color: const Color(0xFFF1F5F9)),
-                                      ),
-                                      child: Text(t, style: const TextStyle(fontSize: 11, color: Color(0xFF475569), fontWeight: FontWeight.w600)),
-                                    )).toList(),
-                                  ),
-                                ],
-                                if (log.moodNote.isNotEmpty) ...[
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    '"${log.moodNote}"',
-                                    style: const TextStyle(fontStyle: FontStyle.italic, color: Color(0xFF64748B), fontSize: 12),
-                                  ),
-                                ],
-                              ],
+                              ),
                             ),
                           );
                         },
