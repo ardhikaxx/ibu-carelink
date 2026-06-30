@@ -21,17 +21,24 @@ class GrowthChartPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: const Color(0xFFF8FAFC),
         appBar: AppBar(
-          title: Text('Kurva Pertumbuhan WHO (${child.name})'),
-          backgroundColor: AppTheme.primaryTeal,
-          foregroundColor: Colors.white,
-          bottom: const TabBar(
-            indicatorColor: Colors.white,
-            labelStyle: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-            unselectedLabelStyle: TextStyle(color: Colors.white70),
-            tabs: [
-              Tab(text: 'Kurva Tinggi Badan (TB/U)'),
-              Tab(text: 'Kurva Berat Badan (BB/U)'),
+          title: Text(
+            'Kurva WHO (${child.name})',
+            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A)),
+          ),
+          backgroundColor: Colors.white,
+          foregroundColor: const Color(0xFF0F172A),
+          elevation: 0,
+          centerTitle: true,
+          bottom: TabBar(
+            indicatorColor: const Color(0xFF0F172A),
+            indicatorWeight: 2.5,
+            labelStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: Color(0xFF0F172A)),
+            unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Color(0xFF64748B)),
+            tabs: const [
+              Tab(text: 'Tinggi Badan (TB/U)'),
+              Tab(text: 'Berat Badan (BB/U)'),
             ],
           ),
         ),
@@ -57,8 +64,13 @@ class GrowthChartPage extends StatelessWidget {
     );
   }
 
-  Widget _buildChartTab(BuildContext context, {required String title, required String yLabel, required Map<int, List<double>> refMap, required bool isHeight}) {
-    // Generate reference lines (-2SD, Median, +2SD)
+  Widget _buildChartTab(
+    BuildContext context, {
+    required String title,
+    required String yLabel,
+    required Map<int, List<double>> refMap,
+    required bool isHeight,
+  }) {
     final months = [0, 6, 12, 24, 36, 60];
     final List<FlSpot> minus2SdSpots = [];
     final List<FlSpot> medianSpots = [];
@@ -72,7 +84,6 @@ class GrowthChartPage extends StatelessWidget {
       }
     }
 
-    // Actual user logs
     final List<FlSpot> actualSpots = [];
     for (var log in logs) {
       final m = DateHelper.calculateAgeInMonths(child.dateOfBirth, currentDate: log.measurementDate);
@@ -82,74 +93,99 @@ class GrowthChartPage extends StatelessWidget {
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
+      physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
-          const SizedBox(height: 6),
-          Text(
-            'Kurva standar WHO membedakan batas normal warna hijau, kuning (waspada), dan merah (di bawah -2 SD).',
-            style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
-          ),
-          const SizedBox(height: 20),
-
-          // Legend
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildLegendItem(Colors.green, 'Median (Normal)'),
-              _buildLegendItem(Colors.orange, '+2 SD / Batas Atas'),
-              _buildLegendItem(AppTheme.errorRed, '-2 SD (Batas Bawah)'),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildLegendItem(AppTheme.primaryTeal, '• Aktual Anak (${child.name})', isCircle: true),
-            ],
-          ),
-          const SizedBox(height: 24),
-
-          // Chart
+          // Title & Info Card
           Container(
-            height: 350,
-            padding: const EdgeInsets.only(right: 16, top: 16, bottom: 8),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10)],
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: const Color(0xFFF1F5F9)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: Color(0xFF0F172A))),
+                const SizedBox(height: 6),
+                const Text(
+                  'Standar antropometri WHO memetakan zona hijau (median optimal), kuning (waspada +2 SD), dan merah (< -2 SD stunting/gizi kurang).',
+                  style: TextStyle(color: Color(0xFF64748B), fontSize: 12.5, height: 1.5),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // Editorial Legend Pills
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _buildLegendPill(color: AppTheme.successGreen, label: 'Median WHO (Normal)'),
+              _buildLegendPill(color: const Color(0xFFF59E0B), label: '+2 SD (Batas Atas)', isDash: true),
+              _buildLegendPill(color: AppTheme.errorRed, label: '-2 SD (Batas Intervensi)', isDash: true),
+              _buildLegendPill(color: AppTheme.primaryTeal, label: 'Aktual (${child.name})', isCircle: true),
+            ],
+          ),
+          const SizedBox(height: 18),
+
+          // Chart Container
+          Container(
+            height: 360,
+            padding: const EdgeInsets.only(right: 20, top: 24, bottom: 12, left: 6),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: const Color(0xFFF1F5F9)),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF0F172A).withValues(alpha: 0.04),
+                  blurRadius: 20,
+                  offset: const Offset(0, 8),
+                ),
+              ],
             ),
             child: LineChart(
               LineChartData(
-                gridData: const FlGridData(show: true, drawVerticalLine: true),
+                gridData: FlGridData(
+                  show: true,
+                  drawVerticalLine: true,
+                  getDrawingHorizontalLine: (val) => FlLine(color: const Color(0xFFF1F5F9), strokeWidth: 1),
+                  getDrawingVerticalLine: (val) => FlLine(color: const Color(0xFFF1F5F9), strokeWidth: 1),
+                ),
                 titlesData: FlTitlesData(
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 30,
+                      reservedSize: 32,
                       interval: 12,
-                      getTitlesWidget: (val, meta) => Text('${val.toInt()} bln', style: const TextStyle(fontSize: 10)),
+                      getTitlesWidget: (val, meta) => Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text('${val.toInt()} bln', style: const TextStyle(fontSize: 11, color: Color(0xFF64748B), fontWeight: FontWeight.w600)),
+                      ),
                     ),
                   ),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 40,
-                      getTitlesWidget: (val, meta) => Text('${val.toInt()}', style: const TextStyle(fontSize: 10)),
+                      reservedSize: 42,
+                      getTitlesWidget: (val, meta) => Text('${val.toInt()}', style: const TextStyle(fontSize: 11, color: Color(0xFF64748B), fontWeight: FontWeight.w600)),
                     ),
                   ),
                   topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                   rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                 ),
-                borderData: FlBorderData(show: true, border: Border.all(color: Colors.grey.shade300)),
+                borderData: FlBorderData(show: true, border: Border.all(color: const Color(0xFFE2E8F0))),
                 lineBarsData: [
                   // Median WHO
                   LineChartBarData(
                     spots: medianSpots,
                     isCurved: true,
-                    color: Colors.green,
-                    barWidth: 2,
+                    color: AppTheme.successGreen,
+                    barWidth: 2.5,
                     dotData: const FlDotData(show: false),
                   ),
                   // -2 SD WHO
@@ -165,63 +201,103 @@ class GrowthChartPage extends StatelessWidget {
                   LineChartBarData(
                     spots: plus2SdSpots,
                     isCurved: true,
-                    color: Colors.orange,
-                    barWidth: 1.5,
+                    color: const Color(0xFFF59E0B),
+                    barWidth: 2,
                     dashArray: [5, 5],
                     dotData: const FlDotData(show: false),
                   ),
-                  // Actual Spots
+                  // Actual User Spots
                   if (actualSpots.isNotEmpty)
                     LineChartBarData(
                       spots: actualSpots,
                       isCurved: false,
                       color: AppTheme.primaryTeal,
-                      barWidth: 3.5,
-                      dotData: const FlDotData(show: true),
+                      barWidth: 4,
+                      dotData: FlDotData(
+                        show: true,
+                        getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
+                          radius: 5,
+                          color: AppTheme.primaryTeal,
+                          strokeWidth: 2,
+                          strokeColor: Colors.white,
+                        ),
+                      ),
                     ),
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 20),
 
           // Clinical Note
-          Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            color: const Color(0xFFF0FDF4),
-            child: const Padding(
-              padding: EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  Icon(Icons.health_and_safety_rounded, color: AppTheme.successGreen, size: 28),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      'Jika titik aktual anak Anda menyentuh atau berada di bawah garis putus-putus merah (-2 SD), segera lakukan pemeriksaan ke Puskesmas atau dokter spesialis anak untuk penanganan intervensi gizi.',
-                      style: TextStyle(fontSize: 12, height: 1.4, color: Color(0xFF166534)),
-                    ),
+          Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: const Color(0xFFECFDF5),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: const Color(0xFFA7F3D0)),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(color: AppTheme.successGreen, shape: BoxShape.circle),
+                  child: const Icon(Icons.health_and_safety_rounded, color: Colors.white, size: 18),
+                ),
+                const SizedBox(width: 14),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Panduan Evaluasi Klinis Z-Score',
+                        style: TextStyle(color: Color(0xFF065F46), fontWeight: FontWeight.w800, fontSize: 13.5),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Apabila titik aktual pertumbuhan anak menyentuh atau berada di bawah garis putus-putus merah (-2 SD), segera konsultasikan ke Puskesmas atau dokter spesialis anak untuk evaluasi gizi intensif.',
+                        style: TextStyle(fontSize: 12.5, height: 1.5, color: Color(0xFF047857), fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );
   }
 
-  Widget _buildLegendItem(Color color, String text, {bool isCircle = false}) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: isCircle ? 10 : 16,
-          height: isCircle ? 10 : 3,
-          decoration: BoxDecoration(color: color, shape: isCircle ? BoxShape.circle : BoxShape.rectangle),
-        ),
-        const SizedBox(width: 6),
-        Text(text, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
-      ],
+  Widget _buildLegendPill({required Color color, required String label, bool isDash = false, bool isCircle = false}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: isCircle ? 10 : 16,
+            height: isCircle ? 10 : 3.5,
+            decoration: BoxDecoration(
+              color: color,
+              shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
+              borderRadius: isCircle ? null : BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF0F172A)),
+          ),
+        ],
+      ),
     );
   }
 }
