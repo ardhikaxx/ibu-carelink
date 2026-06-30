@@ -78,16 +78,12 @@ class _EducationPageState extends State<EducationPage> {
       appBar: CustomFloatingHeader(
         title: 'Edukasi Ibu CareLink',
         showBackButton: false,
-        leading: Container(
-          width: 36,
-          height: 36,
-          padding: const EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.35), width: 1.5),
-          ),
-          child: ClipOval(
-            child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
+        leading: ClipOval(
+          child: Image.asset(
+            'assets/images/logo.png',
+            width: 42,
+            height: 42,
+            fit: BoxFit.cover,
           ),
         ),
       ),
