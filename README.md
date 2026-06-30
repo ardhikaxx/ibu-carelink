@@ -1,6 +1,6 @@
-# ibu_carelink
+# Ibu CareLink
 
-A new Flutter project.
+A comprehensive Flutter application for maternal and child health monitoring.
 
 ## Getting Started
 

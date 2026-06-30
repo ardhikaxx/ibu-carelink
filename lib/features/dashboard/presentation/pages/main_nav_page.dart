@@ -29,6 +29,38 @@ class _MainNavPageState extends State<MainNavPage> {
     ];
 
     return Scaffold(
+      appBar: (_currentIndex == 0 || _currentIndex == 1)
+          ? AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              centerTitle: false,
+              title: Row(
+                children: [
+                  Container(
+                    width: 38,
+                    height: 38,
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.3), width: 1.5),
+                    ),
+                    child: ClipOval(
+                      child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  const Text(
+                    'Ibu CareLink',
+                    style: TextStyle(
+                      color: Color(0xFF0F172A),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 19,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : null,
       body: Column(
         children: [
           const OfflineBannerWidget(),

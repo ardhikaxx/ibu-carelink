@@ -1,6 +1,6 @@
 {
-    "name": "ibu_carelink",
-    "short_name": "ibu_carelink",
+    "name": "Ibu CareLink",
+    "short_name": "Ibu CareLink",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

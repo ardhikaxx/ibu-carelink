@@ -16,7 +16,15 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profil Akun CareLink'),
+        title: Row(
+          children: [
+            ClipOval(
+              child: Image.asset('assets/images/logo.png', width: 30, height: 30, fit: BoxFit.cover),
+            ),
+            const SizedBox(width: 10),
+            const Text('Profil Akun Ibu CareLink'),
+          ],
+        ),
         backgroundColor: AppTheme.primaryTeal,
         foregroundColor: Colors.white,
       ),
@@ -92,7 +100,7 @@ class ProfilePage extends StatelessWidget {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               tileColor: Colors.white,
               leading: const Icon(Icons.help_center_rounded, color: AppTheme.primaryTeal),
-              title: const Text('Bantuan & FAQ CareLink'),
+              title: const Text('Bantuan & FAQ Ibu CareLink'),
               subtitle: const Text('Panduan pemakaian fitur KPSP & Tendangan'),
               trailing: const Icon(Icons.chevron_right_rounded),
               onTap: () {},

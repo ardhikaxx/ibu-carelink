@@ -74,7 +74,15 @@ class _EducationPageState extends State<EducationPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pusat Edukasi & KIA'),
+        title: Row(
+          children: [
+            ClipOval(
+              child: Image.asset('assets/images/logo.png', width: 30, height: 30, fit: BoxFit.cover),
+            ),
+            const SizedBox(width: 10),
+            const Text('Edukasi Ibu CareLink'),
+          ],
+        ),
         backgroundColor: AppTheme.primaryTeal,
         foregroundColor: Colors.white,
       ),
