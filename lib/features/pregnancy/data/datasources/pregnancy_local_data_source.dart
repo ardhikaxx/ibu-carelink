@@ -26,12 +26,26 @@ class PregnancyLocalDataSourceImpl implements PregnancyLocalDataSource {
 
   @override
   Future<PregnancyModel?> getCachedActivePregnancy(String userId) async {
-    final str = sharedPreferences.getString('PREGNANCY_$userId');
-    if (str != null) {
-      try {
-        return PregnancyModel.fromJson(json.decode(str));
-      } catch (e) {
-        return null;
+    if (userId.isNotEmpty) {
+      final str = sharedPreferences.getString('PREGNANCY_$userId');
+      if (str != null) {
+        try {
+          return PregnancyModel.fromJson(json.decode(str));
+        } catch (_) {
+          // Abaikan kesalahan parsing dan lanjutkan pencarian prefix
+        }
+      }
+    }
+    for (final key in sharedPreferences.getKeys()) {
+      if (key.startsWith('PREGNANCY_')) {
+        final str = sharedPreferences.getString(key);
+        if (str != null) {
+          try {
+            return PregnancyModel.fromJson(json.decode(str));
+          } catch (_) {
+            // Abaikan kesalahan parsing pada item korup
+          }
+        }
       }
     }
     return null;

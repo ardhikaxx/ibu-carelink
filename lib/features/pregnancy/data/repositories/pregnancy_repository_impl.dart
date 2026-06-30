@@ -59,12 +59,21 @@ class PregnancyRepositoryImpl implements PregnancyRepository {
         moodNote: log.moodNote,
         triggers: log.triggers,
       );
-      // Butuh userId untuk path di Firestore. Ambil dari cache pregnancy atau lewat model.
-      // Kita kirim ke remoteDataSource
       final active = await localDataSource.getCachedActivePregnancy('');
       final userId = active?.userId ?? 'current_user';
-      final remote = await remoteDataSource.logSymptom(model, userId);
-      return Right(remote);
+
+      try {
+        final existing = await localDataSource.getCachedSymptomLogs(log.pregnancyId);
+        final updated = [model, ...existing.where((x) => x.id != model.id)];
+        await localDataSource.cacheSymptomLogs(log.pregnancyId, updated);
+      } catch (_) {}
+
+      try {
+        final remote = await remoteDataSource.logSymptom(model, userId);
+        return Right(remote);
+      } catch (_) {
+        return Right(model);
+      }
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
@@ -74,15 +83,24 @@ class PregnancyRepositoryImpl implements PregnancyRepository {
   Future<Either<Failure, List<SymptomLogEntity>>> getSymptomLogs(String userId, String pregnancyId) async {
     try {
       final cached = await localDataSource.getCachedSymptomLogs(pregnancyId);
-      if (cached.isNotEmpty) {
-        remoteDataSource.getSymptomLogs(userId, pregnancyId).then((remote) {
-          localDataSource.cacheSymptomLogs(pregnancyId, remote);
-        }).catchError((_) {});
+      try {
+        final remote = await remoteDataSource.getSymptomLogs(userId, pregnancyId);
+        final Map<String, SymptomLogModel> map = {};
+        for (final item in remote) {
+          map[item.id] = item;
+        }
+        for (final item in cached) {
+          if (!map.containsKey(item.id)) {
+            map[item.id] = item;
+          }
+        }
+        final merged = map.values.toList();
+        merged.sort((a, b) => b.date.compareTo(a.date));
+        await localDataSource.cacheSymptomLogs(pregnancyId, merged);
+        return Right(merged);
+      } catch (_) {
         return Right(cached);
       }
-      final remote = await remoteDataSource.getSymptomLogs(userId, pregnancyId);
-      await localDataSource.cacheSymptomLogs(pregnancyId, remote);
-      return Right(remote);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
