@@ -19,6 +19,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _isPasswordVisible = false;
 
   @override
   void dispose() {
@@ -45,6 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthAuthenticated) {
@@ -64,185 +66,389 @@ class _RegisterPageState extends State<RegisterPage> {
             );
           }
         },
-        child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Color(0xFFE0F2FE), Color(0xFFFFF1F2)],
-          ),
-        ),
-        child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(28.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Color(0xFF0F172A)),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Container(
-                      width: 86,
-                      height: 86,
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppTheme.primaryRose.withValues(alpha: 0.25),
-                            blurRadius: 18,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
-                      ),
-                      child: ClipOval(
-                        child: Image.asset(
-                          'assets/images/logo.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Buat Akun Ibu CareLink',
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w800,
-                            color: const Color(0xFF0F172A),
-                          ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Mulai pemantauan kesehatan ibu & anak secara cerdas',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: const Color(0xFF64748B),
-                          ),
-                    ),
-                    const SizedBox(height: 32),
-                    Container(
-                      padding: const EdgeInsets.all(24),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.88),
-                        borderRadius: BorderRadius.circular(24),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.04),
-                            blurRadius: 20,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: _nameController,
-                            decoration: InputDecoration(
-                              labelText: 'Nama Lengkap Ibu',
-                              prefixIcon: const Icon(Icons.person_outline_rounded, color: AppTheme.primaryRose),
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
-                              filled: true,
-                              fillColor: const Color(0xFFF8FAFC),
-                            ),
-                            validator: (val) => val == null || val.isEmpty ? 'Nama tidak boleh kosong' : null,
-                          ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            controller: _emailController,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              labelText: 'Alamat Email',
-                              prefixIcon: const Icon(Icons.email_outlined, color: AppTheme.primaryRose),
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
-                              filled: true,
-                              fillColor: const Color(0xFFF8FAFC),
-                            ),
-                            validator: (val) => val == null || !val.contains('@') ? 'Email tidak valid' : null,
-                          ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            controller: _passwordController,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: 'Kata Sandi',
-                              prefixIcon: const Icon(Icons.lock_outline_rounded, color: AppTheme.primaryRose),
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
-                              filled: true,
-                              fillColor: const Color(0xFFF8FAFC),
-                            ),
-                            validator: (val) => val == null || val.length < 6 ? 'Minimal 6 karakter' : null,
-                          ),
-                          const SizedBox(height: 24),
-                          BlocBuilder<AuthBloc, AuthState>(
-                            builder: (context, state) {
-                              final isLoading = state is AuthLoading;
-                              if (isLoading) {
-                                return const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 12),
-                                  child: CircularProgressIndicator(color: AppTheme.primaryRose),
-                                );
-                              }
-                              return Column(
-                                children: [
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryTeal),
-                                      onPressed: _onRegister,
-                                      child: const Text('Daftar Akun Baru'),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Expanded(child: Divider(color: Colors.grey.shade300)),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                                        child: Text('ATAU', style: TextStyle(color: Colors.grey.shade500, fontSize: 12)),
-                                      ),
-                                      Expanded(child: Divider(color: Colors.grey.shade300)),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 16),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: OutlinedButton.icon(
-                                      style: OutlinedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(vertical: 14),
-                                        side: BorderSide(color: Colors.grey.shade300, width: 1.5),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                                      ),
-                                      onPressed: _onGoogleRegister,
-                                      icon: const Icon(Icons.g_mobiledata_rounded, size: 28, color: Color(0xFFEA4335)),
-                                      label: const Text(
-                                        'Daftar dengan Google',
-                                        style: TextStyle(color: Color(0xFF0F172A), fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+        child: Stack(
+          children: [
+            // Ambient Background Glows
+            Positioned(
+              top: -80,
+              right: -60,
+              child: Container(
+                width: 260,
+                height: 260,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppTheme.primaryRose.withValues(alpha: 0.12),
                 ),
               ),
             ),
-          ),
+            Positioned(
+              top: 60,
+              left: -80,
+              child: Container(
+                width: 220,
+                height: 220,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: const Color(0xFF38BDF8).withValues(alpha: 0.1),
+                ),
+              ),
+            ),
+
+            SafeArea(
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Back Navigation Button
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: InkWell(
+                            onTap: () => Navigator.pop(context),
+                            borderRadius: BorderRadius.circular(16),
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(color: const Color(0xFFE2E8F0)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color(0xFF0F172A).withValues(alpha: 0.03),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Color(0xFF0F172A)),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+
+                        // Registration Pill Badge
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: AppTheme.primaryRose.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Text(
+                            '✨ Registrasi Akun Baru',
+                            style: TextStyle(
+                              color: AppTheme.primaryRose,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 12.5,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+
+                        // Title & Subtitle
+                        const Text(
+                          'Buat Akun Ibu CareLink',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xFF0F172A),
+                            letterSpacing: -0.6,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        const Text(
+                          'Satu akun terpadu untuk rekam medis kehamilan, pemantauan kontraksi rahim, & kurva WHO balita.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            color: Color(0xFF64748B),
+                            height: 1.45,
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+
+                        // Form Container Card
+                        Container(
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(28),
+                            border: Border.all(color: const Color(0xFFE2E8F0)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0xFF0F172A).withValues(alpha: 0.04),
+                                blurRadius: 28,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Nama Lengkap Ibu / Wali',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Color(0xFF334155),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              TextFormField(
+                                controller: _nameController,
+                                style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF0F172A), fontSize: 14.5),
+                                decoration: InputDecoration(
+                                  hintText: 'mis. dr. Sarah Amalia',
+                                  hintStyle: const TextStyle(color: Color(0xFF94A3B8), fontWeight: FontWeight.normal),
+                                  prefixIcon: const Icon(Icons.person_outline_rounded, color: Color(0xFF64748B), size: 20),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(color: AppTheme.primaryRose, width: 1.5),
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xFFF8FAFC),
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                ),
+                                validator: (val) => val == null || val.trim().isEmpty ? 'Nama tidak boleh kosong' : null,
+                              ),
+                              const SizedBox(height: 18),
+
+                              const Text(
+                                'Alamat Email Aktif',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Color(0xFF334155),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              TextFormField(
+                                controller: _emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF0F172A), fontSize: 14.5),
+                                decoration: InputDecoration(
+                                  hintText: 'sarah@email.com',
+                                  hintStyle: const TextStyle(color: Color(0xFF94A3B8), fontWeight: FontWeight.normal),
+                                  prefixIcon: const Icon(Icons.alternate_email_rounded, color: Color(0xFF64748B), size: 20),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(color: AppTheme.primaryRose, width: 1.5),
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xFFF8FAFC),
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                ),
+                                validator: (val) => val == null || !val.contains('@') ? 'Masukkan alamat email yang valid' : null,
+                              ),
+                              const SizedBox(height: 18),
+
+                              const Text(
+                                'Buat Kata Sandi Keamanan',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w800,
+                                  color: Color(0xFF334155),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              TextFormField(
+                                controller: _passwordController,
+                                obscureText: !_isPasswordVisible,
+                                style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF0F172A), fontSize: 14.5),
+                                decoration: InputDecoration(
+                                  hintText: '••••••••',
+                                  hintStyle: const TextStyle(color: Color(0xFF94A3B8), fontWeight: FontWeight.normal),
+                                  prefixIcon: const Icon(Icons.lock_outline_rounded, color: Color(0xFF64748B), size: 20),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isPasswordVisible ? Icons.visibility_rounded : Icons.visibility_off_rounded,
+                                      color: const Color(0xFF64748B),
+                                      size: 20,
+                                    ),
+                                    onPressed: () => setState(() => _isPasswordVisible = !_isPasswordVisible),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(color: AppTheme.primaryRose, width: 1.5),
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xFFF8FAFC),
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                ),
+                                validator: (val) => val == null || val.length < 6 ? 'Kata sandi minimal 6 karakter' : null,
+                              ),
+                              const SizedBox(height: 10),
+
+                              // Mini Requirement Tip
+                              Row(
+                                children: [
+                                  Icon(Icons.shield_outlined, size: 14, color: const Color(0xFF64748B).withValues(alpha: 0.8)),
+                                  const SizedBox(width: 6),
+                                  const Text(
+                                    'Minimal 6 karakter demi keamanan rekam medis Anda',
+                                    style: TextStyle(fontSize: 11.5, color: Color(0xFF64748B)),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 24),
+
+                              BlocBuilder<AuthBloc, AuthState>(
+                                builder: (context, state) {
+                                  final isLoading = state is AuthLoading;
+                                  if (isLoading) {
+                                    return const Center(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 16),
+                                        child: CircularProgressIndicator(color: AppTheme.primaryRose),
+                                      ),
+                                    );
+                                  }
+
+                                  return Column(
+                                    children: [
+                                      SizedBox(
+                                        width: double.infinity,
+                                        height: 52,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: const Color(0xFF0F172A),
+                                            foregroundColor: Colors.white,
+                                            elevation: 0,
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                          ),
+                                          onPressed: _onRegister,
+                                          child: const Text(
+                                            'Daftar Akun Sekarang',
+                                            style: TextStyle(fontSize: 15.5, fontWeight: FontWeight.w800),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 20),
+
+                                      Row(
+                                        children: [
+                                          Expanded(child: Divider(color: const Color(0xFFE2E8F0), thickness: 1)),
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: 12),
+                                            child: Text(
+                                              'ATAU DAFTAR DENGAN',
+                                              style: TextStyle(
+                                                color: Color(0xFF94A3B8),
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w800,
+                                                letterSpacing: 0.5,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(child: Divider(color: const Color(0xFFE2E8F0), thickness: 1)),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 20),
+
+                                      SizedBox(
+                                        width: double.infinity,
+                                        height: 52,
+                                        child: OutlinedButton(
+                                          style: OutlinedButton.styleFrom(
+                                            backgroundColor: const Color(0xFFF8FAFC),
+                                            side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.5),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                          ),
+                                          onPressed: _onGoogleRegister,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                padding: const EdgeInsets.all(4),
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.white,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: const Icon(Icons.g_mobiledata_rounded, size: 24, color: Color(0xFFEA4335)),
+                                              ),
+                                              const SizedBox(width: 10),
+                                              const Text(
+                                                'Daftar Cepat dengan Google',
+                                                style: TextStyle(
+                                                  color: Color(0xFF0F172A),
+                                                  fontSize: 14.5,
+                                                  fontWeight: FontWeight.w800,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+
+                        // Footer Navigation
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Sudah punya akun Ibu CareLink? ',
+                              style: TextStyle(color: Color(0xFF64748B), fontSize: 14),
+                            ),
+                            InkWell(
+                              onTap: () => Navigator.pop(context),
+                              borderRadius: BorderRadius.circular(8),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                                child: Text(
+                                  'Masuk di Sini',
+                                  style: TextStyle(
+                                    color: AppTheme.primaryRose,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
