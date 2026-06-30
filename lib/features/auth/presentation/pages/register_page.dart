@@ -4,7 +4,7 @@ import '../../../../core/utils/theme.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
 import '../bloc/auth_state.dart';
-import 'onboarding_role_page.dart';
+import '../widgets/role_selection_modal.dart';
 import '../../../dashboard/presentation/pages/main_nav_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -53,10 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
               (route) => false,
             );
           } else if (state is AuthRolePending) {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (_) => OnboardingRolePage(user: state.user)),
-              (route) => false,
-            );
+            showRoleSelectionModal(context, state.user);
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
