@@ -177,14 +177,23 @@ class _EducationPageState extends State<EducationPage> {
                   padding: const EdgeInsets.only(right: 8),
                   child: InkWell(
                     onTap: () => setState(() => _selectedCategory = cat),
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(20),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 180),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
-                        color: isSel ? const Color(0xFF0F172A) : Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: isSel ? const Color(0xFF0F172A) : const Color(0xFFE2E8F0)),
+                        color: isSel ? AppTheme.primaryRose : Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: isSel ? AppTheme.primaryRose : const Color(0xFFE2E8F0)),
+                        boxShadow: isSel
+                            ? [
+                                BoxShadow(
+                                  color: AppTheme.primaryRose.withValues(alpha: 0.28),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ]
+                            : null,
                       ),
                       child: Text(
                         cat,

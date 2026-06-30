@@ -303,9 +303,18 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                           duration: const Duration(milliseconds: 180),
                           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                           decoration: BoxDecoration(
-                            color: isSel ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+                            color: isSel ? AppTheme.primaryRose : const Color(0xFFF8FAFC),
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: isSel ? const Color(0xFF0F172A) : const Color(0xFFE2E8F0)),
+                            border: Border.all(color: isSel ? AppTheme.primaryRose : const Color(0xFFE2E8F0)),
+                            boxShadow: isSel
+                                ? [
+                                    BoxShadow(
+                                      color: AppTheme.primaryRose.withValues(alpha: 0.25),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ]
+                                : null,
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
