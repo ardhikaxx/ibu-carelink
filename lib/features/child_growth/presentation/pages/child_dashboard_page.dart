@@ -230,8 +230,8 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      color: AppTheme.primaryTeal.withValues(alpha: 0.1),
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFF0FDFA),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.child_care_rounded, size: 56, color: AppTheme.primaryTeal),
@@ -285,7 +285,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Child selector & add button
+                  // Child Selector & Add Child
                   Row(
                     children: [
                       Expanded(
@@ -304,8 +304,9 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                                     decoration: BoxDecoration(
-                                      color: isSel ? AppTheme.primaryTeal : const Color(0xFFF1F5F9),
+                                      color: isSel ? const Color(0xFF0F172A) : Colors.white,
                                       borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(color: isSel ? const Color(0xFF0F172A) : const Color(0xFFE2E8F0)),
                                     ),
                                     child: Row(
                                       children: [
@@ -335,8 +336,9 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                       const SizedBox(width: 8),
                       Container(
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF1F5F9),
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: const Color(0xFFE2E8F0)),
                         ),
                         child: IconButton(
                           onPressed: _showAddChildModal,
@@ -389,12 +391,13 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                       ),
                     ),
 
-                  // Main Solid Child Card (Modern Simple, No Gradients)
+                  // Main Child Profile Card (Super Clean, White Minimalist, No Gradients)
                   Container(
                     padding: const EdgeInsets.all(22),
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryTeal,
+                      color: const Color(0xFFF0FDFA),
                       borderRadius: BorderRadius.circular(24),
+                      border: Border.all(color: const Color(0xFFCCFBF1), width: 1.5),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -409,15 +412,16 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                                   Text(
                                     selected.name,
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      color: Color(0xFF0F172A),
                                       fontSize: 22,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w900,
+                                      letterSpacing: -0.5,
                                     ),
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     '${selected.formattedAge} • Lahir ${DateHelper.formatIndonesianDate(selected.dateOfBirth)}',
-                                    style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 13),
+                                    style: const TextStyle(color: Color(0xFF475569), fontSize: 13, fontWeight: FontWeight.w500),
                                   ),
                                 ],
                               ),
@@ -425,20 +429,20 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.15),
+                                color: AppTheme.primaryTeal.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Row(
                                 children: [
                                   Icon(
                                     selected.gender == 'Laki-laki' ? Icons.male_rounded : Icons.female_rounded,
-                                    color: Colors.white,
+                                    color: AppTheme.primaryTeal,
                                     size: 16,
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
                                     selected.gender,
-                                    style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+                                    style: const TextStyle(color: AppTheme.primaryTeal, fontSize: 12, fontWeight: FontWeight.w700),
                                   ),
                                 ],
                               ),
@@ -446,21 +450,32 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(child: _buildBannerStat('BB Lahir', '${selected.birthWeightKg} kg')),
-                              Container(width: 1, height: 32, color: Colors.white.withValues(alpha: 0.2)),
-                              Expanded(child: _buildBannerStat('PB Lahir', '${selected.birthLengthCm} cm')),
-                              Container(width: 1, height: 32, color: Colors.white.withValues(alpha: 0.2)),
-                              Expanded(child: _buildBannerStat('BB Terakhir', latestLog != null ? '${latestLog.weightKg} kg' : '-')),
-                            ],
-                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _buildMiniStatCard(
+                                label: 'BB Lahir',
+                                value: '${selected.birthWeightKg} kg',
+                                icon: Icons.scale_rounded,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: _buildMiniStatCard(
+                                label: 'PB Lahir',
+                                value: '${selected.birthLengthCm} cm',
+                                icon: Icons.straighten_rounded,
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: _buildMiniStatCard(
+                                label: 'BB Terakhir',
+                                value: latestLog != null ? '${latestLog.weightKg} kg' : '-',
+                                icon: Icons.monitor_weight_outlined,
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 18),
                         SizedBox(
@@ -468,16 +483,16 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                           height: 46,
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: AppTheme.primaryTeal,
+                              backgroundColor: AppTheme.primaryTeal,
+                              foregroundColor: Colors.white,
                               elevation: 0,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                             ),
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (_) => GrowthChartPage(child: selected, logs: state.logs)));
                             },
-                            icon: const Icon(Icons.show_chart_rounded, size: 20),
-                            label: const Text('Lihat Kurva Z-Score WHO', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                            icon: const Icon(Icons.show_chart_rounded, size: 18),
+                            label: const Text('Buka Kurva Z-Score WHO', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                           ),
                         ),
                       ],
@@ -485,7 +500,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                   ),
                   const SizedBox(height: 20),
 
-                  // Z-Score Status Section
+                  // Z-Score Evaluation Status
                   if (eval != null) ...[
                     Container(
                       padding: const EdgeInsets.all(18),
@@ -498,8 +513,8 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'Status Pertumbuhan WHO',
-                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: Color(0xFF0F172A)),
+                            'Klasifikasi Gizi WHO Terakhir',
+                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15, color: Color(0xFF0F172A)),
                           ),
                           const SizedBox(height: 14),
                           Row(
@@ -508,7 +523,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                                 child: _buildStatusTile(
                                   'Tinggi Badan (TB/U)',
                                   eval.hfaStatus == ZScoreClassification.normal
-                                      ? 'Normal'
+                                      ? 'Normal (Gizi Baik)'
                                       : eval.hfaStatus == ZScoreClassification.warning
                                           ? 'Waspada'
                                           : 'Stunting / < -2 SD',
@@ -535,9 +550,9 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                     const SizedBox(height: 20),
                   ],
 
-                  // Modules KIA & Development
+                  // KIA & Development Modules
                   const Text(
-                    'Layanan & Pantauan KIA',
+                    'Modul Buku KIA & Perkembangan',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF0F172A)),
                   ),
                   const SizedBox(height: 12),
@@ -562,8 +577,8 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: _buildFeatureCard(
-                          title: 'Perkembangan',
-                          subtitle: 'Skrining KPSP Denver',
+                          title: 'Skrining KPSP',
+                          subtitle: 'Denver II Perkembangan',
                           icon: Icons.psychology_rounded,
                           color: const Color(0xFFF59E0B),
                           onTap: () {
@@ -613,7 +628,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(28.0),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF8FAFC),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: const Color(0xFFE2E8F0)),
                       ),
@@ -703,13 +718,24 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
     );
   }
 
-  Widget _buildBannerStat(String label, String val) {
-    return Column(
-      children: [
-        Text(val, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w800)),
-        const SizedBox(height: 2),
-        Text(label, style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 11)),
-      ],
+  Widget _buildMiniStatCard({required String label, required String value, required IconData icon}) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFCCFBF1)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 16, color: AppTheme.primaryTeal),
+          const SizedBox(height: 6),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF0F172A))),
+          const SizedBox(height: 2),
+          Text(label, style: const TextStyle(color: Color(0xFF64748B), fontSize: 10, fontWeight: FontWeight.w500)),
+        ],
+      ),
     );
   }
 
