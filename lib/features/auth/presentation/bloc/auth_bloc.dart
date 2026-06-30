@@ -80,13 +80,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final result = await googleLoginUseCase(NoParams());
     result.fold(
       (failure) => emit(AuthError(failure.message)),
-      (user) {
-        if (user.isRoleSelected) {
-          emit(AuthAuthenticated(user));
-        } else {
-          emit(AuthRolePending(user));
-        }
-      },
+      (user) => emit(AuthAuthenticated(user)),
     );
   }
 
