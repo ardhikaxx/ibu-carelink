@@ -38,33 +38,91 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(28))),
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
       builder: (ctx) => StatefulBuilder(
         builder: (context, setModalState) => Padding(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom, left: 24, right: 24, top: 24),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            left: 24,
+            right: 24,
+            top: 24,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Registrasi Profil Bayi / Anak', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Registrasi Profil Anak',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF0F172A),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close_rounded, color: Colors.grey),
+                    onPressed: () => Navigator.pop(ctx),
+                  ),
+                ],
+              ),
               const SizedBox(height: 16),
               TextField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Nama Lengkap Anak', border: OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
+                decoration: InputDecoration(
+                  labelText: 'Nama Lengkap Anak',
+                  filled: true,
+                  fillColor: const Color(0xFFF8FAFC),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                  ),
+                ),
               ),
               const SizedBox(height: 14),
               DropdownButtonFormField<String>(
                 initialValue: gender,
-                decoration: InputDecoration(labelText: 'Jenis Kelamin (Standar WHO)', border: OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
-                items: ['Laki-laki', 'Perempuan'].map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
+                decoration: InputDecoration(
+                  labelText: 'Jenis Kelamin (Standar WHO)',
+                  filled: true,
+                  fillColor: const Color(0xFFF8FAFC),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                  ),
+                ),
+                items: ['Laki-laki', 'Perempuan']
+                    .map((g) => DropdownMenuItem(value: g, child: Text(g)))
+                    .toList(),
                 onChanged: (val) => setModalState(() => gender = val!),
               ),
               const SizedBox(height: 14),
               ListTile(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: BorderSide(color: Colors.grey.shade300)),
-                leading: const Icon(Icons.cake_rounded, color: AppTheme.primaryTeal),
-                title: const Text('Tanggal Lahir'),
-                subtitle: Text(DateHelper.formatIndonesianDate(dob), style: const TextStyle(fontWeight: FontWeight.bold)),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: const BorderSide(color: Color(0xFFE2E8F0)),
+                ),
+                tileColor: const Color(0xFFF8FAFC),
+                leading: const Icon(Icons.calendar_today_rounded, color: AppTheme.primaryTeal),
+                title: const Text('Tanggal Lahir', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                subtitle: Text(
+                  DateHelper.formatIndonesianDate(dob),
+                  style: const TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF0F172A), fontSize: 15),
+                ),
                 onTap: () async {
                   final picked = await showDatePicker(
                     context: context,
@@ -82,7 +140,19 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                     child: TextField(
                       controller: weightController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: 'BB Lahir (kg)', border: OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
+                      decoration: InputDecoration(
+                        labelText: 'BB Lahir (kg)',
+                        filled: true,
+                        fillColor: const Color(0xFFF8FAFC),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -90,7 +160,19 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                     child: TextField(
                       controller: lengthController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: 'PB Lahir (cm)', border: OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
+                      decoration: InputDecoration(
+                        labelText: 'PB Lahir (cm)',
+                        filled: true,
+                        fillColor: const Color(0xFFF8FAFC),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -98,8 +180,14 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
+                height: 52,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryTeal),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.primaryTeal,
+                    foregroundColor: Colors.white,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  ),
                   onPressed: () {
                     if (nameController.text.trim().isEmpty) return;
                     final child = ChildEntity(
@@ -114,7 +202,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                     context.read<ChildGrowthBloc>().add(AddNewChildEvent(child: child, userId: widget.userId));
                     Navigator.pop(ctx);
                   },
-                  child: const Text('Simpan Profil Anak'),
+                  child: const Text('Simpan Profil Anak', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
               ),
               const SizedBox(height: 24),
@@ -142,19 +230,38 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(color: AppTheme.primaryTeal.withValues(alpha: 0.12), shape: BoxShape.circle),
-                    child: const Icon(Icons.child_care_rounded, size: 64, color: AppTheme.primaryTeal),
+                    decoration: BoxDecoration(
+                      color: AppTheme.primaryTeal.withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.child_care_rounded, size: 56, color: AppTheme.primaryTeal),
                   ),
                   const SizedBox(height: 20),
-                  const Text('Belum Ada Profil Anak Terdaftar', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+                  const Text(
+                    'Belum Ada Profil Anak',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: Color(0xFF0F172A)),
+                  ),
                   const SizedBox(height: 8),
-                  const Text('Daftarkan profil buah hati Anda untuk memantau kurva pertumbuhan WHO Z-Score & jadwal imunisasi IDAI.', textAlign: TextAlign.center, style: TextStyle(color: Colors.grey)),
+                  const Text(
+                    'Daftarkan buah hati Anda untuk memantau kurva pertumbuhan WHO & jadwal imunisasi IDAI.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Color(0xFF64748B), fontSize: 14),
+                  ),
                   const SizedBox(height: 28),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryTeal),
-                    onPressed: _showAddChildModal,
-                    icon: const Icon(Icons.add_rounded),
-                    label: const Text('Tambah Profil Anak'),
+                  SizedBox(
+                    height: 48,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.primaryTeal,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                      ),
+                      onPressed: _showAddChildModal,
+                      icon: const Icon(Icons.add_rounded),
+                      label: const Text('Tambah Profil Anak', style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
                   ),
                 ],
               ),
@@ -168,6 +275,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
           final eval = latestLog?.evaluation;
 
           return RefreshIndicator(
+            color: AppTheme.primaryTeal,
             onRefresh: () async {
               context.read<ChildGrowthBloc>().add(LoadChildrenEvent(widget.userId));
             },
@@ -177,9 +285,8 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Tab Multiple Children
+                  // Child selector & add button
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: SingleChildScrollView(
@@ -189,28 +296,57 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                               final isSel = c.id == selected.id;
                               return Padding(
                                 padding: const EdgeInsets.only(right: 8),
-                                child: ChoiceChip(
-                                  label: Text(c.name),
-                                  selected: isSel,
-                                  selectedColor: AppTheme.primaryTeal,
-                                  labelStyle: TextStyle(color: isSel ? Colors.white : Colors.black87, fontWeight: FontWeight.bold),
-                                  onSelected: (_) {
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(20),
+                                  onTap: () {
                                     context.read<ChildGrowthBloc>().add(SelectChildEvent(child: c, userId: widget.userId));
                                   },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                    decoration: BoxDecoration(
+                                      color: isSel ? AppTheme.primaryTeal : const Color(0xFFF1F5F9),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          c.gender == 'Laki-laki' ? Icons.face_rounded : Icons.face_3_rounded,
+                                          size: 18,
+                                          color: isSel ? Colors.white : const Color(0xFF64748B),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          c.name,
+                                          style: TextStyle(
+                                            color: isSel ? Colors.white : const Color(0xFF0F172A),
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               );
                             }).toList(),
                           ),
                         ),
                       ),
-                      IconButton(
-                        onPressed: _showAddChildModal,
-                        icon: const Icon(Icons.person_add_alt_1_rounded, color: AppTheme.primaryTeal),
-                        tooltip: 'Tambah Anak',
+                      const SizedBox(width: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF1F5F9),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: IconButton(
+                          onPressed: _showAddChildModal,
+                          icon: const Icon(Icons.person_add_alt_1_rounded, color: AppTheme.primaryTeal, size: 20),
+                          tooltip: 'Tambah Anak',
+                        ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
 
                   // Medical Alert Card if Z-Score < -2 SD
                   if (state.hasMedicalAlert)
@@ -218,21 +354,34 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                       padding: const EdgeInsets.all(16),
                       margin: const EdgeInsets.only(bottom: 20),
                       decoration: BoxDecoration(
-                        color: AppTheme.errorRed,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [BoxShadow(color: AppTheme.errorRed.withValues(alpha: 0.3), blurRadius: 16, offset: const Offset(0, 6))],
+                        color: const Color(0xFFFEF2F2),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: const Color(0xFFFCA5A5)),
                       ),
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Icon(Icons.report_problem_rounded, color: Colors.white, size: 36),
-                          SizedBox(width: 14),
-                          Expanded(
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              color: AppTheme.errorRed,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.priority_high_rounded, color: Colors.white, size: 20),
+                          ),
+                          const SizedBox(width: 14),
+                          const Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('PERINGATAN KLINIS Z-SCORE WHO', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14)),
+                                Text(
+                                  'Peringatan Klinis Z-Score',
+                                  style: TextStyle(color: Color(0xFF991B1B), fontWeight: FontWeight.w800, fontSize: 14),
+                                ),
                                 SizedBox(height: 4),
-                                Text('Indikator pertumbuhan anak berada di bawah -2 SD (Risiko Stunting / Gizi Kurang). Segera jadwalkan konsultasi ke dokter spesialis anak!', style: TextStyle(color: Colors.white, fontSize: 12)),
+                                Text(
+                                  'Indikator di bawah -2 SD (Risiko Stunting/Gizi Kurang). Segera konsultasi ke dokter spesialis anak.',
+                                  style: TextStyle(color: Color(0xFF7F1D1D), fontSize: 12),
+                                ),
                               ],
                             ),
                           ),
@@ -240,17 +389,12 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                       ),
                     ),
 
-                  // Banner Anak Utama
+                  // Main Solid Child Card (Modern Simple, No Gradients)
                   Container(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(22),
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF00A896), Color(0xFF028090)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(26),
-                      boxShadow: [BoxShadow(color: AppTheme.primaryTeal.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 10))],
+                      color: AppTheme.primaryTeal,
+                      borderRadius: BorderRadius.circular(24),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,85 +402,144 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(selected.name, style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w900)),
-                            Icon(selected.gender == 'Laki-laki' ? Icons.male_rounded : Icons.female_rounded, color: Colors.white, size: 32),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Text('${selected.formattedAge} • Lahir ${DateHelper.formatIndonesianDate(selected.dateOfBirth)}', style: const TextStyle(color: Colors.white70, fontSize: 13)),
-                        const Divider(color: Colors.white24, height: 28),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            _buildBannerStat('Berat Lahir', '${selected.birthWeightKg} kg'),
-                            _buildBannerStat('Panjang Lahir', '${selected.birthLengthCm} cm'),
-                            _buildBannerStat('BB Terakhir', latestLog != null ? '${latestLog.weightKg} kg' : '-'),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    selected.name,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    '${selected.formattedAge} • Lahir ${DateHelper.formatIndonesianDate(selected.dateOfBirth)}',
+                                    style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    selected.gender == 'Laki-laki' ? Icons.male_rounded : Icons.female_rounded,
+                                    color: Colors.white,
+                                    size: 16,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    selected.gender,
+                                    style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 20),
+                        Container(
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(child: _buildBannerStat('BB Lahir', '${selected.birthWeightKg} kg')),
+                              Container(width: 1, height: 32, color: Colors.white.withValues(alpha: 0.2)),
+                              Expanded(child: _buildBannerStat('PB Lahir', '${selected.birthLengthCm} cm')),
+                              Container(width: 1, height: 32, color: Colors.white.withValues(alpha: 0.2)),
+                              Expanded(child: _buildBannerStat('BB Terakhir', latestLog != null ? '${latestLog.weightKg} kg' : '-')),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 18),
                         SizedBox(
                           width: double.infinity,
+                          height: 46,
                           child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: AppTheme.primaryTeal),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              foregroundColor: AppTheme.primaryTeal,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                            ),
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (_) => GrowthChartPage(child: selected, logs: state.logs)));
                             },
-                            icon: const Icon(Icons.show_chart_rounded),
-                            label: const Text('Buka Kurva Z-Score WHO'),
+                            icon: const Icon(Icons.show_chart_rounded, size: 20),
+                            label: const Text('Lihat Kurva Z-Score WHO', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
 
-                  // Status Klasifikasi Gizi Terakhir
+                  // Z-Score Status Section
                   if (eval != null) ...[
-                    Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(18),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Hasil Analisis Z-Score WHO Terakhir', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
-                            const SizedBox(height: 12),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: _buildStatusTile(
-                                    'Status TB/U (Stunting)',
-                                    eval.hfaStatus == ZScoreClassification.normal
-                                        ? 'Normal (Gizi Baik)'
-                                        : eval.hfaStatus == ZScoreClassification.warning
-                                            ? 'Waspada'
-                                            : 'Intervensi (< -2 SD)',
-                                    eval.hfaStatus == ZScoreClassification.normal ? AppTheme.successGreen : AppTheme.errorRed,
-                                  ),
+                    Container(
+                      padding: const EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Status Pertumbuhan WHO',
+                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: Color(0xFF0F172A)),
+                          ),
+                          const SizedBox(height: 14),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _buildStatusTile(
+                                  'Tinggi Badan (TB/U)',
+                                  eval.hfaStatus == ZScoreClassification.normal
+                                      ? 'Normal'
+                                      : eval.hfaStatus == ZScoreClassification.warning
+                                          ? 'Waspada'
+                                          : 'Stunting / < -2 SD',
+                                  eval.hfaStatus == ZScoreClassification.normal ? AppTheme.successGreen : AppTheme.errorRed,
                                 ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: _buildStatusTile(
-                                    'Status BB/U (Gizi)',
-                                    eval.wfaStatus == ZScoreClassification.normal
-                                        ? 'Normal'
-                                        : eval.wfaStatus == ZScoreClassification.warning
-                                            ? 'Waspada'
-                                            : 'Perlu Perhatian Khusus',
-                                    eval.wfaStatus == ZScoreClassification.normal ? AppTheme.successGreen : AppTheme.warningYellow,
-                                  ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: _buildStatusTile(
+                                  'Berat Badan (BB/U)',
+                                  eval.wfaStatus == ZScoreClassification.normal
+                                      ? 'Normal'
+                                      : eval.wfaStatus == ZScoreClassification.warning
+                                          ? 'Waspada'
+                                          : 'Perlu Perhatian',
+                                  eval.wfaStatus == ZScoreClassification.normal ? AppTheme.successGreen : AppTheme.warningYellow,
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
                   ],
 
-                  // Modul KIA Digital & Tumbuh Kembang
-                  const Text('Modul Buku KIA & Perkembangan', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF0F172A))),
+                  // Modules KIA & Development
+                  const Text(
+                    'Layanan & Pantauan KIA',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF0F172A)),
+                  ),
                   const SizedBox(height: 12),
                   Row(
                     children: [
@@ -356,13 +559,13 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                           },
                         ),
                       ),
-                      const SizedBox(width: 14),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: _buildFeatureCard(
-                          title: 'Milestone KPSP',
-                          subtitle: 'Denver II / KPSP',
+                          title: 'Perkembangan',
+                          subtitle: 'Skrining KPSP Denver',
                           icon: Icons.psychology_rounded,
-                          color: AppTheme.accentWarm,
+                          color: const Color(0xFFF59E0B),
                           onTap: () {
                             Navigator.push(
                               context,
@@ -377,27 +580,48 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  // Quick Actions
+                  // Measurement History
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Riwayat Pengukuran', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF0F172A))),
-                      ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryTeal, padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8)),
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => AddGrowthLogPage(child: selected, userId: widget.userId)));
-                        },
-                        icon: const Icon(Icons.add_rounded, size: 18),
-                        label: const Text('Catat BB/TB'),
+                      const Text(
+                        'Riwayat Pengukuran',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Color(0xFF0F172A)),
+                      ),
+                      SizedBox(
+                        height: 38,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF0F172A),
+                            foregroundColor: Colors.white,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            padding: const EdgeInsets.symmetric(horizontal: 14),
+                          ),
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => AddGrowthLogPage(child: selected, userId: widget.userId)));
+                          },
+                          icon: const Icon(Icons.add_rounded, size: 18),
+                          label: const Text('Catat BB/TB', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                        ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
                   if (state.logs.isEmpty)
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(28.0),
-                        child: Center(child: Text('Belum ada riwayat pengukuran antropometri.', style: TextStyle(color: Colors.grey.shade500))),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(28.0),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF8FAFC),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Belum ada riwayat pengukuran antropometri.',
+                          style: TextStyle(color: Color(0xFF64748B), fontSize: 13),
+                        ),
                       ),
                     )
                   else
@@ -406,31 +630,64 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: state.logs.length,
                       itemBuilder: (context, index) {
-                        final item = state.logs[state.logs.length - 1 - index]; // Newest first
+                        final item = state.logs[state.logs.length - 1 - index];
                         final zSt = item.evaluation?.hfaStatus ?? ZScoreClassification.normal;
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: zSt == ZScoreClassification.normal
-                                  ? AppTheme.successGreen.withValues(alpha: 0.15)
-                                  : AppTheme.errorRed.withValues(alpha: 0.15),
-                              child: Icon(
-                                Icons.straighten_rounded,
-                                color: zSt == ZScoreClassification.normal ? AppTheme.successGreen : AppTheme.errorRed,
+                        final isNormal = zSt == ZScoreClassification.normal;
+                        return Container(
+                          margin: const EdgeInsets.only(bottom: 10),
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: const Color(0xFFE2E8F0)),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: isNormal ? const Color(0xFFECFDF5) : const Color(0xFFFEF2F2),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Icon(
+                                  Icons.straighten_rounded,
+                                  color: isNormal ? AppTheme.successGreen : AppTheme.errorRed,
+                                  size: 20,
+                                ),
                               ),
-                            ),
-                            title: Text('${item.weightKg} kg • ${item.heightCm} cm • LK ${item.headCircumferenceCm} cm', style: const TextStyle(fontWeight: FontWeight.w700)),
-                            subtitle: Text(DateHelper.formatIndonesianDate(item.measurementDate)),
-                            trailing: Chip(
-                              label: Text(zSt == ZScoreClassification.normal ? 'WHO Normal' : 'WHO Perhatian'),
-                              backgroundColor: zSt == ZScoreClassification.normal ? AppTheme.successGreen.withValues(alpha: 0.1) : AppTheme.errorRed.withValues(alpha: 0.1),
-                              labelStyle: TextStyle(
-                                color: zSt == ZScoreClassification.normal ? AppTheme.successGreen : AppTheme.errorRed,
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
+                              const SizedBox(width: 14),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${item.weightKg} kg • ${item.heightCm} cm • LK ${item.headCircumferenceCm} cm',
+                                      style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: Color(0xFF0F172A)),
+                                    ),
+                                    const SizedBox(height: 3),
+                                    Text(
+                                      DateHelper.formatIndonesianDate(item.measurementDate),
+                                      style: const TextStyle(color: Color(0xFF64748B), fontSize: 12),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: isNormal ? const Color(0xFFECFDF5) : const Color(0xFFFEF2F2),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  isNormal ? 'WHO Normal' : 'WHO Perhatian',
+                                  style: TextStyle(
+                                    color: isNormal ? AppTheme.successGreen : AppTheme.errorRed,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         );
                       },
@@ -449,36 +706,51 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
   Widget _buildBannerStat(String label, String val) {
     return Column(
       children: [
-        Text(val, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+        Text(val, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w800)),
         const SizedBox(height: 2),
-        Text(label, style: const TextStyle(color: Colors.white70, fontSize: 11)),
+        Text(label, style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 11)),
       ],
     );
   }
 
-  Widget _buildFeatureCard({required String title, required String subtitle, required IconData icon, required Color color, required VoidCallback onTap}) {
-    return GestureDetector(
+  Widget _buildFeatureCard({
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(18),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withValues(alpha: 0.3), width: 1.5),
-          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 10, offset: const Offset(0, 4))],
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: const Color(0xFFE2E8F0)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(color: color.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(14)),
-              child: Icon(icon, color: color, size: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(icon, color: color, size: 22),
+                ),
+                Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey.shade400),
+              ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 14),
             Text(title, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF0F172A))),
             const SizedBox(height: 3),
-            Text(subtitle, style: TextStyle(fontSize: 11, color: Colors.grey.shade600)),
+            Text(subtitle, style: const TextStyle(fontSize: 11, color: Color(0xFF64748B))),
           ],
         ),
       ),
@@ -487,14 +759,30 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
 
   Widget _buildStatusTile(String title, String val, Color color) {
     return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(14), border: Border.all(color: color.withValues(alpha: 0.3))),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF8FAFC),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: TextStyle(color: Colors.grey.shade700, fontSize: 11)),
-          const SizedBox(height: 4),
-          Text(val, style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 13)),
+          Text(title, style: const TextStyle(color: Color(0xFF64748B), fontSize: 11)),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  val,
+                  style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 13),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
