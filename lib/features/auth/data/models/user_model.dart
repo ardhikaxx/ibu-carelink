@@ -16,7 +16,7 @@ class UserModel extends UserEntity {
       email: map['email'] ?? '',
       name: map['name'] ?? 'Pengguna CareLink',
       role: map['role'] ?? 'pending',
-      photoUrl: map['photoUrl'],
+      photoUrl: map['photoUrl'] ?? map['photoURL'] ?? map['picture'] ?? map['avatar'],
       createdAt: map['createdAt'] != null
           ? DateTime.tryParse(map['createdAt'].toString()) ?? DateTime.now()
           : DateTime.now(),

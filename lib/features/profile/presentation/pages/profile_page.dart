@@ -8,6 +8,9 @@ import '../../../auth/presentation/bloc/auth_event.dart';
 import '../../../auth/presentation/pages/login_page.dart';
 import '../../../sync/presentation/bloc/sync_bloc.dart';
 import '../../../sync/presentation/bloc/sync_event.dart';
+import 'about_app_page.dart';
+import 'help_faq_page.dart';
+import 'privacy_policy_page.dart';
 
 class ProfilePage extends StatelessWidget {
   final UserEntity user;
@@ -200,7 +203,11 @@ class ProfilePage extends StatelessWidget {
                     color: AppTheme.primaryRose,
                     title: 'Kebijakan Privasi Medis',
                     subtitle: 'Standar keamanan data kesehatan maternal',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const PrivacyPolicyPage()),
+                      );
+                    },
                   ),
                   const Divider(color: Color(0xFFF1F5F9), height: 1, indent: 64),
                   _buildMenuItem(
@@ -208,7 +215,11 @@ class ProfilePage extends StatelessWidget {
                     color: AppTheme.accentWarm,
                     title: 'Bantuan & FAQ Ibu CareLink',
                     subtitle: 'Panduan penggunaan fitur skrining & KPSP',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const HelpFaqPage()),
+                      );
+                    },
                   ),
                   const Divider(color: Color(0xFFF1F5F9), height: 1, indent: 64),
                   _buildMenuItem(
@@ -216,7 +227,11 @@ class ProfilePage extends StatelessWidget {
                     color: AppTheme.primaryRose,
                     title: 'Tentang Aplikasi & Lisensi',
                     subtitle: 'Standar Acuan Kemenkes & WHO 2026',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const AboutAppPage()),
+                      );
+                    },
                   ),
                 ],
               ),

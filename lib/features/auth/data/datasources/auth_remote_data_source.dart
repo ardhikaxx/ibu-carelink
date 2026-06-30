@@ -102,6 +102,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         final doc = await firestore.collection('users').doc(userCredential.user!.uid).get();
         if (doc.exists && doc.data() != null) {
           userModel = UserModel.fromFirestore(doc.data()!, doc.id);
+          if ((userModel.photoUrl == null || userModel.photoUrl!.isEmpty) && userCredential.user!.photoURL != null) {
+            userModel = UserModel(
+              uid: userModel.uid,
+              email: userModel.email,
+              name: userModel.name,
+              role: userModel.role,
+              photoUrl: userCredential.user!.photoURL,
+              createdAt: userModel.createdAt,
+            );
+            await firestore.collection('users').doc(userModel.uid).set({'photoUrl': userCredential.user!.photoURL}, SetOptions(merge: true));
+          }
         } else {
           userModel = UserModel(
             uid: userCredential.user!.uid,
@@ -181,7 +192,19 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       final doc = await firestore.collection('users').doc(firebaseUser.uid).get();
       if (doc.exists && doc.data() != null) {
-        return UserModel.fromFirestore(doc.data()!, doc.id);
+        var userModel = UserModel.fromFirestore(doc.data()!, doc.id);
+        if ((userModel.photoUrl == null || userModel.photoUrl!.isEmpty) && firebaseUser.photoURL != null) {
+          userModel = UserModel(
+            uid: userModel.uid,
+            email: userModel.email,
+            name: userModel.name,
+            role: userModel.role,
+            photoUrl: firebaseUser.photoURL,
+            createdAt: userModel.createdAt,
+          );
+          await firestore.collection('users').doc(userModel.uid).set({'photoUrl': firebaseUser.photoURL}, SetOptions(merge: true));
+        }
+        return userModel;
       } else {
         final fallbackUser = UserModel(
           uid: firebaseUser.uid,
