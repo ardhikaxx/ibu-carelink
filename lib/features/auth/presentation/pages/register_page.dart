@@ -308,12 +308,18 @@ class _RegisterPageState extends State<RegisterPage> {
 
                               // Mini Requirement Tip
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.shield_outlined, size: 14, color: const Color(0xFF64748B).withValues(alpha: 0.8)),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 1),
+                                    child: Icon(Icons.shield_outlined, size: 14, color: const Color(0xFF64748B).withValues(alpha: 0.8)),
+                                  ),
                                   const SizedBox(width: 6),
-                                  const Text(
-                                    'Minimal 6 karakter demi keamanan rekam medis Anda',
-                                    style: TextStyle(fontSize: 11.5, color: Color(0xFF64748B)),
+                                  const Expanded(
+                                    child: Text(
+                                      'Minimal 6 karakter demi keamanan rekam medis Anda',
+                                      style: TextStyle(fontSize: 11.5, color: Color(0xFF64748B), height: 1.3),
+                                    ),
                                   ),
                                 ],
                               ),
