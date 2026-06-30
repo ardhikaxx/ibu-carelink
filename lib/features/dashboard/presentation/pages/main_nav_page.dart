@@ -76,31 +76,87 @@ class _MainNavPageState extends State<MainNavPage> {
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          border: const Border(top: BorderSide(color: Color(0xFFF1F5F9), width: 1)),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(28),
+            topRight: Radius.circular(28),
+          ),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF0F172A).withValues(alpha: 0.04),
-              blurRadius: 20,
-              offset: const Offset(0, -6),
+              color: const Color(0xFF0F172A).withValues(alpha: 0.06),
+              blurRadius: 24,
+              offset: const Offset(0, -8),
             ),
           ],
         ),
-        child: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (index) => setState(() => _currentIndex = index),
-          selectedItemColor: AppTheme.primaryRose,
-          unselectedItemColor: const Color(0xFF94A3B8),
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
-          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 11.5),
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.pregnant_woman_rounded), label: 'Kehamilan'),
-            BottomNavigationBarItem(icon: Icon(Icons.child_friendly_rounded), label: 'Bayi & Anak'),
-            BottomNavigationBarItem(icon: Icon(Icons.menu_book_rounded), label: 'Edukasi KIA'),
-            BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: 'Profil'),
-          ],
+        child: SafeArea(
+          top: false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildNavItem(0, Icons.favorite_outline_rounded, Icons.favorite_rounded, 'Kehamilan'),
+                _buildNavItem(1, Icons.child_friendly_outlined, Icons.child_friendly_rounded, 'Bayi & Anak'),
+                _buildNavItem(2, Icons.menu_book_outlined, Icons.menu_book_rounded, 'Edukasi KIA'),
+                _buildNavItem(3, Icons.person_outline_rounded, Icons.person_rounded, 'Profil'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(int index, IconData icon, IconData activeIcon, String label) {
+    final isSelected = _currentIndex == index;
+    return Expanded(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => setState(() => _currentIndex = index),
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeOutCubic,
+                  padding: EdgeInsets.symmetric(horizontal: isSelected ? 22 : 16, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: isSelected ? AppTheme.primaryRose : Colors.transparent,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: isSelected
+                        ? [
+                            BoxShadow(
+                              color: AppTheme.primaryRose.withValues(alpha: 0.32),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ]
+                        : null,
+                  ),
+                  child: Icon(
+                    isSelected ? activeIcon : icon,
+                    color: isSelected ? Colors.white : const Color(0xFF94A3B8),
+                    size: 22,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 200),
+                  style: TextStyle(
+                    color: isSelected ? AppTheme.primaryRose : const Color(0xFF64748B),
+                    fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                    fontSize: isSelected ? 12 : 11.5,
+                    fontFamily: 'Inter',
+                  ),
+                  child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
