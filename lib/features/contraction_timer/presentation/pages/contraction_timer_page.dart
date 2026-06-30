@@ -122,55 +122,118 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                     if (!isContraction)
                       Column(
                         children: [
-                          const Text('Pilih Intensitas Nyeri Saat Ini:', style: TextStyle(fontWeight: FontWeight.w700)),
-                          const SizedBox(height: 10),
-                          SegmentedButton<String>(
-                            segments: const [
-                              ButtonSegment(value: 'ringan', label: Text('Ringan')),
-                              ButtonSegment(value: 'sedang', label: Text('Sedang')),
-                              ButtonSegment(value: 'kuat', label: Text('Kuat')),
-                            ],
-                            selected: {_selectedIntensity},
-                            onSelectionChanged: (val) {
-                              setState(() => _selectedIntensity = val.first);
-                            },
+                          const Text('Pilih Intensitas Nyeri Saat Ini:', style: TextStyle(fontWeight: FontWeight.w700, color: Color(0xFF0F172A))),
+                          const SizedBox(height: 12),
+                          Row(
+                            children: ['ringan', 'sedang', 'kuat'].map((level) {
+                              final isSel = _selectedIntensity == level;
+                              final label = level == 'ringan'
+                                  ? 'Ringan'
+                                  : level == 'sedang'
+                                      ? 'Sedang'
+                                      : 'Kuat';
+                              return Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                                  child: InkWell(
+                                    onTap: () => setState(() => _selectedIntensity = level),
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 180),
+                                      padding: const EdgeInsets.symmetric(vertical: 12),
+                                      decoration: BoxDecoration(
+                                        color: isSel ? AppTheme.primaryRose : Colors.white,
+                                        borderRadius: BorderRadius.circular(16),
+                                        border: Border.all(
+                                          color: isSel ? AppTheme.primaryRose : const Color(0xFFE2E8F0),
+                                          width: isSel ? 2 : 1,
+                                        ),
+                                        boxShadow: isSel
+                                            ? [
+                                                BoxShadow(
+                                                  color: AppTheme.primaryRose.withValues(alpha: 0.25),
+                                                  blurRadius: 10,
+                                                  offset: const Offset(0, 4),
+                                                ),
+                                              ]
+                                            : null,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          label,
+                                          style: TextStyle(
+                                            color: isSel ? Colors.white : const Color(0xFF475569),
+                                            fontWeight: isSel ? FontWeight.w800 : FontWeight.w600,
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
                           ),
                           const SizedBox(height: 20),
                         ],
                       ),
 
                     // Active Timer Display Card
-                    Container(
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 36),
+                      padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
                       decoration: BoxDecoration(
-                        color: isContraction ? AppTheme.primaryRose.withValues(alpha: 0.12) : AppTheme.primaryRose.withValues(alpha: 0.12),
+                        color: isContraction ? AppTheme.primaryRose.withValues(alpha: 0.08) : Colors.white,
                         borderRadius: BorderRadius.circular(28),
-                        border: Border.all(color: isContraction ? AppTheme.primaryRose : AppTheme.primaryRose, width: 2),
+                        border: Border.all(
+                          color: isContraction ? AppTheme.primaryRose : const Color(0xFFE2E8F0),
+                          width: isContraction ? 2.5 : 1.5,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: (isContraction ? AppTheme.primaryRose : const Color(0xFF0F172A)).withValues(alpha: isContraction ? 0.15 : 0.04),
+                            blurRadius: 20,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
                       ),
                       child: Column(
                         children: [
-                          Text(
-                            isContraction ? 'KONTRAKSI BERLANGSUNG' : 'INTERVAL ISTIRAHAT',
-                            style: TextStyle(
-                              color: isContraction ? AppTheme.primaryRose : AppTheme.primaryRose,
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 1.5,
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: (isContraction ? AppTheme.primaryRose : const Color(0xFF64748B)).withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              isContraction ? 'KONTRAKSI BERLANGSUNG' : 'INTERVAL ISTIRAHAT',
+                              style: TextStyle(
+                                color: isContraction ? AppTheme.primaryRose : const Color(0xFF475569),
+                                fontWeight: FontWeight.w800,
+                                fontSize: 12,
+                                letterSpacing: 1.2,
+                              ),
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 20),
                           Text(
                             isContraction
                                 ? _formatSeconds(state.activeDurationSeconds)
                                 : _formatSeconds(state.currentIntervalSeconds),
-                            style: const TextStyle(fontSize: 54, fontWeight: FontWeight.w900, color: Color(0xFF0F172A)),
+                            style: TextStyle(
+                              fontSize: 54,
+                              fontWeight: FontWeight.w900,
+                              color: isContraction ? AppTheme.primaryRose : const Color(0xFF0F172A),
+                            ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 12),
                           Text(
                             isContraction
                                 ? 'Tarik napas dalam dari hidung, hembuskan perlahan...'
                                 : 'Istirahat dan rilekskan tubuh sebelum gelombang berikutnya.',
-                            style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Color(0xFF64748B), fontSize: 13, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -297,21 +360,65 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                     itemCount: history.length,
                     itemBuilder: (context, index) {
                       final item = history[index];
-                      return Card(
+                      return Container(
                         margin: const EdgeInsets.only(bottom: 12),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: AppTheme.primaryRose.withValues(alpha: 0.15),
-                            child: const Icon(Icons.show_chart_rounded, color: AppTheme.primaryRose),
-                          ),
-                          title: Text(
-                            'Durasi: ${_formatSeconds(item.durationSeconds)} • Intensitas: ${item.intensityLevel.toUpperCase()}',
-                            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
-                          ),
-                          subtitle: Text(
-                            'Mulai: ${DateHelper.formatTime(item.startTime)} • Jarak dari sebelumnya: ${_formatSeconds(item.intervalSeconds)}',
-                            style: const TextStyle(fontSize: 12),
-                          ),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: const Color(0xFFF1F5F9)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF0F172A).withValues(alpha: 0.03),
+                              blurRadius: 14,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: AppTheme.primaryRose.withValues(alpha: 0.12),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Icon(Icons.show_chart_rounded, color: AppTheme.primaryRose, size: 24),
+                            ),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Durasi: ${_formatSeconds(item.durationSeconds)}',
+                                        style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15, color: Color(0xFF0F172A)),
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: AppTheme.primaryRose.withValues(alpha: 0.1),
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Text(
+                                          item.intensityLevel.toUpperCase(),
+                                          style: const TextStyle(color: AppTheme.primaryRose, fontWeight: FontWeight.w800, fontSize: 11),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    'Mulai: ${DateHelper.formatTime(item.startTime)} • Jarak istirahat: ${_formatSeconds(item.intervalSeconds)}',
+                                    style: const TextStyle(fontSize: 12, color: Color(0xFF64748B), fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     },
