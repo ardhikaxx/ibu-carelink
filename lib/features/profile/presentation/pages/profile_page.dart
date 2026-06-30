@@ -252,13 +252,7 @@ class ProfilePage extends StatelessWidget {
                     side: const BorderSide(color: Color(0xFFFECACA)),
                   ),
                 ),
-                onPressed: () {
-                  context.read<AuthBloc>().add(LogoutEvent());
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (_) => const LoginPage()),
-                    (route) => false,
-                  );
-                },
+                onPressed: () => _showLogoutConfirmationDialog(context),
                 icon: const Icon(Icons.logout_rounded, size: 20),
                 label: const Text('Keluar dari Akun Ibu CareLink', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.5)),
               ),
@@ -267,6 +261,150 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'Logout Confirmation',
+      barrierColor: const Color(0xFF0F172A).withValues(alpha: 0.65),
+      transitionDuration: const Duration(milliseconds: 260),
+      pageBuilder: (dialogContext, animation, secondaryAnimation) {
+        return Center(
+          child: Material(
+            color: Colors.transparent,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 360),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.all(28),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(28),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF0F172A).withValues(alpha: 0.2),
+                      blurRadius: 32,
+                      offset: const Offset(0, 16),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Hero Icon Badge
+                    Container(
+                      width: 76,
+                      height: 76,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFEF2F2),
+                        shape: BoxShape.circle,
+                        border: Border.all(color: const Color(0xFFFECACA), width: 1.5),
+                      ),
+                      child: const Icon(
+                        Icons.logout_rounded,
+                        color: AppTheme.errorRed,
+                        size: 34,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Keluar dari Akun?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF0F172A),
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Apakah Bunda yakin ingin keluar dari sesi Ibu CareLink? Pastikan seluruh data medis kehamilan & tumbuh kembang anak telah tersimpan.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 13.5,
+                        color: Color(0xFF64748B),
+                        height: 1.45,
+                      ),
+                    ),
+                    const SizedBox(height: 28),
+
+                    // Action Buttons
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: 48,
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                backgroundColor: const Color(0xFFFEF2F2),
+                                side: const BorderSide(color: Color(0xFFFECACA), width: 1.2),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                              ),
+                              onPressed: () {
+                                Navigator.of(dialogContext).pop();
+                                context.read<AuthBloc>().add(LogoutEvent());
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(builder: (_) => const LoginPage()),
+                                  (route) => false,
+                                );
+                              },
+                              child: const Text(
+                                'Ya, Keluar',
+                                style: TextStyle(
+                                  color: AppTheme.errorRed,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: SizedBox(
+                            height: 48,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF0F172A),
+                                foregroundColor: Colors.white,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                              ),
+                              onPressed: () => Navigator.of(dialogContext).pop(),
+                              child: const Text(
+                                'Tetap di Sini',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (context, anim, secondaryAnim, child) {
+        return FadeTransition(
+          opacity: anim,
+          child: ScaleTransition(
+            scale: Tween<double>(begin: 0.88, end: 1.0).animate(
+              CurvedAnimation(parent: anim, curve: Curves.easeOutBack),
+            ),
+            child: child,
+          ),
+        );
+      },
     );
   }
 

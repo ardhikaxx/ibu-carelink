@@ -81,10 +81,11 @@ Future<void> init() async {
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => FirebaseFirestore.instance);
   sl.registerLazySingleton(() => FirebaseAuth.instance);
-  sl.registerLazySingleton(() => GoogleSignIn(
-        clientId: kIsWeb ? '985223544295-aanjof8t40vr9kto213lb0p0nu3k5qvu.apps.googleusercontent.com' : null,
-        serverClientId: '985223544295-aanjof8t40vr9kto213lb0p0nu3k5qvu.apps.googleusercontent.com',
-      ));
+  await GoogleSignIn.instance.initialize(
+    clientId: kIsWeb ? '985223544295-aanjof8t40vr9kto213lb0p0nu3k5qvu.apps.googleusercontent.com' : null,
+    serverClientId: '985223544295-aanjof8t40vr9kto213lb0p0nu3k5qvu.apps.googleusercontent.com',
+  );
+  sl.registerLazySingleton(() => GoogleSignIn.instance);
 
   //! Data Sources
   sl.registerLazySingleton<AuthLocalDataSource>(
