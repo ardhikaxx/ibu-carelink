@@ -46,6 +46,7 @@ dependencies:
   uuid: ^4.2.2
   fl_chart: ^0.65.0
   google_fonts: ^6.1.0
+  connectivity_plus: ^5.0.2
 
 dev_dependencies:
   flutter_test:
