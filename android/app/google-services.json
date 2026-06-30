@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "985223544295",
+    "firebase_url": "https://ibu-carelink-default-rtdb.firebaseio.com",
     "project_id": "ibu-carelink",
     "storage_bucket": "ibu-carelink.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.ibu_carelink"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "985223544295-dt54imr993b7rc70om2qu014nab1ff5b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ibu_carelink",
+            "certificate_hash": "f0b7683c2c2e77674954fdbeb0b4d88c11736e16"
+          }
+        },
+        {
+          "client_id": "985223544295-aanjof8t40vr9kto213lb0p0nu3k5qvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAyD7U2uU3dOWxYhcQLzkxkTcJ4ad6LHKc"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985223544295-aanjof8t40vr9kto213lb0p0nu3k5qvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
