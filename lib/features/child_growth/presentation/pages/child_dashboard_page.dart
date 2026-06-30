@@ -264,7 +264,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                     const SizedBox(height: 24),
                     const Text(
                       'Belum Ada Profil Anak',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: Color(0xFF0F172A)),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AppTheme.primaryRose),
                     ),
                     const SizedBox(height: 8),
                     const Text(
@@ -330,11 +330,11 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                                       duration: const Duration(milliseconds: 200),
                                       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                                       decoration: BoxDecoration(
-                                        color: isSel ? const Color(0xFF0F172A) : Colors.white,
+                                        color: isSel ? AppTheme.primaryRose : Colors.white,
                                         borderRadius: BorderRadius.circular(24),
-                                        border: Border.all(color: isSel ? const Color(0xFF0F172A) : const Color(0xFFE2E8F0)),
+                                        border: Border.all(color: isSel ? AppTheme.primaryRose : const Color(0xFFE2E8F0)),
                                         boxShadow: isSel
-                                            ? [BoxShadow(color: const Color(0xFF0F172A).withValues(alpha: 0.15), blurRadius: 10, offset: const Offset(0, 4))]
+                                            ? [BoxShadow(color: AppTheme.primaryRose.withValues(alpha: 0.25), blurRadius: 10, offset: const Offset(0, 4))]
                                             : null,
                                       ),
                                       child: Row(
@@ -342,14 +342,14 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                                           Icon(
                                             c.gender == 'Laki-laki' ? Icons.face_rounded : Icons.face_3_rounded,
                                             size: 18,
-                                            color: isSel ? Colors.white : const Color(0xFF64748B),
+                                            color: isSel ? Colors.white : AppTheme.primaryRose,
                                           ),
                                           const SizedBox(width: 8),
                                           Text(
                                             c.name,
                                             style: TextStyle(
-                                              color: isSel ? Colors.white : const Color(0xFF0F172A),
-                                              fontWeight: FontWeight.w700,
+                                              color: isSel ? Colors.white : AppTheme.primaryRose,
+                                              fontWeight: FontWeight.w800,
                                               fontSize: 14,
                                             ),
                                           ),
@@ -373,7 +373,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                           ),
                           child: IconButton(
                             onPressed: _showAddChildModal,
-                            icon: const Icon(Icons.add_rounded, color: Color(0xFF0F172A), size: 22),
+                            icon: const Icon(Icons.add_rounded, color: AppTheme.primaryRose, size: 22),
                             tooltip: 'Tambah Anak',
                           ),
                         ),
