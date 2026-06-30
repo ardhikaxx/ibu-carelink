@@ -91,9 +91,32 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: () => Navigator.pop(context),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
+                    Container(
+                      width: 86,
+                      height: 86,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme.primaryRose.withValues(alpha: 0.25),
+                            blurRadius: 18,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
+                      ),
+                      child: ClipOval(
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     Text(
-                      'Buat Akun CareLink',
+                      'Buat Akun Ibu CareLink',
                       style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                             fontWeight: FontWeight.w800,
                             color: const Color(0xFF0F172A),
@@ -161,41 +184,56 @@ class _RegisterPageState extends State<RegisterPage> {
                             validator: (val) => val == null || val.length < 6 ? 'Minimal 6 karakter' : null,
                           ),
                           const SizedBox(height: 24),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryTeal),
-                              onPressed: _onRegister,
-                              child: const Text('Daftar Akun Baru'),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Expanded(child: Divider(color: Colors.grey.shade300)),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 12),
-                                child: Text('ATAU', style: TextStyle(color: Colors.grey.shade500, fontSize: 12)),
-                              ),
-                              Expanded(child: Divider(color: Colors.grey.shade300)),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          SizedBox(
-                            width: double.infinity,
-                            child: OutlinedButton.icon(
-                              style: OutlinedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(vertical: 14),
-                                side: BorderSide(color: Colors.grey.shade300, width: 1.5),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                              ),
-                              onPressed: _onGoogleRegister,
-                              icon: const Icon(Icons.g_mobiledata_rounded, size: 28, color: Color(0xFFEA4335)),
-                              label: const Text(
-                                'Daftar dengan Google',
-                                style: TextStyle(color: Color(0xFF0F172A), fontWeight: FontWeight.w600),
-                              ),
-                            ),
+                          BlocBuilder<AuthBloc, AuthState>(
+                            builder: (context, state) {
+                              final isLoading = state is AuthLoading;
+                              if (isLoading) {
+                                return const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 12),
+                                  child: CircularProgressIndicator(color: AppTheme.primaryRose),
+                                );
+                              }
+                              return Column(
+                                children: [
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryTeal),
+                                      onPressed: _onRegister,
+                                      child: const Text('Daftar Akun Baru'),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Expanded(child: Divider(color: Colors.grey.shade300)),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                                        child: Text('ATAU', style: TextStyle(color: Colors.grey.shade500, fontSize: 12)),
+                                      ),
+                                      Expanded(child: Divider(color: Colors.grey.shade300)),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 16),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: OutlinedButton.icon(
+                                      style: OutlinedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(vertical: 14),
+                                        side: BorderSide(color: Colors.grey.shade300, width: 1.5),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                      ),
+                                      onPressed: _onGoogleRegister,
+                                      icon: const Icon(Icons.g_mobiledata_rounded, size: 28, color: Color(0xFFEA4335)),
+                                      label: const Text(
+                                        'Daftar dengan Google',
+                                        style: TextStyle(color: Color(0xFF0F172A), fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
                         ],
                       ),
