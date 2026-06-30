@@ -59,7 +59,7 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Batal')),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryTeal),
+            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryRose),
             onPressed: () {
               context.read<ImmunizationBloc>().add(MarkImmunizationDoneEvent(
                     immunization: item,
@@ -82,15 +82,22 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
     final childAgeMonths = widget.child.ageInMonths;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: Text('Buku KIA Digital - Imunisasi (${widget.child.name})'),
-        backgroundColor: AppTheme.primaryTeal,
-        foregroundColor: Colors.white,
+        title: Text('Jadwal Imunisasi (${widget.child.name})', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 17, color: Color(0xFF0F172A))),
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF0F172A),
+        elevation: 0,
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(color: const Color(0xFFF1F5F9), height: 1),
+        ),
       ),
       body: BlocBuilder<ImmunizationBloc, ImmunizationState>(
         builder: (context, state) {
           if (state is ImmunizationLoading) {
-            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryTeal));
+            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryRose));
           }
 
           if (state is ImmunizationLoaded) {
@@ -107,13 +114,13 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                      color: AppTheme.primaryRose.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(22),
-                      border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.3)),
+                      border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.verified_user_rounded, color: AppTheme.primaryTeal, size: 36),
+                        const Icon(Icons.verified_user_rounded, color: AppTheme.primaryRose, size: 36),
                         const SizedBox(width: 14),
                         Expanded(
                           child: Column(
@@ -211,7 +218,7 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
               Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryTeal, padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8)),
+                  style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryRose, padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8)),
                   onPressed: () => _showMarkDoneDialog(item),
                   icon: const Icon(Icons.check_rounded, size: 16),
                   label: const Text('Tandai Sudah Imunisasi'),

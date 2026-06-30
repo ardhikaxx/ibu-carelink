@@ -128,10 +128,10 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                 leading: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                    color: AppTheme.primaryRose.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(Icons.cake_rounded, color: AppTheme.primaryTeal, size: 20),
+                  child: const Icon(Icons.cake_rounded, color: AppTheme.primaryRose, size: 20),
                 ),
                 title: const Text('Tanggal Lahir', style: TextStyle(fontSize: 12, color: Color(0xFF64748B))),
                 subtitle: Text(
@@ -235,7 +235,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
       body: BlocBuilder<ChildGrowthBloc, ChildGrowthState>(
         builder: (context, state) {
           if (state is ChildGrowthLoading) {
-            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryTeal));
+            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryRose));
           }
 
           if (state is ChildGrowthEmpty || state is ChildGrowthError) {
@@ -259,7 +259,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.child_care_rounded, size: 56, color: AppTheme.primaryTeal),
+                      child: const Icon(Icons.child_care_rounded, size: 56, color: AppTheme.primaryRose),
                     ),
                     const SizedBox(height: 24),
                     const Text(
@@ -300,7 +300,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
             final eval = latestLog?.evaluation;
 
             return RefreshIndicator(
-              color: AppTheme.primaryTeal,
+              color: AppTheme.primaryRose,
               onRefresh: () async {
                 context.read<ChildGrowthBloc>().add(LoadChildrenEvent(widget.userId));
               },
@@ -446,12 +446,12 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                                 height: 56,
                                 width: 56,
                                 decoration: BoxDecoration(
-                                  color: AppTheme.primaryTeal.withValues(alpha: 0.1),
+                                  color: AppTheme.primaryRose.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(18),
                                 ),
                                 child: Icon(
                                   selected.gender == 'Laki-laki' ? Icons.child_care_rounded : Icons.face_4_rounded,
-                                  color: AppTheme.primaryTeal,
+                                  color: AppTheme.primaryRose,
                                   size: 30,
                                 ),
                               ),
@@ -596,7 +596,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                             title: 'Jadwal Imunisasi',
                             subtitle: 'Standar IDAI 2024',
                             icon: Icons.vaccines_rounded,
-                            color: AppTheme.primaryTeal,
+                            color: AppTheme.primaryRose,
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -644,7 +644,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                             decoration: BoxDecoration(
-                              color: AppTheme.primaryTeal,
+                              color: AppTheme.primaryRose,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: const Row(

@@ -36,10 +36,17 @@ class _KickCounterPageState extends State<KickCounterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: const Text('Penghitung Tendangan Janin'),
-        backgroundColor: AppTheme.primaryRose,
-        foregroundColor: Colors.white,
+        title: const Text('Penghitung Tendangan Janin', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A))),
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF0F172A),
+        elevation: 0,
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(color: const Color(0xFFF1F5F9), height: 1),
+        ),
       ),
       body: BlocConsumer<KickCounterBloc, KickCounterState>(
         listener: (context, state) {
@@ -86,15 +93,15 @@ class _KickCounterPageState extends State<KickCounterPage> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                        color: AppTheme.primaryRose.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.screen_lock_landscape_rounded, color: AppTheme.primaryTeal, size: 16),
+                          Icon(Icons.screen_lock_landscape_rounded, color: AppTheme.primaryRose, size: 16),
                           SizedBox(width: 8),
-                          Text('Wake Lock Aktif • Layar tidak akan padam', style: TextStyle(color: AppTheme.primaryTeal, fontSize: 12, fontWeight: FontWeight.bold)),
+                          Text('Wake Lock Aktif • Layar tidak akan padam', style: TextStyle(color: AppTheme.primaryRose, fontSize: 12, fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),

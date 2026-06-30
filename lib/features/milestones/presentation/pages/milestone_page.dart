@@ -31,15 +31,22 @@ class _MilestonePageState extends State<MilestonePage> {
     final childAgeMonths = widget.child.ageInMonths;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: Text('Perkembangan KPSP (${widget.child.name})'),
-        backgroundColor: AppTheme.primaryTeal,
-        foregroundColor: Colors.white,
+        title: Text('Perkembangan KPSP (${widget.child.name})', style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 17, color: Color(0xFF0F172A))),
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF0F172A),
+        elevation: 0,
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(color: const Color(0xFFF1F5F9), height: 1),
+        ),
       ),
       body: BlocBuilder<MilestoneBloc, MilestoneState>(
         builder: (context, state) {
           if (state is MilestoneLoading) {
-            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryTeal));
+            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryRose));
           }
 
           if (state is MilestoneLoaded) {
@@ -76,7 +83,7 @@ class _MilestonePageState extends State<MilestonePage> {
                         child: ChoiceChip(
                           label: Text(band),
                           selected: isSel,
-                          selectedColor: AppTheme.primaryTeal,
+                          selectedColor: AppTheme.primaryRose,
                           labelStyle: TextStyle(color: isSel ? Colors.white : Colors.black87, fontWeight: FontWeight.bold),
                           onSelected: (_) => setState(() => _selectedBand = band),
                         ),
@@ -134,7 +141,7 @@ class _MilestonePageState extends State<MilestonePage> {
                                 const SizedBox(height: 14),
                                 _buildProgressBar('Motorik Kasar', grossDone, grossTotal, AppTheme.primaryRose),
                                 const SizedBox(height: 10),
-                                _buildProgressBar('Motorik Halus', fineDone, fineTotal, AppTheme.primaryTeal),
+                                _buildProgressBar('Motorik Halus', fineDone, fineTotal, AppTheme.primaryRose),
                                 const SizedBox(height: 10),
                                 _buildProgressBar('Bicara & Bahasa', speechDone, speechTotal, AppTheme.accentWarm),
                                 const SizedBox(height: 10),

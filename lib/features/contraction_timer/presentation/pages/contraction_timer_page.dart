@@ -38,10 +38,17 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: const Text('Pengatur Waktu Kontraksi'),
-        backgroundColor: AppTheme.primaryRose,
-        foregroundColor: Colors.white,
+        title: const Text('Pengatur Waktu Kontraksi', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A))),
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF0F172A),
+        elevation: 0,
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(color: const Color(0xFFF1F5F9), height: 1),
+        ),
       ),
       body: BlocConsumer<ContractionTimerBloc, ContractionTimerState>(
         listener: (context, state) {
@@ -137,16 +144,16 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 36),
                       decoration: BoxDecoration(
-                        color: isContraction ? AppTheme.primaryRose.withValues(alpha: 0.12) : AppTheme.primaryTeal.withValues(alpha: 0.12),
+                        color: isContraction ? AppTheme.primaryRose.withValues(alpha: 0.12) : AppTheme.primaryRose.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(28),
-                        border: Border.all(color: isContraction ? AppTheme.primaryRose : AppTheme.primaryTeal, width: 2),
+                        border: Border.all(color: isContraction ? AppTheme.primaryRose : AppTheme.primaryRose, width: 2),
                       ),
                       child: Column(
                         children: [
                           Text(
                             isContraction ? 'KONTRAKSI BERLANGSUNG' : 'INTERVAL ISTIRAHAT',
                             style: TextStyle(
-                              color: isContraction ? AppTheme.primaryRose : AppTheme.primaryTeal,
+                              color: isContraction ? AppTheme.primaryRose : AppTheme.primaryRose,
                               fontWeight: FontWeight.w800,
                               letterSpacing: 1.5,
                             ),
@@ -242,7 +249,7 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                     children: [
                       const Row(
                         children: [
-                          Icon(Icons.timer_rounded, color: AppTheme.primaryTeal, size: 32),
+                          Icon(Icons.timer_rounded, color: AppTheme.primaryRose, size: 32),
                           SizedBox(width: 12),
                           Text('Observasi Kontraksi', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
                         ],
@@ -256,7 +263,7 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryTeal),
+                          style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryRose),
                           onPressed: () {
                             context.read<ContractionTimerBloc>().add(StartContractionSessionEvent(
                                   pregnancyId: widget.pregnancyId,

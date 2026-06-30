@@ -200,7 +200,7 @@ class _EducationPageState extends State<EducationPage> {
               itemBuilder: (context, index) {
                 final item = filtered[index];
                 final isEmg = item.isEmergencyGuide;
-                final accentColor = isEmg ? AppTheme.errorRed : AppTheme.primaryTeal;
+                final accentColor = isEmg ? AppTheme.errorRed : AppTheme.primaryRose;
 
                 return Container(
                   margin: const EdgeInsets.only(bottom: 14),
@@ -275,8 +275,8 @@ class _EducationPageState extends State<EducationPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
-                              Text('Baca Panduan Lengkap', style: TextStyle(color: AppTheme.primaryTeal, fontWeight: FontWeight.w800, fontSize: 12.5)),
-                              Icon(Icons.arrow_forward_rounded, size: 16, color: AppTheme.primaryTeal),
+                              Text('Baca Panduan Lengkap', style: TextStyle(color: AppTheme.primaryRose, fontWeight: FontWeight.w800, fontSize: 12.5)),
+                              Icon(Icons.arrow_forward_rounded, size: 16, color: AppTheme.primaryRose),
                             ],
                           ),
                         ],
@@ -320,13 +320,13 @@ class _EducationPageState extends State<EducationPage> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: (article.isEmergencyGuide ? AppTheme.errorRed : AppTheme.primaryTeal).withValues(alpha: 0.12),
+                  color: (article.isEmergencyGuide ? AppTheme.errorRed : AppTheme.primaryRose).withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   article.category,
                   style: TextStyle(
-                    color: article.isEmergencyGuide ? AppTheme.errorRed : AppTheme.primaryTeal,
+                    color: article.isEmergencyGuide ? AppTheme.errorRed : AppTheme.primaryRose,
                     fontWeight: FontWeight.w800,
                     fontSize: 12,
                   ),

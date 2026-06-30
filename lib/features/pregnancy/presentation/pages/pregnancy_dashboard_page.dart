@@ -432,7 +432,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                             title: 'Contraction Timer',
                             subtitle: 'Pantau Kontraksi Latih',
                             icon: Icons.timer_rounded,
-                            color: AppTheme.primaryTeal,
+                            color: AppTheme.primaryRose,
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -528,7 +528,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                       children: [
                                         _buildBadge('Mual ${log.nauseaLevel}/5', AppTheme.primaryRose),
                                         const SizedBox(width: 6),
-                                        _buildBadge('Lelah ${log.fatigueLevel}/5', AppTheme.primaryTeal),
+                                        _buildBadge('Lelah ${log.fatigueLevel}/5', AppTheme.primaryRose),
                                       ],
                                     ),
                                   ],

@@ -189,10 +189,10 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                                color: AppTheme.primaryRose.withValues(alpha: 0.12),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: const Icon(Icons.battery_3_bar_rounded, color: AppTheme.primaryTeal, size: 20),
+                              child: const Icon(Icons.battery_3_bar_rounded, color: AppTheme.primaryRose, size: 20),
                             ),
                             const SizedBox(width: 12),
                             const Expanded(
@@ -208,12 +208,12 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                          color: AppTheme.primaryRose.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           'Level $_fatigueLevel / 5',
-                          style: const TextStyle(color: AppTheme.primaryTeal, fontWeight: FontWeight.w800, fontSize: 12),
+                          style: const TextStyle(color: AppTheme.primaryRose, fontWeight: FontWeight.w800, fontSize: 12),
                         ),
                       ),
                     ],
@@ -221,10 +221,10 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                   const SizedBox(height: 16),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                      activeTrackColor: AppTheme.primaryTeal,
-                      inactiveTrackColor: AppTheme.primaryTeal.withValues(alpha: 0.15),
-                      thumbColor: AppTheme.primaryTeal,
-                      overlayColor: AppTheme.primaryTeal.withValues(alpha: 0.2),
+                      activeTrackColor: AppTheme.primaryRose,
+                      inactiveTrackColor: AppTheme.primaryRose.withValues(alpha: 0.15),
+                      thumbColor: AppTheme.primaryRose,
+                      overlayColor: AppTheme.primaryRose.withValues(alpha: 0.2),
                       trackHeight: 6,
                     ),
                     child: Slider(

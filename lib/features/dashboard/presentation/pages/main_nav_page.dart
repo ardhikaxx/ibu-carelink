@@ -28,11 +28,17 @@ class _MainNavPageState extends State<MainNavPage> {
     ];
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: (_currentIndex == 0 || _currentIndex == 1)
           ? AppBar(
               backgroundColor: Colors.white,
+              foregroundColor: const Color(0xFF0F172A),
               elevation: 0,
               centerTitle: false,
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(1),
+                child: Container(color: const Color(0xFFF1F5F9), height: 1),
+              ),
               title: Row(
                 children: [
                   Container(
@@ -41,7 +47,7 @@ class _MainNavPageState extends State<MainNavPage> {
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.3), width: 1.5),
+                      border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.35), width: 1.5),
                     ),
                     child: ClipOval(
                       child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
@@ -52,8 +58,9 @@ class _MainNavPageState extends State<MainNavPage> {
                     'Ibu CareLink',
                     style: TextStyle(
                       color: Color(0xFF0F172A),
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w900,
                       fontSize: 19,
+                      letterSpacing: -0.4,
                     ),
                   ),
                 ],
@@ -68,18 +75,26 @@ class _MainNavPageState extends State<MainNavPage> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 16, offset: const Offset(0, -4))],
+          color: Colors.white,
+          border: const Border(top: BorderSide(color: Color(0xFFF1F5F9), width: 1)),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF0F172A).withValues(alpha: 0.04),
+              blurRadius: 20,
+              offset: const Offset(0, -6),
+            ),
+          ],
         ),
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) => setState(() => _currentIndex = index),
-          selectedItemColor: AppTheme.primaryTeal,
-          unselectedItemColor: Colors.grey.shade400,
+          selectedItemColor: AppTheme.primaryRose,
+          unselectedItemColor: const Color(0xFF94A3B8),
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
           elevation: 0,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 11),
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
+          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 11.5),
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.pregnant_woman_rounded), label: 'Kehamilan'),
             BottomNavigationBarItem(icon: Icon(Icons.child_friendly_rounded), label: 'Bayi & Anak'),

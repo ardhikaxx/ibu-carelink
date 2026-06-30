@@ -161,7 +161,7 @@ class GrowthChartPage extends StatelessWidget {
                     children: [
                       Text(
                         '$latestVal ${isHeight ? "cm" : "kg"}',
-                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: AppTheme.primaryTeal),
+                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: AppTheme.primaryRose),
                       ),
                       const Text('Pengukuran Terakhir', style: TextStyle(fontSize: 10, color: Color(0xFF94A3B8), fontWeight: FontWeight.w600)),
                     ],
@@ -179,7 +179,7 @@ class GrowthChartPage extends StatelessWidget {
               _buildLegendPill(color: AppTheme.successGreen, label: 'Median Optimal'),
               _buildLegendPill(color: const Color(0xFFF59E0B), label: '+2 SD Batas Atas', isDash: true),
               _buildLegendPill(color: AppTheme.errorRed, label: '-2 SD Batas Bawah', isDash: true),
-              _buildLegendPill(color: AppTheme.primaryTeal, label: 'Titik Aktual Anak', isCircle: true),
+              _buildLegendPill(color: AppTheme.primaryRose, label: 'Titik Aktual Anak', isCircle: true),
             ],
           ),
           const SizedBox(height: 18),
@@ -267,13 +267,13 @@ class GrowthChartPage extends StatelessWidget {
                     LineChartBarData(
                       spots: actualSpots,
                       isCurved: false,
-                      color: AppTheme.primaryTeal,
+                      color: AppTheme.primaryRose,
                       barWidth: 4,
                       dotData: FlDotData(
                         show: true,
                         getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
                           radius: 5.5,
-                          color: AppTheme.primaryTeal,
+                          color: AppTheme.primaryRose,
                           strokeWidth: 2.5,
                           strokeColor: Colors.white,
                         ),
@@ -301,10 +301,10 @@ class GrowthChartPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                        color: AppTheme.primaryRose.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Icon(Icons.menu_book_rounded, color: AppTheme.primaryTeal, size: 20),
+                      child: const Icon(Icons.menu_book_rounded, color: AppTheme.primaryRose, size: 20),
                     ),
                     const SizedBox(width: 12),
                     const Text(

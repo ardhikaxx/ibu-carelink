@@ -111,12 +111,12 @@ class _AddGrowthLogPageState extends State<AddGrowthLogPage> {
                     height: 50,
                     width: 50,
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryTeal.withValues(alpha: 0.1),
+                      color: AppTheme.primaryRose.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: Icon(
                       widget.child.gender == 'Laki-laki' ? Icons.child_care_rounded : Icons.face_4_rounded,
-                      color: AppTheme.primaryTeal,
+                      color: AppTheme.primaryRose,
                       size: 26,
                     ),
                   ),
@@ -196,10 +196,10 @@ class _AddGrowthLogPageState extends State<AddGrowthLogPage> {
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                              color: AppTheme.primaryRose.withValues(alpha: 0.12),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Icon(Icons.calendar_month_rounded, color: AppTheme.primaryTeal, size: 20),
+                            child: const Icon(Icons.calendar_month_rounded, color: AppTheme.primaryRose, size: 20),
                           ),
                           const SizedBox(width: 14),
                           Expanded(
@@ -232,15 +232,15 @@ class _AddGrowthLogPageState extends State<AddGrowthLogPage> {
                       hintText: 'Contoh: 8.5',
                       hintStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xFF94A3B8)),
                       suffixText: 'kg',
-                      suffixStyle: const TextStyle(fontWeight: FontWeight.w800, color: AppTheme.primaryTeal, fontSize: 15),
+                      suffixStyle: const TextStyle(fontWeight: FontWeight.w800, color: AppTheme.primaryRose, fontSize: 15),
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(10),
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryTeal.withValues(alpha: 0.1),
+                          color: AppTheme.primaryRose.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Icon(Icons.monitor_weight_rounded, color: AppTheme.primaryTeal, size: 20),
+                        child: const Icon(Icons.monitor_weight_rounded, color: AppTheme.primaryRose, size: 20),
                       ),
                       filled: true,
                       fillColor: const Color(0xFFF8FAFC),
@@ -270,15 +270,15 @@ class _AddGrowthLogPageState extends State<AddGrowthLogPage> {
                       hintText: 'Contoh: 72.0',
                       hintStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14, color: Color(0xFF94A3B8)),
                       suffixText: 'cm',
-                      suffixStyle: const TextStyle(fontWeight: FontWeight.w800, color: AppTheme.primaryTeal, fontSize: 15),
+                      suffixStyle: const TextStyle(fontWeight: FontWeight.w800, color: AppTheme.primaryRose, fontSize: 15),
                       prefixIcon: Container(
                         margin: const EdgeInsets.all(10),
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryTeal.withValues(alpha: 0.1),
+                          color: AppTheme.primaryRose.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Icon(Icons.straighten_rounded, color: AppTheme.primaryTeal, size: 20),
+                        child: const Icon(Icons.straighten_rounded, color: AppTheme.primaryRose, size: 20),
                       ),
                       filled: true,
                       fillColor: const Color(0xFFF8FAFC),

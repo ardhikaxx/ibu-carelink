@@ -69,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                     height: 96,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.25), width: 3),
+                      border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.25), width: 3),
                     ),
                     child: ClipOval(
                       child: (user.photoUrl != null && user.photoUrl!.isNotEmpty)
@@ -130,10 +130,10 @@ class ProfilePage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                          color: AppTheme.primaryRose.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(14),
                         ),
-                        child: const Icon(Icons.cloud_sync_rounded, color: AppTheme.primaryTeal, size: 22),
+                        child: const Icon(Icons.cloud_sync_rounded, color: AppTheme.primaryRose, size: 22),
                       ),
                       const SizedBox(width: 14),
                       const Expanded(
@@ -207,7 +207,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   _buildMenuItem(
                     icon: Icons.privacy_tip_rounded,
-                    color: AppTheme.primaryTeal,
+                    color: AppTheme.primaryRose,
                     title: 'Kebijakan Privasi Medis',
                     subtitle: 'Standar keamanan data kesehatan maternal',
                     onTap: () {},
@@ -272,12 +272,12 @@ class ProfilePage extends StatelessWidget {
       height: 92,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: AppTheme.primaryTeal.withValues(alpha: 0.1),
+        color: AppTheme.primaryRose.withValues(alpha: 0.1),
         shape: BoxShape.circle,
       ),
       child: Text(
         initial,
-        style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: AppTheme.primaryTeal),
+        style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: AppTheme.primaryRose),
       ),
     );
   }

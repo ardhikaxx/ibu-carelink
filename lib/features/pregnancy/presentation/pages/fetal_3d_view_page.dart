@@ -138,7 +138,7 @@ class Fetal3DViewPage extends StatelessWidget {
                           label: 'Perkiraan Panjang',
                           value: _getEstimatedLength(weeks),
                           icon: Icons.straighten_rounded,
-                          color: AppTheme.primaryTeal,
+                          color: AppTheme.primaryRose,
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -173,10 +173,10 @@ class Fetal3DViewPage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                          color: AppTheme.primaryRose.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(14),
                         ),
-                        child: const Icon(Icons.auto_awesome_rounded, color: AppTheme.primaryTeal, size: 22),
+                        child: const Icon(Icons.auto_awesome_rounded, color: AppTheme.primaryRose, size: 22),
                       ),
                       const SizedBox(width: 14),
                       const Expanded(
