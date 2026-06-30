@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 220,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xFF38BDF8).withValues(alpha: 0.1),
+                  color: AppTheme.accentWarm.withValues(alpha: 0.15),
                 ),
               ),
             ),
@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF0F172A).withValues(alpha: 0.08),
+                                color: AppTheme.primaryRose.withValues(alpha: 0.15),
                                 blurRadius: 24,
                                 offset: const Offset(0, 8),
                               ),
@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(28),
-                            border: Border.all(color: const Color(0xFFE2E8F0)),
+                            border: Border.all(color: const Color(0xFFF1F5F9)),
                             boxShadow: [
                               BoxShadow(
                                 color: const Color(0xFF0F172A).withValues(alpha: 0.04),
@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: InputDecoration(
                                   hintText: 'bunda@email.com',
                                   hintStyle: const TextStyle(color: Color(0xFF94A3B8), fontWeight: FontWeight.normal),
-                                  prefixIcon: const Icon(Icons.alternate_email_rounded, color: Color(0xFF64748B), size: 20),
+                                  prefixIcon: const Icon(Icons.alternate_email_rounded, color: AppTheme.primaryRose, size: 20),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16),
                                     borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
@@ -217,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: InputDecoration(
                                   hintText: '••••••••',
                                   hintStyle: const TextStyle(color: Color(0xFF94A3B8), fontWeight: FontWeight.normal),
-                                  prefixIcon: const Icon(Icons.lock_outline_rounded, color: Color(0xFF64748B), size: 20),
+                                  prefixIcon: const Icon(Icons.lock_outline_rounded, color: AppTheme.primaryRose, size: 20),
                                   suffixIcon: IconButton(
                                     icon: Icon(
                                       _isPasswordVisible ? Icons.visibility_rounded : Icons.visibility_off_rounded,
@@ -265,7 +265,7 @@ class _LoginPageState extends State<LoginPage> {
                                         height: 52,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: const Color(0xFF0F172A),
+                                            backgroundColor: AppTheme.primaryRose,
                                             foregroundColor: Colors.white,
                                             elevation: 0,
                                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
