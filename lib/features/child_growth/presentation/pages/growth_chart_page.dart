@@ -31,29 +31,44 @@ class GrowthChartPage extends StatelessWidget {
           foregroundColor: const Color(0xFF0F172A),
           elevation: 0,
           centerTitle: true,
-          bottom: TabBar(
-            indicatorColor: const Color(0xFF0F172A),
-            indicatorWeight: 2.5,
-            labelStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: Color(0xFF0F172A)),
-            unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Color(0xFF64748B)),
-            tabs: const [
-              Tab(text: 'Tinggi Badan (TB/U)'),
-              Tab(text: 'Berat Badan (BB/U)'),
-            ],
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(56),
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xFFF1F5F9),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: TabBar(
+                indicator: BoxDecoration(
+                  color: const Color(0xFF0F172A),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                indicatorSize: TabBarIndicatorSize.tab,
+                dividerColor: Colors.transparent,
+                labelStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12.5, color: Colors.white),
+                unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5, color: Color(0xFF64748B)),
+                tabs: const [
+                  Tab(text: 'Tinggi Badan (TB/U)'),
+                  Tab(text: 'Berat Badan (BB/U)'),
+                ],
+              ),
+            ),
           ),
         ),
         body: TabBarView(
           children: [
             _buildChartTab(
               context,
-              title: 'Tinggi / Panjang Badan menurut Usia (TB/U)',
+              title: 'Tinggi / Panjang Badan menurut Usia',
               yLabel: 'Tinggi (cm)',
               refMap: heightRef,
               isHeight: true,
             ),
             _buildChartTab(
               context,
-              title: 'Berat Badan menurut Usia (BB/U)',
+              title: 'Berat Badan menurut Usia',
               yLabel: 'Berat (kg)',
               refMap: weightRef,
               isHeight: false,
@@ -91,29 +106,66 @@ class GrowthChartPage extends StatelessWidget {
       actualSpots.add(FlSpot(m.toDouble(), val));
     }
 
+    final latestLog = logs.isNotEmpty ? logs.last : null;
+    final latestVal = latestLog != null ? (isHeight ? latestLog.heightCm : latestLog.weightKg) : null;
+    final ageMonths = DateHelper.calculateAgeInMonths(child.dateOfBirth);
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title & Info Card
+          // Hero Summary Card
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(22),
               border: Border.all(color: const Color(0xFFF1F5F9)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: Color(0xFF0F172A))),
-                const SizedBox(height: 6),
-                const Text(
-                  'Standar antropometri WHO memetakan zona hijau (median optimal), kuning (waspada +2 SD), dan merah (< -2 SD stunting/gizi kurang).',
-                  style: TextStyle(color: Color(0xFF64748B), fontSize: 12.5, height: 1.5),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF0F172A).withValues(alpha: 0.03),
+                  blurRadius: 16,
+                  offset: const Offset(0, 6),
                 ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15, color: Color(0xFF0F172A))),
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFECFDF5),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text('Z-Score Standar WHO', style: TextStyle(color: AppTheme.successGreen, fontWeight: FontWeight.w800, fontSize: 11)),
+                        ),
+                        const SizedBox(width: 8),
+                        Text('Usia $ageMonths Bulan', style: const TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.w600)),
+                      ],
+                    ),
+                  ],
+                ),
+                if (latestVal != null)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '$latestVal ${isHeight ? "cm" : "kg"}',
+                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: AppTheme.primaryTeal),
+                      ),
+                      const Text('Pengukuran Terakhir', style: TextStyle(fontSize: 10, color: Color(0xFF94A3B8), fontWeight: FontWeight.w600)),
+                    ],
+                  ),
               ],
             ),
           ),
@@ -124,26 +176,26 @@ class GrowthChartPage extends StatelessWidget {
             spacing: 8,
             runSpacing: 8,
             children: [
-              _buildLegendPill(color: AppTheme.successGreen, label: 'Median WHO (Normal)'),
-              _buildLegendPill(color: const Color(0xFFF59E0B), label: '+2 SD (Batas Atas)', isDash: true),
-              _buildLegendPill(color: AppTheme.errorRed, label: '-2 SD (Batas Intervensi)', isDash: true),
-              _buildLegendPill(color: AppTheme.primaryTeal, label: 'Aktual (${child.name})', isCircle: true),
+              _buildLegendPill(color: AppTheme.successGreen, label: 'Median Optimal'),
+              _buildLegendPill(color: const Color(0xFFF59E0B), label: '+2 SD Batas Atas', isDash: true),
+              _buildLegendPill(color: AppTheme.errorRed, label: '-2 SD Batas Bawah', isDash: true),
+              _buildLegendPill(color: AppTheme.primaryTeal, label: 'Titik Aktual Anak', isCircle: true),
             ],
           ),
           const SizedBox(height: 18),
 
           // Chart Container
           Container(
-            height: 360,
-            padding: const EdgeInsets.only(right: 20, top: 24, bottom: 12, left: 6),
+            height: 380,
+            padding: const EdgeInsets.only(right: 22, top: 28, bottom: 14, left: 8),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(26),
               border: Border.all(color: const Color(0xFFF1F5F9)),
               boxShadow: [
                 BoxShadow(
                   color: const Color(0xFF0F172A).withValues(alpha: 0.04),
-                  blurRadius: 20,
+                  blurRadius: 24,
                   offset: const Offset(0, 8),
                 ),
               ],
@@ -160,11 +212,11 @@ class GrowthChartPage extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 32,
+                      reservedSize: 34,
                       interval: 12,
                       getTitlesWidget: (val, meta) => Padding(
                         padding: const EdgeInsets.only(top: 8),
-                        child: Text('${val.toInt()} bln', style: const TextStyle(fontSize: 11, color: Color(0xFF64748B), fontWeight: FontWeight.w600)),
+                        child: Text('${val.toInt()} bln', style: const TextStyle(fontSize: 11, color: Color(0xFF64748B), fontWeight: FontWeight.w700)),
                       ),
                     ),
                   ),
@@ -172,7 +224,7 @@ class GrowthChartPage extends StatelessWidget {
                     sideTitles: SideTitles(
                       showTitles: true,
                       reservedSize: 42,
-                      getTitlesWidget: (val, meta) => Text('${val.toInt()}', style: const TextStyle(fontSize: 11, color: Color(0xFF64748B), fontWeight: FontWeight.w600)),
+                      getTitlesWidget: (val, meta) => Text('${val.toInt()}', style: const TextStyle(fontSize: 11, color: Color(0xFF64748B), fontWeight: FontWeight.w700)),
                     ),
                   ),
                   topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -187,6 +239,10 @@ class GrowthChartPage extends StatelessWidget {
                     color: AppTheme.successGreen,
                     barWidth: 2.5,
                     dotData: const FlDotData(show: false),
+                    belowBarData: BarAreaData(
+                      show: true,
+                      color: AppTheme.successGreen.withValues(alpha: 0.05),
+                    ),
                   ),
                   // -2 SD WHO
                   LineChartBarData(
@@ -216,9 +272,9 @@ class GrowthChartPage extends StatelessWidget {
                       dotData: FlDotData(
                         show: true,
                         getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
-                          radius: 5,
+                          radius: 5.5,
                           color: AppTheme.primaryTeal,
-                          strokeWidth: 2,
+                          strokeWidth: 2.5,
                           strokeColor: Colors.white,
                         ),
                       ),
@@ -229,45 +285,67 @@ class GrowthChartPage extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          // Clinical Note
+          // Clinical Guide Card
           Container(
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: const Color(0xFFECFDF5),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFFA7F3D0)),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: const Color(0xFFF1F5F9)),
             ),
-            child: Row(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(color: AppTheme.successGreen, shape: BoxShape.circle),
-                  child: const Icon(Icons.health_and_safety_rounded, color: Colors.white, size: 18),
-                ),
-                const SizedBox(width: 14),
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Panduan Evaluasi Klinis Z-Score',
-                        style: TextStyle(color: Color(0xFF065F46), fontWeight: FontWeight.w800, fontSize: 13.5),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      SizedBox(height: 4),
-                      Text(
-                        'Apabila titik aktual pertumbuhan anak menyentuh atau berada di bawah garis putus-putus merah (-2 SD), segera konsultasikan ke Puskesmas atau dokter spesialis anak untuk evaluasi gizi intensif.',
-                        style: TextStyle(fontSize: 12.5, height: 1.5, color: Color(0xFF047857), fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
+                      child: const Icon(Icons.menu_book_rounded, color: AppTheme.primaryTeal, size: 20),
+                    ),
+                    const SizedBox(width: 12),
+                    const Text(
+                      'Panduan Membaca Kurva WHO',
+                      style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.5, color: Color(0xFF0F172A)),
+                    ),
+                  ],
                 ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 14),
+                  child: Divider(color: Color(0xFFF1F5F9), height: 1),
+                ),
+                _buildGuideRow(color: AppTheme.successGreen, text: 'Garis Hijau (Median): Merupakan lintasan pertumbuhan optimal standar WHO internasional.'),
+                const SizedBox(height: 10),
+                _buildGuideRow(color: const Color(0xFFF59E0B), text: 'Garis Oranye (+2 SD): Batas atas kewaspadaan pertumbuhan berlebih atau risiko kelebihan berat badan.'),
+                const SizedBox(height: 10),
+                _buildGuideRow(color: AppTheme.errorRed, text: 'Garis Merah (-2 SD): Batas intervensi klinis. Titik di bawah garis ini mengindikasikan risiko Stunting atau Gizi Kurang.'),
               ],
             ),
           ),
           const SizedBox(height: 20),
         ],
       ),
+    );
+  }
+
+  Widget _buildGuideRow({required Color color, required String text}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 4),
+          width: 8,
+          height: 8,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Text(text, style: const TextStyle(fontSize: 12.5, height: 1.5, color: Color(0xFF475569))),
+        ),
+      ],
     );
   }
 
