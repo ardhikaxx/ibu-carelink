@@ -80,17 +80,16 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       try {
         await googleSignIn.signOut();
       } catch (_) {}
-      GoogleSignInAccount? googleUser;
-      try {
-        googleUser = await googleSignIn.authenticate();
-      } catch (e) {
-        throw AuthException('Login Google dibatalkan atau gagal: ${e.toString()}');
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      if (googleUser == null) {
+        throw AuthException('Login Google dibatalkan pengguna');
       }
-      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
-      if (googleAuth.idToken == null) {
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      if (googleAuth.idToken == null && googleAuth.accessToken == null) {
         throw AuthException('Token otentikasi Google tidak ditemukan');
       }
       final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
       final userCredential = await firebaseAuth.signInWithCredential(credential);
