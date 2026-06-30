@@ -513,19 +513,25 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                           const SizedBox(height: 22),
                           SizedBox(
                             width: double.infinity,
-                            height: 48,
+                            height: 54,
                             child: ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppTheme.primaryRose,
                                 foregroundColor: Colors.white,
                                 elevation: 0,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                               ),
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => GrowthChartPage(child: selected, logs: state.logs)));
                               },
-                              icon: const Icon(Icons.insights_rounded, size: 18),
-                              label: const Text('Buka Kurva Z-Score WHO', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+                              icon: const Icon(Icons.insights_rounded, size: 20),
+                              label: const Padding(
+                                padding: EdgeInsets.only(bottom: 2),
+                                child: Text(
+                                  'Buka Kurva Z-Score WHO',
+                                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.5, height: 1.35),
+                                ),
+                              ),
                             ),
                           ),
                         ],

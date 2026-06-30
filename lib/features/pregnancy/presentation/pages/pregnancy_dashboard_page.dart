@@ -382,19 +382,25 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                           const SizedBox(height: 20),
                           SizedBox(
                             width: double.infinity,
-                            height: 48,
+                            height: 54,
                             child: ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppTheme.primaryRose,
                                 foregroundColor: Colors.white,
                                 elevation: 0,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                               ),
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => Fetal3DViewPage(pregnancy: pregnancy)));
                               },
-                              icon: const Icon(Icons.view_in_ar_rounded, size: 18),
-                              label: const Text('Lihat Analogi & Model Janin 3D', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+                              icon: const Icon(Icons.view_in_ar_rounded, size: 20),
+                              label: const Padding(
+                                padding: EdgeInsets.only(bottom: 2),
+                                child: Text(
+                                  'Lihat Analogi & Model Janin 3D',
+                                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.5, height: 1.35),
+                                ),
+                              ),
                             ),
                           ),
                         ],
