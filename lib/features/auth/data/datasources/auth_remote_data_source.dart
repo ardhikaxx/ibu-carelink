@@ -77,6 +77,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           'Login dengan Google tidak didukung di aplikasi Desktop Windows/Linux. Silakan gunakan Login dengan Email & Kata Sandi atau jalankan di Android / Web.');
     }
     try {
+      try {
+        await googleSignIn.signOut();
+      } catch (_) {}
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
         throw AuthException('Login Google dibatalkan pengguna');
