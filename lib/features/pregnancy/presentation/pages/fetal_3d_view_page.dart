@@ -12,164 +12,278 @@ class Fetal3DViewPage extends StatelessWidget {
     final analogy = pregnancy.fetalSizeFruitAnalogy;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: const Text('Visualisasi Anatomi & Ukuran Janin'),
-        backgroundColor: AppTheme.primaryRose,
-        foregroundColor: Colors.white,
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFFFFF1F2), Color(0xFFF8FAFC)],
-          ),
+        title: const Text(
+          'Anatomi & Ukuran Janin',
+          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: Color(0xFF0F172A)),
         ),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 12),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryRose.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Text(
-                  'Usia Kehamilan: $weeks Minggu (Trimester ${pregnancy.trimester})',
-                  style: const TextStyle(
-                    color: AppTheme.primaryRose,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14,
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF0F172A),
+        elevation: 0,
+        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(color: const Color(0xFFE2E8F0), height: 1),
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20.0),
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Status Gestasi Header
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: AppTheme.primaryRose.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-              ),
-              const SizedBox(height: 28),
-
-              // Visual Card Metafora Buah 3D
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFE85A71), Color(0xFFD9465F)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(28),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppTheme.primaryRose.withValues(alpha: 0.35),
-                      blurRadius: 24,
-                      offset: const Offset(0, 12),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      width: 140,
-                      height: 140,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white.withValues(alpha: 0.4), width: 3),
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.child_care_rounded,
-                          size: 80,
-                          color: Colors.white,
+                  child: Row(
+                    children: [
+                      const Icon(Icons.calendar_month_rounded, size: 16, color: AppTheme.primaryRose),
+                      const SizedBox(width: 6),
+                      Text(
+                        'USIA GESTASI $weeks MINGGU',
+                        style: const TextStyle(
+                          color: AppTheme.primaryRose,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 12,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      'Ukuran Janin Analogis:',
-                      style: TextStyle(color: Colors.white70, fontSize: 14),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      analogy,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 28),
-
-              // Penjelasan Klinis Anatomi mingguan
-              Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Row(
-                        children: [
-                          Icon(Icons.auto_awesome_rounded, color: AppTheme.primaryTeal),
-                          SizedBox(width: 10),
-                          Text(
-                            'Perkembangan Anatomi Minggu Ini',
-                            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      const Divider(height: 24),
-                      Text(
-                        _getAnatomicalDescription(weeks),
-                        style: const TextStyle(fontSize: 14, height: 1.5, color: Color(0xFF334155)),
-                      ),
                     ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-
-              // Checklist Edukasi / Saran Medis mingguan
-              Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Row(
-                        children: [
-                          Icon(Icons.tips_and_updates_rounded, color: AppTheme.accentWarm),
-                          SizedBox(width: 10),
-                          Text(
-                            'Saran Medis & Nutrisi',
-                            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      const Divider(height: 24),
-                      _buildTipItem(
-                        weeks <= 12
-                            ? 'Pastikan konsumsi rutin Asam Folat (400-800 mcg) untuk pembentukan tabung saraf janin.'
-                            : weeks <= 27
-                                ? 'Konsumsi suplemen zat besi dan kalsium. Jadwalkan pemeriksaan USG anatomi untuk mengecek organ janin.'
-                                : 'Siapkan tas persalinan dan perhatikan pola gerakan tendangan janin setiap hari.',
-                      ),
-                      const SizedBox(height: 10),
-                      _buildTipItem('Minum air putih minimal 2,5 - 3 liter per hari dan istirahat cukup.'),
-                    ],
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF1F5F9),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    'TRIMESTER ${pregnancy.trimester}',
+                    style: const TextStyle(
+                      color: Color(0xFF475569),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 11,
+                    ),
                   ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 18),
+
+            // Ultra-Modern Floating Hero Analogy Card
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(28),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(26),
+                border: Border.all(color: const Color(0xFFF1F5F9)),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF0F172A).withValues(alpha: 0.04),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
               ),
-            ],
-          ),
+              child: Column(
+                children: [
+                  Container(
+                    width: 124,
+                    height: 124,
+                    decoration: BoxDecoration(
+                      color: AppTheme.primaryRose.withValues(alpha: 0.08),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.2), width: 2),
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.child_care_rounded,
+                        size: 64,
+                        color: AppTheme.primaryRose,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Analogi Ukuran Janin Saat Ini',
+                    style: TextStyle(color: Color(0xFF64748B), fontSize: 13, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    analogy,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Color(0xFF0F172A),
+                      fontSize: 26,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: -0.5,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 22),
+                    child: Divider(color: Color(0xFFF1F5F9), height: 1),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildEstimatorBox(
+                          label: 'Perkiraan Panjang',
+                          value: _getEstimatedLength(weeks),
+                          icon: Icons.straighten_rounded,
+                          color: AppTheme.primaryTeal,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _buildEstimatorBox(
+                          label: 'Perkiraan Berat',
+                          value: _getEstimatedWeight(weeks),
+                          icon: Icons.monitor_weight_outlined,
+                          color: AppTheme.primaryRose,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Anatomical Development Card
+            Container(
+              padding: const EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: const Color(0xFFF1F5F9)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(Icons.auto_awesome_rounded, color: AppTheme.primaryTeal, size: 22),
+                      ),
+                      const SizedBox(width: 14),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Perkembangan Anatomi Mingguan',
+                              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: Color(0xFF0F172A)),
+                            ),
+                            SizedBox(height: 2),
+                            Text('Proses pembentukan fisiologis janin', style: TextStyle(fontSize: 12, color: Color(0xFF64748B))),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Divider(color: Color(0xFFF1F5F9), height: 1),
+                  ),
+                  Text(
+                    _getAnatomicalDescription(weeks),
+                    style: const TextStyle(fontSize: 14, height: 1.6, color: Color(0xFF334155)),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Medical Advice & Nutrition Checklist Card
+            Container(
+              padding: const EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: const Color(0xFFF1F5F9)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFEF3C7),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(Icons.tips_and_updates_rounded, color: Color(0xFFD97706), size: 22),
+                      ),
+                      const SizedBox(width: 14),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Saran Medis & Nutrisi Maternal',
+                              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: Color(0xFF0F172A)),
+                            ),
+                            SizedBox(height: 2),
+                            Text('Rekomendasi klinis menjaga kehamilan', style: TextStyle(fontSize: 12, color: Color(0xFF64748B))),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Divider(color: Color(0xFFF1F5F9), height: 1),
+                  ),
+                  _buildTipItem(
+                    weeks <= 12
+                        ? 'Pastikan konsumsi rutin Asam Folat (400-800 mcg) untuk mencegah defek tabung saraf janin.'
+                        : weeks <= 27
+                            ? 'Konsumsi suplemen zat besi dan kalsium. Jadwalkan pemeriksaan USG anatomi untuk mengecek organ janin secara menyeluruh.'
+                            : 'Siapkan tas persalinan dan perhatikan pola gerakan tendangan janin setiap hari secara rutin.',
+                  ),
+                  const SizedBox(height: 14),
+                  _buildTipItem('Cukupi kebutuhan hidrasi air putih minimal 2,5 - 3 liter per hari dan hindari aktivitas berisiko tinggi.'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 14),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildEstimatorBox({required String label, required String value, required IconData icon, required Color color}) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF8FAFC),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFF1F5F9)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 18, color: color),
+          const SizedBox(height: 8),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15, color: Color(0xFF0F172A))),
+          const SizedBox(height: 2),
+          Text(label, style: const TextStyle(color: Color(0xFF64748B), fontSize: 11, fontWeight: FontWeight.w500)),
+        ],
       ),
     );
   }
@@ -178,13 +292,48 @@ class Fetal3DViewPage extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Icon(Icons.check_circle_rounded, color: AppTheme.successGreen, size: 20),
+        Container(
+          margin: const EdgeInsets.only(top: 2),
+          padding: const EdgeInsets.all(4),
+          decoration: const BoxDecoration(
+            color: Color(0xFFECFDF5),
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(Icons.check_rounded, color: AppTheme.successGreen, size: 14),
+        ),
         const SizedBox(width: 12),
         Expanded(
-          child: Text(text, style: const TextStyle(fontSize: 13, height: 1.4)),
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 13.5, height: 1.5, color: Color(0xFF334155), fontWeight: FontWeight.w500),
+          ),
         ),
       ],
     );
+  }
+
+  String _getEstimatedLength(int weeks) {
+    if (weeks <= 8) return '~1.6 cm';
+    if (weeks <= 12) return '~5.4 cm';
+    if (weeks <= 16) return '~11.6 cm';
+    if (weeks <= 20) return '~25.6 cm';
+    if (weeks <= 24) return '~30.0 cm';
+    if (weeks <= 28) return '~37.6 cm';
+    if (weeks <= 32) return '~42.4 cm';
+    if (weeks <= 36) return '~47.4 cm';
+    return '~50.5 cm';
+  }
+
+  String _getEstimatedWeight(int weeks) {
+    if (weeks <= 8) return '~1 gram';
+    if (weeks <= 12) return '~14 gram';
+    if (weeks <= 16) return '~100 gram';
+    if (weeks <= 20) return '~300 gram';
+    if (weeks <= 24) return '~600 gram';
+    if (weeks <= 28) return '~1.000 gram';
+    if (weeks <= 32) return '~1.700 gram';
+    if (weeks <= 36) return '~2.600 gram';
+    return '~3.300 gram';
   }
 
   String _getAnatomicalDescription(int weeks) {
