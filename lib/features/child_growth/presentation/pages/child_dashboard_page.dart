@@ -466,23 +466,23 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                                           child: Text(
                                             selected.name,
                                             style: const TextStyle(
-                                              color: Color(0xFF0F172A),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w800,
+                                              color: AppTheme.primaryRose,
+                                              fontSize: 21,
+                                              fontWeight: FontWeight.w900,
                                             ),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         const SizedBox(width: 8),
                                         Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFFF1F5F9),
+                                            color: AppTheme.primaryRose.withValues(alpha: 0.12),
                                             borderRadius: BorderRadius.circular(6),
                                           ),
                                           child: Text(
                                             selected.gender,
-                                            style: const TextStyle(color: Color(0xFF475569), fontSize: 11, fontWeight: FontWeight.w600),
+                                            style: const TextStyle(color: AppTheme.primaryRose, fontSize: 11, fontWeight: FontWeight.w700),
                                           ),
                                         ),
                                       ],
