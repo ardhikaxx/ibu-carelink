@@ -7,6 +7,7 @@ import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/bloc/auth_event.dart';
 import 'features/auth/presentation/bloc/auth_state.dart';
 import 'features/auth/presentation/pages/login_page.dart';
+import 'features/auth/presentation/pages/onboarding_role_page.dart';
 import 'features/child_growth/presentation/bloc/child_growth_bloc.dart';
 import 'features/contraction_timer/presentation/bloc/contraction_timer_bloc.dart';
 import 'features/dashboard/presentation/pages/main_nav_page.dart';
@@ -75,6 +76,9 @@ class IbuCareLinkApp extends StatelessWidget {
             }
             if (state is AuthAuthenticated) {
               return MainNavPage(user: state.user);
+            }
+            if (state is AuthRolePending) {
+              return OnboardingRolePage(user: state.user);
             }
             return const LoginPage();
           },

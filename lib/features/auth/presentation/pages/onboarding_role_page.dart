@@ -4,6 +4,8 @@ import '../../../../core/utils/theme.dart';
 import '../../domain/entities/user_entity.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
+import '../bloc/auth_state.dart';
+import '../../../dashboard/presentation/pages/main_nav_page.dart';
 
 class OnboardingRolePage extends StatefulWidget {
   final UserEntity user;
@@ -28,8 +30,21 @@ class _OnboardingRolePageState extends State<OnboardingRolePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthAuthenticated) {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => MainNavPage(user: state.user)),
+              (route) => false,
+            );
+          } else if (state is AuthError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message), backgroundColor: AppTheme.errorRed),
+            );
+          }
+        },
+        child: Container(
+          decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -99,6 +114,7 @@ class _OnboardingRolePageState extends State<OnboardingRolePage> {
             ),
           ),
         ),
+      ),
       ),
     );
   }

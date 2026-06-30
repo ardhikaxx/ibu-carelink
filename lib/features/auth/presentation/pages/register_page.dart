@@ -4,6 +4,7 @@ import '../../../../core/utils/theme.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
 import '../bloc/auth_state.dart';
+import 'onboarding_role_page.dart';
 import '../../../dashboard/presentation/pages/main_nav_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -49,6 +50,11 @@ class _RegisterPageState extends State<RegisterPage> {
           if (state is AuthAuthenticated) {
             Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (_) => MainNavPage(user: state.user)),
+              (route) => false,
+            );
+          } else if (state is AuthRolePending) {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (_) => OnboardingRolePage(user: state.user)),
               (route) => false,
             );
           } else if (state is AuthError) {
