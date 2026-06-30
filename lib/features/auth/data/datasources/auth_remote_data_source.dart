@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -70,12 +72,19 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<UserModel> signInWithGoogle() async {
+    if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
+      throw AuthException(
+          'Login dengan Google tidak didukung di aplikasi Desktop Windows/Linux. Silakan gunakan Login dengan Email & Kata Sandi atau jalankan di Android / Web.');
+    }
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
         throw AuthException('Login Google dibatalkan pengguna');
       }
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      if (googleAuth.idToken == null && googleAuth.accessToken == null) {
+        throw AuthException('Token otentikasi Google tidak ditemukan');
+      }
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
@@ -100,8 +109,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       } else {
         return UserModel.fromFirestore(doc.data()!, doc.id);
       }
+    } on AuthException {
+      rethrow;
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(e.message ?? 'Autentikasi Google gagal');
     } catch (e) {
-      throw AuthException('Gagal login dengan Google: ${e.toString()}');
+      final errStr = e.toString();
+      if (errStr.contains('MissingPluginException') || errStr.contains('UnsupportedError')) {
+        throw AuthException(
+            'Login dengan Google tidak didukung pada perangkat desktop ini. Silakan gunakan Login Email atau jalankan di Android / Web.');
+      }
+      if (errStr.contains('10:') || errStr.contains('ApiException: 10') || errStr.contains('sign_in_failed')) {
+        throw AuthException(
+            'Gagal Login Google (Kode 10: SHA-1 / Konfigurasi Client ID). Pastikan aplikasi di-build untuk Android yang terdaftar di Firebase Console.');
+      }
+      throw AuthException('Gagal login dengan Google: $errStr');
     }
   }
 
