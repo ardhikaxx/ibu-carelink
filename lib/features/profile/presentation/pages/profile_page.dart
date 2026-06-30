@@ -71,16 +71,18 @@ class ProfilePage extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.25), width: 3),
                     ),
-                    child: CircleAvatar(
-                      radius: 46,
-                      backgroundColor: AppTheme.primaryTeal.withValues(alpha: 0.1),
-                      backgroundImage: user.photoUrl != null ? NetworkImage(user.photoUrl!) : null,
-                      child: user.photoUrl == null
-                          ? Text(
-                              user.name.isNotEmpty ? user.name[0].toUpperCase() : 'I',
-                              style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: AppTheme.primaryTeal),
+                    child: ClipOval(
+                      child: (user.photoUrl != null && user.photoUrl!.isNotEmpty)
+                          ? Image.network(
+                              user.photoUrl!,
+                              width: 92,
+                              height: 92,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return _buildInitialAvatar(user.name);
+                              },
                             )
-                          : null,
+                          : _buildInitialAvatar(user.name),
                     ),
                   ),
                   const SizedBox(height: 18),
@@ -259,6 +261,23 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 28),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildInitialAvatar(String name) {
+    final initial = name.trim().isNotEmpty ? name.trim()[0].toUpperCase() : 'I';
+    return Container(
+      width: 92,
+      height: 92,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: AppTheme.primaryTeal.withValues(alpha: 0.1),
+        shape: BoxShape.circle,
+      ),
+      child: Text(
+        initial,
+        style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: AppTheme.primaryTeal),
       ),
     );
   }
