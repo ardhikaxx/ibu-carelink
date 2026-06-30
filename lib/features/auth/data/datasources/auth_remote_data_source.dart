@@ -103,7 +103,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           uid: userCredential.user!.uid,
           email: userCredential.user!.email ?? '',
           name: userCredential.user!.displayName ?? 'Pengguna Google',
-          role: 'pending',
+          role: 'both',
           photoUrl: userCredential.user!.photoURL,
           createdAt: DateTime.now(),
         );
