@@ -117,7 +117,7 @@ class _OnboardingRolePageState extends State<OnboardingRolePage> {
         duration: const Duration(milliseconds: 250),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: isSelected ? color.withOpacity(0.12) : Colors.white,
+          color: isSelected ? color.withValues(alpha: 0.12) : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isSelected ? color : Colors.grey.shade200,
@@ -125,7 +125,7 @@ class _OnboardingRolePageState extends State<OnboardingRolePage> {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(isSelected ? 0.08 : 0.03),
+              color: Colors.black.withValues(alpha: isSelected ? 0.08 : 0.03),
               blurRadius: 14,
               offset: const Offset(0, 4),
             ),
@@ -136,7 +136,7 @@ class _OnboardingRolePageState extends State<OnboardingRolePage> {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.15),
+                color: color.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: color, size: 30),

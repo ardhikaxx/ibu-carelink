@@ -34,7 +34,7 @@ class Fetal3DViewPage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryRose.withOpacity(0.15),
+                  color: AppTheme.primaryRose.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Text(
@@ -61,7 +61,7 @@ class Fetal3DViewPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(28),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.primaryRose.withOpacity(0.35),
+                      color: AppTheme.primaryRose.withValues(alpha: 0.35),
                       blurRadius: 24,
                       offset: const Offset(0, 12),
                     ),
@@ -73,9 +73,9 @@ class Fetal3DViewPage extends StatelessWidget {
                       width: 140,
                       height: 140,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white.withOpacity(0.4), width: 3),
+                        border: Border.all(color: Colors.white.withValues(alpha: 0.4), width: 3),
                       ),
                       child: const Center(
                         child: Icon(

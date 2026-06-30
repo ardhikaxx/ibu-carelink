@@ -107,9 +107,9 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryTeal.withOpacity(0.12),
+                      color: AppTheme.primaryTeal.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(22),
-                      border: Border.all(color: AppTheme.primaryTeal.withOpacity(0.3)),
+                      border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.3)),
                     ),
                     child: Row(
                       children: [
@@ -183,7 +183,7 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide(color: borderColor.withOpacity(0.4))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18), side: BorderSide(color: borderColor.withValues(alpha: 0.4))),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -195,7 +195,7 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
                 Text(item.vaccineName, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
                 Chip(
                   label: Text(item.isCompleted ? 'Selesai' : 'Usia ${item.targetAgeMonths} Bulan'),
-                  backgroundColor: borderColor.withOpacity(0.12),
+                  backgroundColor: borderColor.withValues(alpha: 0.12),
                   labelStyle: TextStyle(color: borderColor, fontWeight: FontWeight.bold, fontSize: 11),
                 ),
               ],

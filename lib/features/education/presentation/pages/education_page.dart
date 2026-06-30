@@ -83,7 +83,7 @@ class _EducationPageState extends State<EducationPage> {
           // Emergency Hotline Banner
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-            color: AppTheme.errorRed.withOpacity(0.12),
+            color: AppTheme.errorRed.withValues(alpha: 0.12),
             child: Row(
               children: [
                 const Icon(Icons.phone_in_talk_rounded, color: AppTheme.errorRed, size: 28),
@@ -141,7 +141,7 @@ class _EducationPageState extends State<EducationPage> {
                   margin: const EdgeInsets.only(bottom: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(color: item.isEmergencyGuide ? AppTheme.errorRed.withOpacity(0.5) : Colors.grey.shade200, width: item.isEmergencyGuide ? 1.5 : 1),
+                    side: BorderSide(color: item.isEmergencyGuide ? AppTheme.errorRed.withValues(alpha: 0.5) : Colors.grey.shade200, width: item.isEmergencyGuide ? 1.5 : 1),
                   ),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(20),
@@ -157,7 +157,7 @@ class _EducationPageState extends State<EducationPage> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: item.isEmergencyGuide ? AppTheme.errorRed.withOpacity(0.12) : AppTheme.primaryTeal.withOpacity(0.12),
+                                  color: item.isEmergencyGuide ? AppTheme.errorRed.withValues(alpha: 0.12) : AppTheme.primaryTeal.withValues(alpha: 0.12),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Text(
@@ -209,7 +209,7 @@ class _EducationPageState extends State<EducationPage> {
                 child: Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(10))),
               ),
               const SizedBox(height: 20),
-              Chip(label: Text(article.category), backgroundColor: AppTheme.primaryTeal.withOpacity(0.15), labelStyle: const TextStyle(color: AppTheme.primaryTeal, fontWeight: FontWeight.bold)),
+              Chip(label: Text(article.category), backgroundColor: AppTheme.primaryTeal.withValues(alpha: 0.15), labelStyle: const TextStyle(color: AppTheme.primaryTeal, fontWeight: FontWeight.bold)),
               const SizedBox(height: 10),
               Text(article.title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Color(0xFF0F172A))),
               const SizedBox(height: 6),

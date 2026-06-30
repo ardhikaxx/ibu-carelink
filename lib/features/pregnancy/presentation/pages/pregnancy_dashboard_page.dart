@@ -112,7 +112,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(color: AppTheme.primaryRose.withOpacity(0.12), shape: BoxShape.circle),
+                    decoration: BoxDecoration(color: AppTheme.primaryRose.withValues(alpha: 0.12), shape: BoxShape.circle),
                     child: const Icon(Icons.pregnant_woman_rounded, size: 64, color: AppTheme.primaryRose),
                   ),
                   const SizedBox(height: 20),
@@ -158,7 +158,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                       ),
                       borderRadius: BorderRadius.circular(26),
                       boxShadow: [
-                        BoxShadow(color: AppTheme.primaryRose.withOpacity(0.3), blurRadius: 20, offset: const Offset(0, 10)),
+                        BoxShadow(color: AppTheme.primaryRose.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 10)),
                       ],
                     ),
                     child: Column(
@@ -169,7 +169,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                              decoration: BoxDecoration(color: Colors.white.withOpacity(0.25), borderRadius: BorderRadius.circular(20)),
+                              decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.25), borderRadius: BorderRadius.circular(20)),
                               child: Text('TRIMESTER $tri', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 12)),
                             ),
                             const Icon(Icons.favorite, color: Colors.white, size: 28),
@@ -325,7 +325,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
   Widget _buildBadge(String text, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(color: color.withOpacity(0.12), borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(8)),
       child: Text(text, style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.bold)),
     );
   }
@@ -338,15 +338,15 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(22),
-          border: Border.all(color: color.withOpacity(0.3), width: 1.5),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 14, offset: const Offset(0, 6))],
+          border: Border.all(color: color.withValues(alpha: 0.3), width: 1.5),
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 14, offset: const Offset(0, 6))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: color.withOpacity(0.15), borderRadius: BorderRadius.circular(16)),
+              decoration: BoxDecoration(color: color.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(16)),
               child: Icon(icon, color: color, size: 28),
             ),
             const SizedBox(height: 14),

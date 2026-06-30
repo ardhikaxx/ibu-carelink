@@ -86,7 +86,7 @@ class _KickCounterPageState extends State<KickCounterPage> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryTeal.withOpacity(0.12),
+                        color: AppTheme.primaryTeal.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Row(
@@ -106,7 +106,7 @@ class _KickCounterPageState extends State<KickCounterPage> {
                         padding: const EdgeInsets.all(14),
                         margin: const EdgeInsets.only(bottom: 16),
                         decoration: BoxDecoration(
-                          color: AppTheme.errorRed.withOpacity(0.12),
+                          color: AppTheme.errorRed.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(color: AppTheme.errorRed),
                         ),
@@ -166,7 +166,7 @@ class _KickCounterPageState extends State<KickCounterPage> {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: (state.targetAchieved ? AppTheme.successGreen : AppTheme.primaryRose).withOpacity(0.4),
+                              color: (state.targetAchieved ? AppTheme.successGreen : AppTheme.primaryRose).withValues(alpha: 0.4),
                               blurRadius: 30,
                               offset: const Offset(0, 15),
                             ),
@@ -295,7 +295,7 @@ class _KickCounterPageState extends State<KickCounterPage> {
                         margin: const EdgeInsets.only(bottom: 12),
                         child: ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: item.targetAchieved ? AppTheme.successGreen.withOpacity(0.2) : AppTheme.warningYellow.withOpacity(0.2),
+                            backgroundColor: item.targetAchieved ? AppTheme.successGreen.withValues(alpha: 0.2) : AppTheme.warningYellow.withValues(alpha: 0.2),
                             child: Icon(
                               Icons.favorite,
                               color: item.targetAchieved ? AppTheme.successGreen : AppTheme.warningYellow,
@@ -308,7 +308,7 @@ class _KickCounterPageState extends State<KickCounterPage> {
                           subtitle: Text(DateHelper.formatIndonesianDate(item.startTime)),
                           trailing: Chip(
                             label: Text(item.targetAchieved ? 'Tercapai' : 'Kurang'),
-                            backgroundColor: item.targetAchieved ? AppTheme.successGreen.withOpacity(0.1) : AppTheme.warningYellow.withOpacity(0.1),
+                            backgroundColor: item.targetAchieved ? AppTheme.successGreen.withValues(alpha: 0.1) : AppTheme.warningYellow.withValues(alpha: 0.1),
                             labelStyle: TextStyle(
                               color: item.targetAchieved ? AppTheme.successGreen : AppTheme.warningYellow,
                               fontSize: 11,

@@ -22,8 +22,8 @@ class DateHelper {
   }
 
   /// Usia kronologis anak dalam bulan
-  static int calculateAgeInMonths(DateTime dateOfBirth) {
-    final now = DateTime.now();
+  static int calculateAgeInMonths(DateTime dateOfBirth, {DateTime? currentDate}) {
+    final now = currentDate ?? DateTime.now();
     int months = (now.year - dateOfBirth.year) * 12 + now.month - dateOfBirth.month;
     if (now.day < dateOfBirth.day) {
       months--;

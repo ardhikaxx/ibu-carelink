@@ -90,7 +90,7 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                           color: AppTheme.errorRed,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
-                            BoxShadow(color: AppTheme.errorRed.withOpacity(0.4), blurRadius: 16, offset: const Offset(0, 6)),
+                            BoxShadow(color: AppTheme.errorRed.withValues(alpha: 0.4), blurRadius: 16, offset: const Offset(0, 6)),
                           ],
                         ),
                         child: const Row(
@@ -137,7 +137,7 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 36),
                       decoration: BoxDecoration(
-                        color: isContraction ? AppTheme.primaryRose.withOpacity(0.12) : AppTheme.primaryTeal.withOpacity(0.12),
+                        color: isContraction ? AppTheme.primaryRose.withValues(alpha: 0.12) : AppTheme.primaryTeal.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(28),
                         border: Border.all(color: isContraction ? AppTheme.primaryRose : AppTheme.primaryTeal, width: 2),
                       ),
@@ -188,7 +188,7 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                           borderRadius: BorderRadius.circular(22),
                           boxShadow: [
                             BoxShadow(
-                              color: (isContraction ? Colors.black : AppTheme.primaryRose).withOpacity(0.3),
+                              color: (isContraction ? Colors.black : AppTheme.primaryRose).withValues(alpha: 0.3),
                               blurRadius: 20,
                               offset: const Offset(0, 8),
                             ),
@@ -294,7 +294,7 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                         margin: const EdgeInsets.only(bottom: 12),
                         child: ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: AppTheme.primaryRose.withOpacity(0.15),
+                            backgroundColor: AppTheme.primaryRose.withValues(alpha: 0.15),
                             child: const Icon(Icons.show_chart_rounded, color: AppTheme.primaryRose),
                           ),
                           title: Text(

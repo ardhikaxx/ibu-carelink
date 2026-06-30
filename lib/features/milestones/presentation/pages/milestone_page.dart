@@ -99,7 +99,7 @@ class _MilestonePageState extends State<MilestonePage> {
                             decoration: BoxDecoration(
                               color: AppTheme.errorRed,
                               borderRadius: BorderRadius.circular(20),
-                              boxShadow: [BoxShadow(color: AppTheme.errorRed.withOpacity(0.3), blurRadius: 16, offset: const Offset(0, 6))],
+                              boxShadow: [BoxShadow(color: AppTheme.errorRed.withValues(alpha: 0.3), blurRadius: 16, offset: const Offset(0, 6))],
                             ),
                             child: Row(
                               children: [
@@ -160,7 +160,7 @@ class _MilestonePageState extends State<MilestonePage> {
                                 margin: const EdgeInsets.only(bottom: 12),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
-                                  side: BorderSide(color: item.isAchieved ? AppTheme.successGreen.withOpacity(0.5) : Colors.grey.shade300),
+                                  side: BorderSide(color: item.isAchieved ? AppTheme.successGreen.withValues(alpha: 0.5) : Colors.grey.shade300),
                                 ),
                                 child: CheckboxListTile(
                                   activeColor: AppTheme.successGreen,
@@ -204,7 +204,7 @@ class _MilestonePageState extends State<MilestonePage> {
         LinearProgressIndicator(
           value: ratio,
           minHeight: 8,
-          backgroundColor: color.withOpacity(0.12),
+          backgroundColor: color.withValues(alpha: 0.12),
           color: color,
           borderRadius: BorderRadius.circular(8),
         ),

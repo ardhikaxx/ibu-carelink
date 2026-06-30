@@ -19,7 +19,7 @@ class AppTheme {
 
   static ThemeData get lightTheme {
     return ThemeData(
-      useMaterialDesign: true,
+      useMaterial3: true,
       brightness: Brightness.light,
       primaryColor: primaryRose,
       scaffoldBackgroundColor: lightBackground,
@@ -42,10 +42,10 @@ class AppTheme {
         ),
         iconTheme: const IconThemeData(color: Color(0xFF0F172A)),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: lightSurface,
         elevation: 4,
-        shadowColor: Colors.black.withOpacity(0.06),
+        shadowColor: Colors.black.withValues(alpha: 0.06),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -66,7 +66,7 @@ class AppTheme {
 
   static ThemeData get darkTheme {
     return ThemeData(
-      useMaterialDesign: true,
+      useMaterial3: true,
       brightness: Brightness.dark,
       primaryColor: primaryRose,
       scaffoldBackgroundColor: darkBackground,
@@ -89,10 +89,10 @@ class AppTheme {
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: darkSurface,
         elevation: 4,
-        shadowColor: Colors.black.withOpacity(0.25),
+        shadowColor: Colors.black.withValues(alpha: 0.25),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

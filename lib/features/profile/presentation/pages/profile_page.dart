@@ -27,7 +27,7 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 12),
             CircleAvatar(
               radius: 48,
-              backgroundColor: AppTheme.primaryTeal.withOpacity(0.15),
+              backgroundColor: AppTheme.primaryTeal.withValues(alpha: 0.15),
               backgroundImage: user.photoUrl != null ? NetworkImage(user.photoUrl!) : null,
               child: user.photoUrl == null
                   ? Text(user.name.isNotEmpty ? user.name[0].toUpperCase() : 'I', style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: AppTheme.primaryTeal))

@@ -90,7 +90,7 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                         const Text('Tingkat Mual / Morning Sickness', style: TextStyle(fontWeight: FontWeight.w700)),
                         Chip(
                           label: Text('Level $_nauseaLevel/5'),
-                          backgroundColor: AppTheme.primaryRose.withOpacity(0.1),
+                          backgroundColor: AppTheme.primaryRose.withValues(alpha: 0.1),
                           labelStyle: const TextStyle(color: AppTheme.primaryRose, fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -123,7 +123,7 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                         const Text('Tingkat Kelelahan Fisik', style: TextStyle(fontWeight: FontWeight.w700)),
                         Chip(
                           label: Text('Level $_fatigueLevel/5'),
-                          backgroundColor: AppTheme.primaryTeal.withOpacity(0.1),
+                          backgroundColor: AppTheme.primaryTeal.withValues(alpha: 0.1),
                           labelStyle: const TextStyle(color: AppTheme.primaryTeal, fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -160,7 +160,7 @@ class _SymptomLogPageState extends State<SymptomLogPage> {
                         return FilterChip(
                           label: Text(t),
                           selected: isSel,
-                          selectedColor: AppTheme.accentWarm.withOpacity(0.3),
+                          selectedColor: AppTheme.accentWarm.withValues(alpha: 0.3),
                           checkmarkColor: const Color(0xFF0F172A),
                           onSelected: (sel) {
                             setState(() {

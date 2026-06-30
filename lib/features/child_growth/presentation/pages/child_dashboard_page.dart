@@ -54,7 +54,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
               ),
               const SizedBox(height: 14),
               DropdownButtonFormField<String>(
-                value: gender,
+                initialValue: gender,
                 decoration: InputDecoration(labelText: 'Jenis Kelamin (Standar WHO)', border: OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
                 items: ['Laki-laki', 'Perempuan'].map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
                 onChanged: (val) => setModalState(() => gender = val!),
@@ -142,7 +142,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(color: AppTheme.primaryTeal.withOpacity(0.12), shape: BoxShape.circle),
+                    decoration: BoxDecoration(color: AppTheme.primaryTeal.withValues(alpha: 0.12), shape: BoxShape.circle),
                     child: const Icon(Icons.child_care_rounded, size: 64, color: AppTheme.primaryTeal),
                   ),
                   const SizedBox(height: 20),
@@ -220,7 +220,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                       decoration: BoxDecoration(
                         color: AppTheme.errorRed,
                         borderRadius: BorderRadius.circular(20),
-                        boxShadow: [BoxShadow(color: AppTheme.errorRed.withOpacity(0.3), blurRadius: 16, offset: const Offset(0, 6))],
+                        boxShadow: [BoxShadow(color: AppTheme.errorRed.withValues(alpha: 0.3), blurRadius: 16, offset: const Offset(0, 6))],
                       ),
                       child: const Row(
                         children: [
@@ -250,7 +250,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(26),
-                      boxShadow: [BoxShadow(color: AppTheme.primaryTeal.withOpacity(0.3), blurRadius: 20, offset: const Offset(0, 10))],
+                      boxShadow: [BoxShadow(color: AppTheme.primaryTeal.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 10))],
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -413,8 +413,8 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                           child: ListTile(
                             leading: CircleAvatar(
                               backgroundColor: zSt == ZScoreClassification.normal
-                                  ? AppTheme.successGreen.withOpacity(0.15)
-                                  : AppTheme.errorRed.withOpacity(0.15),
+                                  ? AppTheme.successGreen.withValues(alpha: 0.15)
+                                  : AppTheme.errorRed.withValues(alpha: 0.15),
                               child: Icon(
                                 Icons.straighten_rounded,
                                 color: zSt == ZScoreClassification.normal ? AppTheme.successGreen : AppTheme.errorRed,
@@ -424,7 +424,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
                             subtitle: Text(DateHelper.formatIndonesianDate(item.measurementDate)),
                             trailing: Chip(
                               label: Text(zSt == ZScoreClassification.normal ? 'WHO Normal' : 'WHO Perhatian'),
-                              backgroundColor: zSt == ZScoreClassification.normal ? AppTheme.successGreen.withOpacity(0.1) : AppTheme.errorRed.withOpacity(0.1),
+                              backgroundColor: zSt == ZScoreClassification.normal ? AppTheme.successGreen.withValues(alpha: 0.1) : AppTheme.errorRed.withValues(alpha: 0.1),
                               labelStyle: TextStyle(
                                 color: zSt == ZScoreClassification.normal ? AppTheme.successGreen : AppTheme.errorRed,
                                 fontSize: 11,
@@ -464,15 +464,15 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withOpacity(0.3), width: 1.5),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))],
+          border: Border.all(color: color.withValues(alpha: 0.3), width: 1.5),
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 10, offset: const Offset(0, 4))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(color: color.withOpacity(0.15), borderRadius: BorderRadius.circular(14)),
+              decoration: BoxDecoration(color: color.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(14)),
               child: Icon(icon, color: color, size: 24),
             ),
             const SizedBox(height: 12),
@@ -488,7 +488,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
   Widget _buildStatusTile(String title, String val, Color color) {
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(14), border: Border.all(color: color.withOpacity(0.3))),
+      decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(14), border: Border.all(color: color.withValues(alpha: 0.3))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
