@@ -169,7 +169,7 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
       children: [
         Icon(icon, color: color, size: 22),
         const SizedBox(width: 8),
-        Text(title, style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: color)),
+        Expanded(child: Text(title, style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: color))),
       ],
     );
   }
@@ -193,7 +193,8 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(item.vaccineName, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
+                Expanded(child: Text(item.vaccineName, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16))),
+                const SizedBox(width: 8),
                 Chip(
                   label: Text(item.isCompleted ? 'Selesai' : 'Usia ${item.targetAgeMonths} Bulan'),
                   backgroundColor: borderColor.withValues(alpha: 0.12),
