@@ -29,20 +29,29 @@ class GrowthChartPage extends StatelessWidget {
           bottomHeight: 52,
           bottomWidget: Container(
             margin: const EdgeInsets.only(top: 4),
-            height: 40,
+            height: 44,
+            padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-              color: const Color(0xFFF1F5F9),
-              borderRadius: BorderRadius.circular(14),
+              color: AppTheme.primaryRose.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.2)),
             ),
             child: TabBar(
               indicator: BoxDecoration(
-                color: const Color(0xFF0F172A),
+                color: AppTheme.primaryRose,
                 borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.primaryRose.withValues(alpha: 0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               indicatorSize: TabBarIndicatorSize.tab,
               dividerColor: Colors.transparent,
               labelStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12.5, color: Colors.white),
-              unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12.5, color: Color(0xFF64748B)),
+              unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12.5, color: AppTheme.primaryRose),
               tabs: const [
                 Tab(text: 'Tinggi Badan (TB/U)'),
                 Tab(text: 'Berat Badan (BB/U)'),
