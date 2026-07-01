@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/theme.dart';
 import '../../../../core/widgets/custom_floating_header.dart';
+import '../../../../core/widgets/app_skeleton.dart';
 import '../../../child_growth/domain/entities/child_entity.dart';
 import '../bloc/milestone_bloc.dart';
 import '../bloc/milestone_event.dart';
@@ -72,7 +73,7 @@ class _MilestonePageState extends State<MilestonePage> {
       body: BlocBuilder<MilestoneBloc, MilestoneState>(
         builder: (context, state) {
           if (state is MilestoneLoading) {
-            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryRose));
+            return AppSkeleton.listSkeleton(itemCount: 5);
           }
 
           if (state is MilestoneLoaded) {

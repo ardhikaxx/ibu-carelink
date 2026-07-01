@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/utils/theme.dart';
+import 'core/widgets/app_skeleton.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/bloc/auth_event.dart';
 import 'features/auth/presentation/bloc/auth_state.dart';
@@ -68,11 +69,7 @@ class IbuCareLinkApp extends StatelessWidget {
         home: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             if (state is AuthInitialLoading || state is AuthInitial) {
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(color: AppTheme.primaryTeal),
-                ),
-              );
+              return Scaffold(body: AppSkeleton.dashboardSkeleton());
             }
             if (state is AuthAuthenticated) {
               return MainNavPage(user: state.user);

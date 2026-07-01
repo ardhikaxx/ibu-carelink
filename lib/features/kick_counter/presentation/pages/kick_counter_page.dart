@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/date_helper.dart';
 import '../../../../core/utils/theme.dart';
 import '../../../../core/widgets/custom_floating_header.dart';
+import '../../../../core/widgets/app_skeleton.dart';
 import '../bloc/kick_counter_bloc.dart';
 import '../bloc/kick_counter_event.dart';
 import '../bloc/kick_counter_state.dart';
@@ -64,16 +65,7 @@ class _KickCounterPageState extends State<KickCounterPage> {
         },
         builder: (context, state) {
           if (state is KickCounterSaving) {
-            return const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(color: AppTheme.primaryRose),
-                  SizedBox(height: 16),
-                  Text('Menyimpan dokumen sesi ke Cloud Firestore...'),
-                ],
-              ),
-            );
+            return AppSkeleton.dashboardSkeleton();
           }
 
           if (state is KickCounterActive) {

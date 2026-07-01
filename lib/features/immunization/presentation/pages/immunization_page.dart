@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/date_helper.dart';
 import '../../../../core/utils/theme.dart';
 import '../../../../core/widgets/custom_floating_header.dart';
+import '../../../../core/widgets/app_skeleton.dart';
 import '../../../child_growth/domain/entities/child_entity.dart';
 import '../../domain/entities/immunization_entity.dart';
 import '../bloc/immunization_bloc.dart';
@@ -91,7 +92,7 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
       body: BlocBuilder<ImmunizationBloc, ImmunizationState>(
         builder: (context, state) {
           if (state is ImmunizationLoading) {
-            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryRose));
+            return AppSkeleton.listSkeleton(itemCount: 6);
           }
 
           if (state is ImmunizationLoaded) {

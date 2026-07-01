@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../core/utils/date_helper.dart';
 import '../../../../core/utils/theme.dart';
+import '../../../../core/widgets/app_skeleton.dart';
 import '../../domain/entities/child_entity.dart';
 import '../../domain/entities/zscore_evaluation.dart';
 import '../bloc/child_growth_bloc.dart';
@@ -235,7 +236,7 @@ class _ChildDashboardPageState extends State<ChildDashboardPage> {
       body: BlocBuilder<ChildGrowthBloc, ChildGrowthState>(
         builder: (context, state) {
           if (state is ChildGrowthLoading) {
-            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryRose));
+            return AppSkeleton.dashboardSkeleton();
           }
 
           if (state is ChildGrowthEmpty || state is ChildGrowthError) {

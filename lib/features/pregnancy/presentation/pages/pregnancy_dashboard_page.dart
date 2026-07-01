@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/date_helper.dart';
 import '../../../../core/utils/theme.dart';
+import '../../../../core/widgets/app_skeleton.dart';
 import '../../../contraction_timer/presentation/pages/contraction_timer_page.dart';
 import '../../../kick_counter/presentation/pages/kick_counter_page.dart';
 import '../bloc/pregnancy_bloc.dart';
@@ -167,7 +168,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
       body: BlocBuilder<PregnancyBloc, PregnancyState>(
         builder: (context, state) {
           if (state is PregnancyLoading) {
-            return const Center(child: CircularProgressIndicator(color: AppTheme.primaryRose));
+            return AppSkeleton.dashboardSkeleton();
           }
 
           if (state is PregnancyEmpty || state is PregnancyError) {
