@@ -356,13 +356,12 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 26),
 
-                    // Action Buttons
                     Row(
                       children: [
                         Expanded(
                           child: SizedBox(
                             height: 48,
-                            child: OutlinedButton(
+                            child: OutlinedButton.icon(
                               style: OutlinedButton.styleFrom(
                                 side: BorderSide(color: Colors.grey.shade300, width: 1.2),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -375,12 +374,13 @@ class ProfilePage extends StatelessWidget {
                                   (route) => false,
                                 );
                               },
-                              child: Text(
+                              icon: Icon(Icons.logout_rounded, size: 18, color: Colors.grey.shade700),
+                              label: Text(
                                 'Keluar',
                                 style: TextStyle(
                                   color: Colors.grey.shade700,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 14,
+                                  fontSize: 13.5,
                                 ),
                               ),
                             ),
@@ -390,7 +390,7 @@ class ProfilePage extends StatelessWidget {
                         Expanded(
                           child: SizedBox(
                             height: 48,
-                            child: ElevatedButton(
+                            child: ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppTheme.primaryRose,
                                 foregroundColor: Colors.white,
@@ -399,11 +399,12 @@ class ProfilePage extends StatelessWidget {
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                               ),
                               onPressed: () => Navigator.of(dialogContext).pop(),
-                              child: const Text(
+                              icon: const Icon(Icons.verified_user_rounded, size: 18),
+                              label: const Text(
                                 'Tetap Masuk',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
-                                  fontSize: 14,
+                                  fontSize: 13.5,
                                 ),
                               ),
                             ),
