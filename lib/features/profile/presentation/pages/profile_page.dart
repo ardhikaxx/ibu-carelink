@@ -270,51 +270,75 @@ class ProfilePage extends StatelessWidget {
       barrierDismissible: true,
       barrierLabel: 'Logout Confirmation',
       barrierColor: const Color(0xFF0F172A).withValues(alpha: 0.65),
-      transitionDuration: const Duration(milliseconds: 260),
+      transitionDuration: const Duration(milliseconds: 280),
+      transitionBuilder: (context, anim, secondaryAnim, child) {
+        return FadeTransition(
+          opacity: anim,
+          child: ScaleTransition(
+            scale: Tween<double>(begin: 0.88, end: 1.0).animate(
+              CurvedAnimation(parent: anim, curve: Curves.easeOutBack),
+            ),
+            child: child,
+          ),
+        );
+      },
       pageBuilder: (dialogContext, animation, secondaryAnimation) {
         return Center(
           child: Material(
             color: Colors.transparent,
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 360),
+              constraints: const BoxConstraints(maxWidth: 350),
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 24),
-                padding: const EdgeInsets.all(28),
+                padding: const EdgeInsets.all(26),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(28),
+                  border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.2)),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF0F172A).withValues(alpha: 0.2),
+                      color: AppTheme.primaryRose.withValues(alpha: 0.12),
                       blurRadius: 32,
-                      offset: const Offset(0, 16),
+                      offset: const Offset(0, 12),
+                    ),
+                    BoxShadow(
+                      color: const Color(0xFF0F172A).withValues(alpha: 0.15),
+                      blurRadius: 24,
+                      offset: const Offset(0, 8),
                     ),
                   ],
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Hero Icon Badge
+                    // Aesthetic Rose Icon Badge
                     Container(
-                      width: 76,
-                      height: 76,
+                      width: 78,
+                      height: 78,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFEF2F2),
+                        color: AppTheme.primaryRose.withValues(alpha: 0.12),
                         shape: BoxShape.circle,
-                        border: Border.all(color: const Color(0xFFFECACA), width: 1.5),
+                        border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.35), width: 2),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme.primaryRose.withValues(alpha: 0.2),
+                            blurRadius: 16,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
                       ),
                       child: const Icon(
                         Icons.logout_rounded,
-                        color: AppTheme.errorRed,
-                        size: 34,
+                        color: AppTheme.primaryRose,
+                        size: 36,
                       ),
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      'Keluar dari Akun?',
+                      'Keluar dari Aplikasi?',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 21,
+                        fontSize: 20,
                         fontWeight: FontWeight.w900,
                         color: Color(0xFF0F172A),
                         letterSpacing: -0.5,
@@ -322,7 +346,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Apakah Bunda yakin ingin keluar dari sesi Ibu CareLink? Pastikan seluruh data medis kehamilan & tumbuh kembang anak telah tersimpan.',
+                      'Apakah Bunda yakin ingin keluar dari sesi Ibu CareLink saat ini? Pastikan seluruh pencatatan medis telah tersimpan dengan aman.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 13.5,
@@ -330,7 +354,7 @@ class ProfilePage extends StatelessWidget {
                         height: 1.45,
                       ),
                     ),
-                    const SizedBox(height: 28),
+                    const SizedBox(height: 26),
 
                     // Action Buttons
                     Row(
@@ -340,9 +364,8 @@ class ProfilePage extends StatelessWidget {
                             height: 48,
                             child: OutlinedButton(
                               style: OutlinedButton.styleFrom(
-                                backgroundColor: const Color(0xFFFEF2F2),
-                                side: const BorderSide(color: Color(0xFFFECACA), width: 1.2),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                side: BorderSide(color: Colors.grey.shade300, width: 1.2),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                               ),
                               onPressed: () {
                                 Navigator.of(dialogContext).pop();
@@ -352,11 +375,11 @@ class ProfilePage extends StatelessWidget {
                                   (route) => false,
                                 );
                               },
-                              child: const Text(
-                                'Ya, Keluar',
+                              child: Text(
+                                'Keluar',
                                 style: TextStyle(
-                                  color: AppTheme.errorRed,
-                                  fontWeight: FontWeight.w800,
+                                  color: Colors.grey.shade700,
+                                  fontWeight: FontWeight.w700,
                                   fontSize: 14,
                                 ),
                               ),
@@ -369,14 +392,15 @@ class ProfilePage extends StatelessWidget {
                             height: 48,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF0F172A),
+                                backgroundColor: AppTheme.primaryRose,
                                 foregroundColor: Colors.white,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                elevation: 3,
+                                shadowColor: AppTheme.primaryRose.withValues(alpha: 0.4),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                               ),
                               onPressed: () => Navigator.of(dialogContext).pop(),
                               child: const Text(
-                                'Tetap di Sini',
+                                'Tetap Masuk',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   fontSize: 14,
@@ -391,17 +415,6 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        );
-      },
-      transitionBuilder: (context, anim, secondaryAnim, child) {
-        return FadeTransition(
-          opacity: anim,
-          child: ScaleTransition(
-            scale: Tween<double>(begin: 0.88, end: 1.0).animate(
-              CurvedAnimation(parent: anim, curve: Curves.easeOutBack),
-            ),
-            child: child,
           ),
         );
       },
