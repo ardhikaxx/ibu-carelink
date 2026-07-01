@@ -244,11 +244,9 @@ class _ContractionTimerPageState extends State<ContractionTimerPage> {
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 22),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: isContraction
-                                ? [const Color(0xFF475569), const Color(0xFF1E293B)]
-                                : [AppTheme.primaryRose, const Color(0xFFD9465F)],
-                          ),
+                          color: isContraction
+                              ? const Color(0xFF475569)
+                              : AppTheme.primaryRose,
                           borderRadius: BorderRadius.circular(22),
                           boxShadow: [
                             BoxShadow(

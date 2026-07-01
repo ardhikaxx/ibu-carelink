@@ -149,17 +149,13 @@ class _KickCounterPageState extends State<KickCounterPage> {
                         width: 230,
                         height: 230,
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: state.targetAchieved
-                                ? [AppTheme.successGreen, const Color(0xFF059669)]
-                                : [AppTheme.primaryRose, const Color(0xFFD9465F)],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
+                          color: state.targetAchieved
+                              ? AppTheme.primaryTeal
+                              : AppTheme.primaryRose,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: (state.targetAchieved ? AppTheme.successGreen : AppTheme.primaryRose).withValues(alpha: 0.4),
+                              color: (state.targetAchieved ? AppTheme.primaryTeal : AppTheme.primaryRose).withValues(alpha: 0.4),
                               blurRadius: 30,
                               offset: const Offset(0, 15),
                             ),

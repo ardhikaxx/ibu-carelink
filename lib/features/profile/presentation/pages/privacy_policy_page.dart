@@ -105,7 +105,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 
             _buildPolicySection(
               icon: Icons.lock_outline_rounded,
-              color: AppTheme.accentWarm,
+              color: AppTheme.primaryRose,
               title: '2. Enkripsi & Penyimpanan Offline-First',
               content:
                   'Aplikasi kami dirancang dengan arsitektur Offline-First. Seluruh data kesehatan disimpan secara lokal di dalam basis data terenkripsi pada perangkat Anda terlebih dahulu. Sinkronisasi cloud (Firebase Cloud Firestore) dilakukan secara aman menggunakan protokol enkripsi TLS/SSL standar perbankan.',
@@ -114,7 +114,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 
             _buildPolicySection(
               icon: Icons.do_not_disturb_alt_rounded,
-              color: AppTheme.errorRed,
+              color: AppTheme.primaryRose,
               title: '3. Tanpa Komersialisasi Data',
               content:
                   'Kami tidak pernah memperjualbelikan, menyewakan, atau membagikan informasi medis pribadi atau data anak Anda kepada pengiklan, perusahaan asuransi, atau pihak ketiga mana pun. Identitas medis Anda adalah privasi mutlak yang tidak dapat diganggu gugat.',
@@ -123,7 +123,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 
             _buildPolicySection(
               icon: Icons.share_rounded,
-              color: const Color(0xFF3B82F6),
+              color: AppTheme.primaryRose,
               title: '4. Berbagi dengan Tenaga Medis',
               content:
                   'Anda memiliki kontrol penuh untuk mengekspor atau membagikan ringkasan catatan kesehatan (seperti kurva WHO atau log kontraksi) langsung kepada dokter spesialis kandungan atau bidan pendamping saat jadwal konsultasi.',
@@ -132,7 +132,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 
             _buildPolicySection(
               icon: Icons.manage_accounts_rounded,
-              color: const Color(0xFF10B981),
+              color: AppTheme.primaryRose,
               title: '5. Hak Penghapusan Data (Right to be Forgotten)',
               content:
                   'Sesuai regulasi pelindungan data pribadi, Anda berhak meminta penghapusan seluruh riwayat akun dan data medis kapan saja melalui menu pengaturan akun atau dengan menghubungi tim dukungan teknis kami.',
