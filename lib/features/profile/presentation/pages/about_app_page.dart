@@ -133,11 +133,7 @@ class AboutAppPage extends StatelessWidget {
               padding: const EdgeInsets.all(24),
               width: double.infinity,
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [AppTheme.primaryRose, AppTheme.primaryTeal],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+                color: AppTheme.primaryRose,
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
