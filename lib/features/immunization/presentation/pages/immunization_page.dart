@@ -197,6 +197,7 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
                 Chip(
                   label: Text(item.isCompleted ? 'Selesai' : 'Usia ${item.targetAgeMonths} Bulan'),
                   backgroundColor: borderColor.withValues(alpha: 0.12),
+                  side: BorderSide.none,
                   labelStyle: TextStyle(color: borderColor, fontWeight: FontWeight.bold, fontSize: 11),
                 ),
               ],

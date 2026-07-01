@@ -30,6 +30,7 @@ class ImmunizationModel extends ImmunizationEntity {
       'vaccineName': vaccineName,
       'targetAgeMonths': targetAgeMonths,
       'isCompleted': isCompleted,
+      'status': isCompleted ? 'completed' : 'pending',
       'dateAdministered': dateAdministered?.toIso8601String(),
       'batchNumber': batchNumber,
       'clinicName': clinicName,

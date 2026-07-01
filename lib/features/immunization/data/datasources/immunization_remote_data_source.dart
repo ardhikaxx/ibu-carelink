@@ -15,27 +15,34 @@ class ImmunizationRemoteDataSourceImpl implements ImmunizationRemoteDataSource {
   @override
   Future<List<ImmunizationModel>> getImmunizations(String userId, String childId) async {
     try {
-      final colRef = firestore.collection('users').doc(userId).collection('children').doc(childId).collection('immunizations');
+      final colRef = firestore.collection('users').doc(userId).collection('children').doc(childId).collection('vaccinations');
       final snap = await colRef.orderBy('targetAgeMonths').get();
 
-      if (snap.docs.isEmpty) {
-        // Inisialisasi jadwal IDAI 2024 jika belum ada
+      if (snap.docs.isEmpty || snap.docs.length < AppConstants.idaiVaccineSchedule2024.length) {
+        final existingNames = snap.docs.map((d) => d.data()['vaccineName'] ?? '').toSet();
         final batch = firestore.batch();
-        final List<ImmunizationModel> initialList = [];
+        bool hasNew = false;
+
         for (var item in AppConstants.idaiVaccineSchedule2024) {
-          final docRef = colRef.doc();
-          final m = ImmunizationModel(
-            id: docRef.id,
-            childId: childId,
-            vaccineName: item['name'],
-            targetAgeMonths: item['ageMonths'],
-            isCompleted: false,
-          );
-          batch.set(docRef, m.toFirestore());
-          initialList.add(m);
+          final name = item['name'] as String;
+          if (!existingNames.contains(name)) {
+            final docRef = colRef.doc();
+            final m = ImmunizationModel(
+              id: docRef.id,
+              childId: childId,
+              vaccineName: name,
+              targetAgeMonths: item['ageMonths'],
+              isCompleted: false,
+            );
+            batch.set(docRef, m.toFirestore());
+            hasNew = true;
+          }
         }
-        await batch.commit();
-        return initialList;
+        if (hasNew) {
+          await batch.commit();
+          final updatedSnap = await colRef.orderBy('targetAgeMonths').get();
+          return updatedSnap.docs.map((doc) => ImmunizationModel.fromFirestore(doc.data(), doc.id, childId)).toList();
+        }
       }
 
       return snap.docs.map((doc) => ImmunizationModel.fromFirestore(doc.data(), doc.id, childId)).toList();
@@ -52,7 +59,7 @@ class ImmunizationRemoteDataSourceImpl implements ImmunizationRemoteDataSource {
           .doc(userId)
           .collection('children')
           .doc(model.childId)
-          .collection('immunizations')
+          .collection('vaccinations')
           .doc(model.id);
       await ref.set(model.toFirestore(), SetOptions(merge: true));
       return model;
