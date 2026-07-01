@@ -45,6 +45,14 @@ class _MilestonePageState extends State<MilestonePage> {
     }
   }
 
+  Color _getDomainColor(String domain) {
+    if (domain.contains('Motorik Kasar')) return AppTheme.primaryRose;
+    if (domain.contains('Motorik Halus')) return AppTheme.primaryTeal;
+    if (domain.contains('Bicara') || domain.contains('Bahasa')) return const Color(0xFFD97706);
+    if (domain.contains('Sosial') || domain.contains('Kognitif')) return AppTheme.successGreen;
+    return AppTheme.primaryRose;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -102,7 +110,13 @@ class _MilestonePageState extends State<MilestonePage> {
                           label: Text(band),
                           selected: isSel,
                           selectedColor: AppTheme.primaryRose,
-                          labelStyle: TextStyle(color: isSel ? Colors.white : Colors.black87, fontWeight: FontWeight.bold),
+                          backgroundColor: Colors.white,
+                          showCheckmark: false,
+                          side: BorderSide(color: isSel ? AppTheme.primaryRose : Colors.grey.shade300),
+                          labelStyle: TextStyle(
+                            color: isSel ? Colors.white : const Color(0xFF0F172A),
+                            fontWeight: isSel ? FontWeight.w800 : FontWeight.w600,
+                          ),
                           onSelected: (_) => setState(() => _selectedBand = band),
                         ),
                       );
@@ -159,11 +173,11 @@ class _MilestonePageState extends State<MilestonePage> {
                                 const SizedBox(height: 14),
                                 _buildProgressBar('Motorik Kasar', grossDone, grossTotal, AppTheme.primaryRose),
                                 const SizedBox(height: 10),
-                                _buildProgressBar('Motorik Halus', fineDone, fineTotal, AppTheme.primaryRose),
+                                _buildProgressBar('Motorik Halus', fineDone, fineTotal, AppTheme.primaryTeal),
                                 const SizedBox(height: 10),
-                                _buildProgressBar('Bicara & Bahasa', speechDone, speechTotal, AppTheme.accentWarm),
+                                _buildProgressBar('Bicara & Bahasa', speechDone, speechTotal, const Color(0xFFD97706)),
                                 const SizedBox(height: 10),
-                                _buildProgressBar('Sosialisasi & Kemandirian', socialDone, socialTotal, Colors.purple.shade400),
+                                _buildProgressBar('Sosialisasi & Kemandirian', socialDone, socialTotal, AppTheme.successGreen),
                               ],
                             ),
                           ),
@@ -181,16 +195,52 @@ class _MilestonePageState extends State<MilestonePage> {
                             itemCount: bandFiltered.length,
                             itemBuilder: (context, index) {
                               final item = bandFiltered[index];
+                              final domainColor = _getDomainColor(item.domain);
                               return Card(
                                 margin: const EdgeInsets.only(bottom: 12),
+                                color: item.isAchieved ? AppTheme.primaryRose.withValues(alpha: 0.05) : Colors.white,
+                                elevation: item.isAchieved ? 0 : 2,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
-                                  side: BorderSide(color: item.isAchieved ? AppTheme.successGreen.withValues(alpha: 0.5) : Colors.grey.shade300),
+                                  side: BorderSide(
+                                    color: item.isAchieved ? AppTheme.primaryRose : Colors.grey.shade200,
+                                    width: item.isAchieved ? 1.5 : 1,
+                                  ),
                                 ),
                                 child: CheckboxListTile(
-                                  activeColor: AppTheme.successGreen,
-                                  title: Text(item.title, style: TextStyle(fontWeight: FontWeight.w700, decoration: item.isAchieved ? TextDecoration.lineThrough : null)),
-                                  subtitle: Text('Domain: ${item.domain}', style: const TextStyle(fontSize: 12)),
+                                  activeColor: AppTheme.primaryRose,
+                                  checkColor: Colors.white,
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                  title: Text(
+                                    item.title,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: item.isAchieved ? AppTheme.primaryRose : const Color(0xFF0F172A),
+                                      decoration: item.isAchieved ? TextDecoration.lineThrough : null,
+                                    ),
+                                  ),
+                                  subtitle: Padding(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: domainColor.withValues(alpha: 0.12),
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: Text(
+                                            item.domain,
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w700,
+                                              color: domainColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                   value: item.isAchieved,
                                   onChanged: (val) {
                                     context.read<MilestoneBloc>().add(ToggleMilestoneEvent(milestone: item, userId: widget.userId));
