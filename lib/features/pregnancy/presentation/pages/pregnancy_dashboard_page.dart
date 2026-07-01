@@ -512,7 +512,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                   SizedBox(width: 10),
                                   Flexible(
                                     child: Text(
-                                      'Lihat Anatomi & Perkembangan Janin',
+                                      'Pantau Perkembangan Janin',
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
