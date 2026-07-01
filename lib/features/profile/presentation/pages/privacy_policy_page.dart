@@ -108,7 +108,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 
             _buildPolicySection(
               icon: Icons.lock_outline_rounded,
-              color: AppTheme.primaryTeal,
+              color: AppTheme.primaryRose,
               title: '2. Enkripsi & Penyimpanan Offline-First',
               content:
                   'Aplikasi kami dirancang dengan arsitektur Offline-First. Seluruh data kesehatan disimpan secara lokal di dalam basis data terenkripsi pada perangkat Anda terlebih dahulu. Sinkronisasi cloud (Firebase Cloud Firestore) dilakukan secara aman menggunakan protokol enkripsi TLS/SSL standar perbankan.',
@@ -126,7 +126,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 
             _buildPolicySection(
               icon: Icons.share_rounded,
-              color: AppTheme.primaryTeal,
+              color: AppTheme.primaryRose,
               title: '4. Berbagi dengan Tenaga Medis',
               content:
                   'Anda memiliki kontrol penuh untuk mengekspor atau membagikan ringkasan catatan kesehatan (seperti kurva WHO atau log kontraksi) langsung kepada dokter spesialis kandungan atau bidan pendamping saat jadwal konsultasi.',
@@ -142,17 +142,17 @@ class PrivacyPolicyPage extends StatelessWidget {
             ),
             const SizedBox(height: 28),
 
-            // Contact Card (Medical Teal Theme)
+            // Contact Card (Rose Pink Theme)
             Container(
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
-                color: AppTheme.primaryTeal.withValues(alpha: 0.08),
+                color: AppTheme.primaryRose.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.25)),
+                border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.2)),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.mark_email_unread_rounded, color: AppTheme.primaryTeal, size: 28),
+                  const Icon(Icons.mark_email_unread_rounded, color: AppTheme.primaryRose, size: 28),
                   const SizedBox(width: 14),
                   Expanded(
                     child: Column(

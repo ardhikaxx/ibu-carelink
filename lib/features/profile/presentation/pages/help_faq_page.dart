@@ -109,7 +109,7 @@ class HelpFaqPage extends StatelessWidget {
               question: 'Apa arti peringatan Pola Kontraksi 5-1-1?',
               answer:
                   'Aturan 5-1-1 adalah standar obstetri internasional untuk persalinan aktif: Kontraksi terjadi setiap 5 menit sekali, berlangsung selama minimal 1 menit setiap sesinya, dan telah bertahan konsisten selama 1 jam berturut-turut. Segera bersiap menuju fasilitas kebidanan/rumah sakit terdekat bila pola ini terdeteksi.',
-              color: AppTheme.primaryTeal,
+              color: AppTheme.primaryRose,
             ),
             const SizedBox(height: 12),
 
@@ -125,7 +125,7 @@ class HelpFaqPage extends StatelessWidget {
               question: 'Apakah aplikasi tetap berjalan saat tidak ada internet?',
               answer:
                   'Ya, 100%! Ibu CareLink dibangun menggunakan teknologi Offline-First. Seluruh penghitung tendangan, pengatur waktu kontraksi, log gejala harian, dan kalkulasi grafik pertumbuhan WHO dapat diakses lancar di daerah terpencil tanpa koneksi internet.',
-              color: AppTheme.primaryTeal,
+              color: AppTheme.primaryRose,
             ),
             const SizedBox(height: 12),
 
@@ -137,20 +137,20 @@ class HelpFaqPage extends StatelessWidget {
             ),
             const SizedBox(height: 28),
 
-            // Live Support Contact (Medical Teal Theme)
+            // Live Support Contact (Rose Pink Theme)
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: AppTheme.primaryTeal.withValues(alpha: 0.08),
+                color: AppTheme.primaryRose.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(22),
-                border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.25)),
+                border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Row(
                     children: [
-                      Icon(Icons.headset_mic_rounded, color: AppTheme.primaryTeal, size: 24),
+                      Icon(Icons.headset_mic_rounded, color: AppTheme.primaryRose, size: 24),
                       SizedBox(width: 10),
                       Text(
                         'Butuh Bantuan Langsung?',
@@ -169,7 +169,7 @@ class HelpFaqPage extends StatelessWidget {
                     height: 48,
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppTheme.primaryTeal,
+                        backgroundColor: AppTheme.primaryRose,
                         foregroundColor: Colors.white,
                         elevation: 0,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -178,7 +178,7 @@ class HelpFaqPage extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Menghubungkan ke WhatsApp Layanan Bantuan Ibu CareLink...'),
-                            backgroundColor: AppTheme.primaryTeal,
+                            backgroundColor: AppTheme.primaryRose,
                           ),
                         );
                       },
