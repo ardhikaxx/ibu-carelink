@@ -21,15 +21,22 @@ class HelpFaqPage extends StatelessWidget {
           children: [
             // Help Center Banner
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(22),
               decoration: BoxDecoration(
-                color: AppTheme.primaryRose,
-                borderRadius: BorderRadius.circular(24),
+                gradient: LinearGradient(
+                  colors: [
+                    AppTheme.primaryRose,
+                    AppTheme.primaryRose.withValues(alpha: 0.85),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(26),
                 boxShadow: [
                   BoxShadow(
                     color: AppTheme.primaryRose.withValues(alpha: 0.3),
-                    blurRadius: 20,
-                    offset: const Offset(0, 8),
+                    blurRadius: 24,
+                    offset: const Offset(0, 10),
                   ),
                 ],
               ),
@@ -57,8 +64,8 @@ class HelpFaqPage extends StatelessWidget {
                           'Pusat Bantuan Ibu & Anak',
                           style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 17,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 18,
                             letterSpacing: -0.3,
                           ),
                         ),
@@ -67,7 +74,7 @@ class HelpFaqPage extends StatelessWidget {
                           'Temukan panduan klinis & solusi cepat untuk seluruh fitur skrining dan pemantauan.',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12.5,
+                            fontSize: 13,
                             height: 1.4,
                           ),
                         ),
@@ -94,6 +101,7 @@ class HelpFaqPage extends StatelessWidget {
               question: 'Bagaimana cara menghitung tendangan janin yang tepat?',
               answer:
                   'Carilah waktu di mana janin biasanya aktif (setelah makan atau malam hari). Berbaring santai miring ke kiri, ketuk tombol hitung setiap kali merasakan tendangan, berguling, atau gerakan janin. Sesi normal adalah mencapai 10 gerakan dalam waktu kurang dari 2 jam.',
+              color: AppTheme.primaryRose,
             ),
             const SizedBox(height: 12),
 
@@ -101,6 +109,7 @@ class HelpFaqPage extends StatelessWidget {
               question: 'Apa arti peringatan Pola Kontraksi 5-1-1?',
               answer:
                   'Aturan 5-1-1 adalah standar obstetri internasional untuk persalinan aktif: Kontraksi terjadi setiap 5 menit sekali, berlangsung selama minimal 1 menit setiap sesinya, dan telah bertahan konsisten selama 1 jam berturut-turut. Segera bersiap menuju fasilitas kebidanan/rumah sakit terdekat bila pola ini terdeteksi.',
+              color: AppTheme.primaryTeal,
             ),
             const SizedBox(height: 12),
 
@@ -108,6 +117,7 @@ class HelpFaqPage extends StatelessWidget {
               question: 'Bagaimana cara kerja fitur Skrining Preeklamsia?',
               answer:
                   'Fitur ini mengevaluasi kombinasi pembacaan tekanan darah (sistolik ≥ 140 mmHg atau diastolik ≥ 90 mmHg) bersama gejala penyerta klinis seperti sakit kepala hebat yang tidak hilang, gangguan penglihatan, dan pembengkakan ekstrem pada wajah atau tangan untuk mendeteksi risiko preeklamsia sejak dini.',
+              color: AppTheme.primaryRose,
             ),
             const SizedBox(height: 12),
 
@@ -115,6 +125,7 @@ class HelpFaqPage extends StatelessWidget {
               question: 'Apakah aplikasi tetap berjalan saat tidak ada internet?',
               answer:
                   'Ya, 100%! Ibu CareLink dibangun menggunakan teknologi Offline-First. Seluruh penghitung tendangan, pengatur waktu kontraksi, log gejala harian, dan kalkulasi grafik pertumbuhan WHO dapat diakses lancar di daerah terpencil tanpa koneksi internet.',
+              color: AppTheme.primaryTeal,
             ),
             const SizedBox(height: 12),
 
@@ -122,16 +133,17 @@ class HelpFaqPage extends StatelessWidget {
               question: 'Bagaimana cara membaca Kurva Pertumbuhan WHO balita?',
               answer:
                   'Kurva WHO membandingkan tinggi badan (TB/U) atau berat badan (BB/U) anak dengan standar global seusianya. Area hijau menandakan pertumbuhan normal, sedangkan titik pada zona merah atau kuning merupakan indikasi untuk segera melakukan konsultasi nutrisi dengan dokter spesialis anak.',
+              color: AppTheme.primaryRose,
             ),
             const SizedBox(height: 28),
 
-            // Live Support Contact
+            // Live Support Contact (Medical Teal Theme)
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.primaryTeal.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(22),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
+                border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.25)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +169,7 @@ class HelpFaqPage extends StatelessWidget {
                     height: 48,
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF0F172A),
+                        backgroundColor: AppTheme.primaryTeal,
                         foregroundColor: Colors.white,
                         elevation: 0,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -166,7 +178,7 @@ class HelpFaqPage extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Menghubungkan ke WhatsApp Layanan Bantuan Ibu CareLink...'),
-                            backgroundColor: AppTheme.primaryRose,
+                            backgroundColor: AppTheme.primaryTeal,
                           ),
                         );
                       },
@@ -187,15 +199,15 @@ class HelpFaqPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFaqItem({required String question, required String answer}) {
+  Widget _buildFaqItem({required String question, required String answer, required Color color}) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF0F172A).withValues(alpha: 0.02),
+            color: color.withValues(alpha: 0.03),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -204,10 +216,18 @@ class HelpFaqPage extends StatelessWidget {
       child: Theme(
         data: ThemeData().copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
-          iconColor: AppTheme.primaryRose,
-          collapsedIconColor: const Color(0xFF64748B),
-          tilePadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-          childrenPadding: const EdgeInsets.fromLTRB(18, 0, 18, 16),
+          iconColor: color,
+          collapsedIconColor: color,
+          tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          leading: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(Icons.help_outline_rounded, color: color, size: 20),
+          ),
           title: Text(
             question,
             style: const TextStyle(
