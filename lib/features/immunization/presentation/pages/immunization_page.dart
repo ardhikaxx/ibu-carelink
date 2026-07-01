@@ -135,21 +135,49 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
                   const SizedBox(height: 24),
 
                   if (overdue.isNotEmpty) ...[
-                    _buildSectionHeader('Terlewat / Perlu Segera Disusulkan (Catch-up)', AppTheme.errorRed, Icons.warning_rounded),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                      decoration: BoxDecoration(
+                        color: AppTheme.errorRed.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: AppTheme.errorRed.withValues(alpha: 0.3)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.warning_amber_rounded, color: AppTheme.errorRed, size: 22),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Vaksinasi Terlewat (Catch-up)',
+                                  style: TextStyle(color: AppTheme.errorRed, fontWeight: FontWeight.w800, fontSize: 13),
+                                ),
+                                Text(
+                                  'Konsultasikan ke bidan atau dokter untuk jadwal susulan.',
+                                  style: TextStyle(color: Colors.grey.shade700, fontSize: 11),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     ...overdue.map((i) => _buildVaccineCard(i, childAgeMonths)),
                     const SizedBox(height: 20),
                   ],
 
                   if (upcoming.isNotEmpty) ...[
-                    _buildSectionHeader('Segera & Mendatang', AppTheme.warningYellow, Icons.schedule_rounded),
+                    _buildSectionHeader('Jadwal Mendatang', const Color(0xFFD97706), Icons.schedule_rounded),
                     const SizedBox(height: 10),
                     ...upcoming.map((i) => _buildVaccineCard(i, childAgeMonths)),
                     const SizedBox(height: 20),
                   ],
 
                   if (completed.isNotEmpty) ...[
-                    _buildSectionHeader('Selesai Diberikan (Riwayat KIA)', AppTheme.successGreen, Icons.check_circle_rounded),
+                    _buildSectionHeader('Selesai Diberikan', AppTheme.successGreen, Icons.check_circle_rounded),
                     const SizedBox(height: 10),
                     ...completed.map((i) => _buildVaccineCard(i, childAgeMonths)),
                   ],
