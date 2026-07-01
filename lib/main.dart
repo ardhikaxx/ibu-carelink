@@ -67,7 +67,7 @@ class IbuCareLinkApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         home: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            if (state is AuthLoading) {
+            if (state is AuthInitialLoading || state is AuthInitial) {
               return const Scaffold(
                 body: Center(
                   child: CircularProgressIndicator(color: AppTheme.primaryTeal),

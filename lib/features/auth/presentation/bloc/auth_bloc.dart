@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onCheckAuthStatus(CheckAuthStatusEvent event, Emitter<AuthState> emit) async {
-    emit(AuthLoading());
+    emit(AuthInitialLoading());
     final result = await getCurrentUserUseCase(NoParams());
     result.fold(
       (failure) => emit(AuthUnauthenticated()),
