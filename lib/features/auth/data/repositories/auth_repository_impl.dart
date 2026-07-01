@@ -91,11 +91,11 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, void>> logout() async {
     try {
-      await remoteDataSource.logout();
       await localDataSource.clearCache();
-      return const Right(null);
-    } catch (e) {
-      return Left(ServerFailure(e.toString()));
-    }
+    } catch (_) {}
+    try {
+      await remoteDataSource.logout();
+    } catch (_) {}
+    return const Right(null);
   }
 }
