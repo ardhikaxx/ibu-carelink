@@ -21,19 +21,21 @@ class PregnancyEntity extends Equatable {
   int get gestationalWeeks => DateHelper.calculateGestationalWeeks(hpht);
   int get trimester => DateHelper.calculateTrimester(gestationalWeeks);
 
-  /// Metafora analogi buah 3D untuk ukuran janin berdasarkan usia minggu
+  /// Metafora analogi buah 3D untuk ukuran janin berdasarkan usia minggu (12 Tahapan Anatomi)
   String get fetalSizeFruitAnalogy {
     final w = gestationalWeeks;
-    if (w <= 4) return 'Biji Poppy (0.1 cm)';
-    if (w <= 8) return 'Buah Rasberi (1.6 cm)';
-    if (w <= 12) return 'Buah Jeruk Nipis (5.4 cm)';
-    if (w <= 16) return 'Buah Alpukat (11.6 cm)';
-    if (w <= 20) return 'Buah Pisang (25.6 cm)';
-    if (w <= 24) return 'Buah Jagung (30.0 cm)';
-    if (w <= 28) return 'Buah Terong Besar (37.6 cm)';
-    if (w <= 32) return 'Buah Kelapa (42.4 cm)';
-    if (w <= 36) return 'Buah Pepaya (47.4 cm)';
-    return 'Buah Semangka (51.2 cm)';
+    if (w <= 3) return 'Biji Selasih / Zigot (~0.1 cm)';
+    if (w == 4) return 'Biji Poppy / Blastosis (~0.2 cm)';
+    if (w == 5) return 'Biji Wijen / Embrio C (~0.3 cm)';
+    if (w == 6) return 'Kacang Hijau / Tunas (~0.6 cm)';
+    if (w == 7) return 'Buah Blueberry (~1.3 cm)';
+    if (w <= 10) return 'Buah Stroberi (~2.5 cm)';
+    if (w <= 13) return 'Jeruk Nipis (~6.0 cm)';
+    if (w <= 18) return 'Buah Alpukat (~14.0 cm)';
+    if (w <= 22) return 'Buah Pisang (~26.0 cm)';
+    if (w <= 29) return 'Buah Jagung (~36.0 cm)';
+    if (w <= 35) return 'Buah Nanas (~45.0 cm)';
+    return 'Buah Semangka (~50.5 cm)';
   }
 
   @override
