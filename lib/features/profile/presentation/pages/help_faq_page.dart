@@ -138,7 +138,7 @@ class HelpFaqPage extends StatelessWidget {
                 children: [
                   const Row(
                     children: [
-                      Icon(Icons.headset_mic_rounded, color: AppTheme.accentWarm, size: 24),
+                      Icon(Icons.headset_mic_rounded, color: AppTheme.primaryTeal, size: 24),
                       SizedBox(width: 10),
                       Text(
                         'Butuh Bantuan Langsung?',

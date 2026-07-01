@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/theme.dart';
 import '../bloc/emergency_bloc.dart';
 import '../bloc/emergency_event.dart';
 import '../bloc/emergency_state.dart';
@@ -25,7 +26,7 @@ class SosFloatingButton extends StatelessWidget {
       builder: (context, state) {
         final isLoading = state is EmergencyTriggering;
         return FloatingActionButton(
-          backgroundColor: Colors.red.shade700,
+          backgroundColor: AppTheme.primaryRose,
           onPressed: isLoading ? null : () => _confirmAndTrigger(context),
           child: isLoading
               ? const CircularProgressIndicator(color: Colors.white)
@@ -46,7 +47,7 @@ class SosFloatingButton extends StatelessWidget {
         actions: [
           TextButton(onPressed: () => Navigator.pop(dialogContext), child: const Text('Batal')),
           FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: Colors.red.shade700),
+            style: FilledButton.styleFrom(backgroundColor: AppTheme.primaryRose),
             onPressed: () {
               Navigator.pop(dialogContext);
               context.read<EmergencyBloc>().add(const SosButtonPressed());

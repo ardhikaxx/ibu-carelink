@@ -178,14 +178,14 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
                   ],
 
                   if (upcoming.isNotEmpty) ...[
-                    _buildSectionHeader('Jadwal Mendatang', const Color(0xFFD97706), Icons.schedule_rounded),
+                    _buildSectionHeader('Jadwal Mendatang', AppTheme.primaryRose, Icons.schedule_rounded),
                     const SizedBox(height: 10),
                     ...upcoming.map((i) => _buildVaccineCard(i, childAgeMonths)),
                     const SizedBox(height: 20),
                   ],
 
                   if (completed.isNotEmpty) ...[
-                    _buildSectionHeader('Selesai Diberikan', AppTheme.successGreen, Icons.check_circle_rounded),
+                    _buildSectionHeader('Selesai Diberikan', AppTheme.primaryTeal, Icons.check_circle_rounded),
                     const SizedBox(height: 10),
                     ...completed.map((i) => _buildVaccineCard(i, childAgeMonths)),
                   ],
@@ -213,10 +213,10 @@ class _ImmunizationPageState extends State<ImmunizationPage> {
   Widget _buildVaccineCard(ImmunizationEntity item, int currentChildAgeMonths) {
     final status = item.getStatus(currentChildAgeMonths);
     Color borderColor = status == ImmunizationStatus.completed
-        ? AppTheme.successGreen
+        ? AppTheme.primaryTeal
         : status == ImmunizationStatus.overdue
-            ? AppTheme.errorRed
-            : AppTheme.warningYellow;
+            ? AppTheme.primaryRose
+            : AppTheme.primaryRose;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),

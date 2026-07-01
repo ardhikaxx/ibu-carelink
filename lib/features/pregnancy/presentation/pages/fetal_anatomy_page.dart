@@ -341,10 +341,10 @@ class FetalAnatomyPage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFEF3C7),
+                          color: AppTheme.primaryRose.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(14),
                         ),
-                        child: const Icon(Icons.tips_and_updates_rounded, color: Color(0xFFD97706), size: 22),
+                        child: const Icon(Icons.tips_and_updates_rounded, color: AppTheme.primaryRose, size: 22),
                       ),
                       const SizedBox(width: 14),
                       const Expanded(
@@ -466,11 +466,11 @@ class FetalAnatomyPage extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(top: 2),
           padding: const EdgeInsets.all(4),
-          decoration: const BoxDecoration(
-            color: Color(0xFFECFDF5),
+          decoration: BoxDecoration(
+            color: AppTheme.primaryTeal.withValues(alpha: 0.12),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.check_rounded, color: AppTheme.successGreen, size: 14),
+          child: const Icon(Icons.check_rounded, color: AppTheme.primaryTeal, size: 14),
         ),
         const SizedBox(width: 12),
         Expanded(
