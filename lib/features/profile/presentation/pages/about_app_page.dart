@@ -48,7 +48,7 @@ class AboutAppPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   const Text(
-                    'Ibu CareLink Pro',
+                    'Ibu CareLink',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w900,
@@ -112,7 +112,7 @@ class AboutAppPage extends StatelessWidget {
 
             _buildReferenceCard(
               icon: Icons.public_rounded,
-              color: const Color(0xFF3B82F6),
+              color: AppTheme.primaryTeal,
               title: 'World Health Organization (WHO 2026)',
               description:
                   'Perhitungan Z-Score rasio Tinggi Badan menurut Usia (TB/U) dan Berat Badan menurut Usia (BB/U) didasarkan pada WHO Child Growth Standards.',
@@ -121,7 +121,7 @@ class AboutAppPage extends StatelessWidget {
 
             _buildReferenceCard(
               icon: Icons.monitor_heart_rounded,
-              color: const Color(0xFF10B981),
+              color: AppTheme.primaryRose,
               title: 'ACOG Obstetric Guidelines',
               description:
                   'Metodologi pemantauan gerakan tendangan janin (Kick Counter) dan penentuan persalinan aktif via Pola 5-1-1 mengacu pada standar American College of Obstetricians and Gynecologists.',
@@ -130,39 +130,64 @@ class AboutAppPage extends StatelessWidget {
 
             // Vision & Team Card
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(24),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: const Color(0xFF0F172A),
+                gradient: const LinearGradient(
+                  colors: [AppTheme.primaryRose, AppTheme.primaryTeal],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
                 borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.primaryRose.withValues(alpha: 0.25),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Visi & Misi Pengembang',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800,
-                    ),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(Icons.lightbulb_rounded, color: Colors.white, size: 20),
+                      ),
+                      const SizedBox(width: 12),
+                      const Text(
+                        'Visi & Misi Pengembang',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 14),
+                  const Text(
                     'Didedikasikan penuh untuk menurunkan Angka Kematian Ibu (AKI) dan angka prevalensi stunting di seluruh pelosok Nusantara melalui teknologi kesehatan digital cerdas yang dapat bekerja tanpa koneksi internet.',
                     style: TextStyle(
-                      color: Color(0xFF94A3B8),
-                      fontSize: 13,
-                      height: 1.5,
+                      color: Colors.white,
+                      fontSize: 13.5,
+                      fontWeight: FontWeight.w500,
+                      height: 1.6,
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Divider(color: Color(0xFF334155), height: 1),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 18),
+                  Divider(color: Colors.white.withValues(alpha: 0.25), height: 1),
+                  const SizedBox(height: 16),
+                  const Text(
                     '© 2026 Ibu CareLink Development Team\nLicensed under MIT Medical Software License.',
                     style: TextStyle(
-                      color: Color(0xFF64748B),
+                      color: Colors.white70,
                       fontSize: 11.5,
                       height: 1.4,
                     ),
