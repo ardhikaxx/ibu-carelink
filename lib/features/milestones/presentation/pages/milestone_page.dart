@@ -47,10 +47,6 @@ class _MilestonePageState extends State<MilestonePage> {
   }
 
   Color _getDomainColor(String domain) {
-    if (domain.contains('Motorik Kasar')) return AppTheme.primaryRose;
-    if (domain.contains('Motorik Halus')) return AppTheme.primaryTeal;
-    if (domain.contains('Bicara') || domain.contains('Bahasa')) return AppTheme.primaryRose;
-    if (domain.contains('Sosial') || domain.contains('Kognitif')) return AppTheme.primaryTeal;
     return AppTheme.primaryRose;
   }
 
@@ -174,11 +170,11 @@ class _MilestonePageState extends State<MilestonePage> {
                                 const SizedBox(height: 14),
                                 _buildProgressBar('Motorik Kasar', grossDone, grossTotal, AppTheme.primaryRose),
                                 const SizedBox(height: 10),
-                                _buildProgressBar('Motorik Halus', fineDone, fineTotal, AppTheme.primaryTeal),
+                                _buildProgressBar('Motorik Halus', fineDone, fineTotal, AppTheme.primaryRose),
                                 const SizedBox(height: 10),
                                 _buildProgressBar('Bicara & Bahasa', speechDone, speechTotal, AppTheme.primaryRose),
                                 const SizedBox(height: 10),
-                                _buildProgressBar('Sosialisasi & Kemandirian', socialDone, socialTotal, AppTheme.primaryTeal),
+                                _buildProgressBar('Sosialisasi & Kemandirian', socialDone, socialTotal, AppTheme.primaryRose),
                               ],
                             ),
                           ),

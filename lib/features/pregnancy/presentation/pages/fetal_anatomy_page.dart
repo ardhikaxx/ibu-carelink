@@ -467,10 +467,10 @@ class FetalAnatomyPage extends StatelessWidget {
           margin: const EdgeInsets.only(top: 2),
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: AppTheme.primaryTeal.withValues(alpha: 0.12),
+            color: AppTheme.primaryRose.withValues(alpha: 0.12),
             shape: BoxShape.circle,
           ),
-          child: const Icon(Icons.check_rounded, color: AppTheme.primaryTeal, size: 14),
+          child: const Icon(Icons.check_rounded, color: AppTheme.primaryRose, size: 14),
         ),
         const SizedBox(width: 12),
         Expanded(

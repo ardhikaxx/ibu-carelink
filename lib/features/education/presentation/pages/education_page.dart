@@ -346,12 +346,12 @@ class _EducationPageState extends State<EducationPage> {
                           const SizedBox(height: 12),
                           Row(
                             children: [
-                              const Icon(Icons.verified_user_rounded, size: 13.5, color: AppTheme.primaryTeal),
+                              const Icon(Icons.verified_user_rounded, size: 13.5, color: AppTheme.primaryRose),
                               const SizedBox(width: 6),
                               Expanded(
                                 child: Text(
                                   'Sumber: ${item.source}',
-                                  style: const TextStyle(color: AppTheme.primaryTeal, fontSize: 11.5, fontWeight: FontWeight.w700),
+                                  style: const TextStyle(color: AppTheme.primaryRose, fontSize: 11.5, fontWeight: FontWeight.w700),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -440,14 +440,14 @@ class _EducationPageState extends State<EducationPage> {
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryTeal.withValues(alpha: 0.08),
+                  color: AppTheme.primaryRose.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.3)),
+                  border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.3)),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.verified_rounded, color: AppTheme.primaryTeal, size: 18),
+                    const Icon(Icons.verified_rounded, color: AppTheme.primaryRose, size: 18),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Column(
@@ -460,7 +460,7 @@ class _EducationPageState extends State<EducationPage> {
                           const SizedBox(height: 2),
                           Text(
                             article.source,
-                            style: const TextStyle(color: AppTheme.primaryTeal, fontSize: 12.5, fontWeight: FontWeight.w800, height: 1.3),
+                            style: const TextStyle(color: AppTheme.primaryRose, fontSize: 12.5, fontWeight: FontWeight.w800, height: 1.3),
                           ),
                         ],
                       ),

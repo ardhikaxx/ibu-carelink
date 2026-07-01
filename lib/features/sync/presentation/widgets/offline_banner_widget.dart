@@ -39,7 +39,7 @@ class OfflineBannerWidget extends StatelessWidget {
             duration: const Duration(milliseconds: 300),
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            color: AppTheme.primaryTeal,
+            color: AppTheme.primaryRose,
             child: const SafeArea(
               bottom: false,
               child: Row(

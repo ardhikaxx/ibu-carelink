@@ -149,13 +149,11 @@ class _KickCounterPageState extends State<KickCounterPage> {
                         width: 230,
                         height: 230,
                         decoration: BoxDecoration(
-                          color: state.targetAchieved
-                              ? AppTheme.primaryTeal
-                              : AppTheme.primaryRose,
+                          color: AppTheme.primaryRose,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: (state.targetAchieved ? AppTheme.primaryTeal : AppTheme.primaryRose).withValues(alpha: 0.4),
+                              color: AppTheme.primaryRose.withValues(alpha: 0.4),
                               blurRadius: 30,
                               offset: const Offset(0, 15),
                             ),

@@ -212,7 +212,7 @@ class ProfilePage extends StatelessWidget {
                   const Divider(color: Color(0xFFF1F5F9), height: 1, indent: 64),
                   _buildMenuItem(
                     icon: Icons.help_center_rounded,
-                    color: AppTheme.primaryTeal,
+                    color: AppTheme.primaryRose,
                     title: 'Bantuan & FAQ Ibu CareLink',
                     subtitle: 'Panduan penggunaan fitur skrining & KPSP',
                     onTap: () {

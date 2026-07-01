@@ -112,7 +112,7 @@ class AboutAppPage extends StatelessWidget {
 
             _buildReferenceCard(
               icon: Icons.public_rounded,
-              color: AppTheme.primaryTeal,
+              color: AppTheme.primaryRose,
               title: 'World Health Organization (WHO 2026)',
               description:
                   'Perhitungan Z-Score rasio Tinggi Badan menurut Usia (TB/U) dan Berat Badan menurut Usia (BB/U) didasarkan pada WHO Child Growth Standards.',
