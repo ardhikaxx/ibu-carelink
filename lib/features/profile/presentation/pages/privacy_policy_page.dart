@@ -19,37 +19,40 @@ class PrivacyPolicyPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Security Shield Banner Card
+            // Security Shield Banner Card (Rose Pink Theme)
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(22),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF0F172A), Color(0xFF1E293B)],
+                gradient: LinearGradient(
+                  colors: [
+                    AppTheme.primaryRose,
+                    AppTheme.primaryRose.withValues(alpha: 0.85),
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(26),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF0F172A).withValues(alpha: 0.15),
-                    blurRadius: 20,
-                    offset: const Offset(0, 8),
+                    color: AppTheme.primaryRose.withValues(alpha: 0.3),
+                    blurRadius: 24,
+                    offset: const Offset(0, 10),
                   ),
                 ],
               ),
               child: Row(
                 children: [
                   Container(
-                    width: 52,
-                    height: 52,
+                    width: 54,
+                    height: 54,
                     decoration: BoxDecoration(
-                      color: AppTheme.successGreen.withValues(alpha: 0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
                       Icons.verified_user_rounded,
-                      color: AppTheme.successGreen,
-                      size: 28,
+                      color: Colors.white,
+                      size: 30,
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -61,8 +64,8 @@ class PrivacyPolicyPage extends StatelessWidget {
                           'Komitmen Privasi Total',
                           style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 17,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 18,
                             letterSpacing: -0.3,
                           ),
                         ),
@@ -70,8 +73,8 @@ class PrivacyPolicyPage extends StatelessWidget {
                         Text(
                           'Data medis ibu hamil & balita dienkripsi berlapis sesuai standar UU PDP & HIPAA.',
                           style: TextStyle(
-                            color: Color(0xFF94A3B8),
-                            fontSize: 12.5,
+                            color: Colors.white,
+                            fontSize: 13,
                             height: 1.4,
                           ),
                         ),
@@ -105,7 +108,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 
             _buildPolicySection(
               icon: Icons.lock_outline_rounded,
-              color: AppTheme.primaryRose,
+              color: AppTheme.primaryTeal,
               title: '2. Enkripsi & Penyimpanan Offline-First',
               content:
                   'Aplikasi kami dirancang dengan arsitektur Offline-First. Seluruh data kesehatan disimpan secara lokal di dalam basis data terenkripsi pada perangkat Anda terlebih dahulu. Sinkronisasi cloud (Firebase Cloud Firestore) dilakukan secara aman menggunakan protokol enkripsi TLS/SSL standar perbankan.',
@@ -123,7 +126,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 
             _buildPolicySection(
               icon: Icons.share_rounded,
-              color: AppTheme.primaryRose,
+              color: AppTheme.primaryTeal,
               title: '4. Berbagi dengan Tenaga Medis',
               content:
                   'Anda memiliki kontrol penuh untuk mengekspor atau membagikan ringkasan catatan kesehatan (seperti kurva WHO atau log kontraksi) langsung kepada dokter spesialis kandungan atau bidan pendamping saat jadwal konsultasi.',
@@ -139,17 +142,17 @@ class PrivacyPolicyPage extends StatelessWidget {
             ),
             const SizedBox(height: 28),
 
-            // Contact Card
+            // Contact Card (Medical Teal Theme)
             Container(
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
-                color: AppTheme.primaryRose.withValues(alpha: 0.06),
+                color: AppTheme.primaryTeal.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.2)),
+                border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.25)),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.mark_email_unread_rounded, color: AppTheme.primaryRose, size: 28),
+                  const Icon(Icons.mark_email_unread_rounded, color: AppTheme.primaryTeal, size: 28),
                   const SizedBox(width: 14),
                   Expanded(
                     child: Column(
