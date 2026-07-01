@@ -246,18 +246,18 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Ultra-Modern White Floating Gestation Card
+                    // Ultra-Modern Rose Pink Gestation Hero Card
                     Container(
                       padding: const EdgeInsets.all(24),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(28),
-                        border: Border.all(color: const Color(0xFFF1F5F9)),
+                        borderRadius: BorderRadius.circular(32),
+                        border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.18), width: 1.5),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFF0F172A).withValues(alpha: 0.04),
-                            blurRadius: 24,
-                            offset: const Offset(0, 10),
+                            color: AppTheme.primaryRose.withValues(alpha: 0.08),
+                            blurRadius: 30,
+                            offset: const Offset(0, 12),
                           ),
                         ],
                       ),
@@ -266,7 +266,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Row(
                                 children: [
@@ -274,12 +274,26 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                     height: 52,
                                     width: 52,
                                     decoration: BoxDecoration(
-                                      color: AppTheme.primaryRose.withValues(alpha: 0.12),
-                                      borderRadius: BorderRadius.circular(16),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          AppTheme.primaryRose,
+                                          AppTheme.primaryRose.withValues(alpha: 0.8),
+                                        ],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      ),
+                                      borderRadius: BorderRadius.circular(18),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppTheme.primaryRose.withValues(alpha: 0.3),
+                                          blurRadius: 10,
+                                          offset: const Offset(0, 4),
+                                        ),
+                                      ],
                                     ),
                                     child: const Icon(
                                       Icons.favorite_rounded,
-                                      color: AppTheme.primaryRose,
+                                      color: Colors.white,
                                       size: 26,
                                     ),
                                   ),
@@ -294,7 +308,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                             style: TextStyle(
                                               color: Color(0xFF0F172A),
                                               fontSize: 18,
-                                              fontWeight: FontWeight.w800,
+                                              fontWeight: FontWeight.w900,
                                             ),
                                           ),
                                           const SizedBox(width: 8),
@@ -311,10 +325,10 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 4),
+                                      const SizedBox(height: 3),
                                       Text(
                                         'Taksiran Lahir: ${DateHelper.formatIndonesianDate(pregnancy.estimatedDueDate)}',
-                                        style: const TextStyle(color: Color(0xFF64748B), fontSize: 13),
+                                        style: const TextStyle(color: Color(0xFF64748B), fontSize: 13, fontWeight: FontWeight.w600),
                                       ),
                                     ],
                                   ),
@@ -337,10 +351,10 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                   Text(
                                     '$weeks',
                                     style: const TextStyle(
-                                      color: Color(0xFF0F172A),
-                                      fontSize: 44,
+                                      color: AppTheme.primaryRose,
+                                      fontSize: 52,
                                       fontWeight: FontWeight.w900,
-                                      letterSpacing: -1.5,
+                                      letterSpacing: -2.0,
                                       height: 1.0,
                                     ),
                                   ),
@@ -348,10 +362,10 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                   const Text(
                                     'MINGGU',
                                     style: TextStyle(
-                                      color: Color(0xFF475569),
+                                      color: Color(0xFF334155),
                                       fontSize: 16,
                                       fontWeight: FontWeight.w800,
-                                      letterSpacing: 1.0,
+                                      letterSpacing: 1.2,
                                     ),
                                   ),
                                 ],
@@ -359,9 +373,9 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                                 decoration: BoxDecoration(
-                                  color: AppTheme.primaryTeal.withValues(alpha: 0.1),
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(color: AppTheme.primaryTeal.withValues(alpha: 0.25)),
+                                  color: AppTheme.primaryRose.withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(18),
+                                  border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.3)),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -369,12 +383,12 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                     Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Icon(Icons.timer_outlined, size: 13, color: AppTheme.primaryTeal),
+                                        Icon(Icons.timer_outlined, size: 13, color: AppTheme.primaryRose),
                                         const SizedBox(width: 4),
                                         Text(
                                           'MENUJU PERSALINAN',
                                           style: TextStyle(
-                                            color: AppTheme.primaryTeal,
+                                            color: AppTheme.primaryRose,
                                             fontSize: 10,
                                             fontWeight: FontWeight.w800,
                                             letterSpacing: 0.5,
@@ -386,7 +400,7 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                     Text(
                                       remainingWeeks > 0 ? '± $remainingWeeks Minggu Lagi' : 'Siap Bersalin',
                                       style: const TextStyle(
-                                        color: AppTheme.primaryTeal,
+                                        color: AppTheme.primaryRose,
                                         fontSize: 13.5,
                                         fontWeight: FontWeight.w800,
                                       ),
@@ -396,63 +410,78 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 16),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Progres Kehamilan',
-                                    style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.w600),
-                                  ),
-                                  Text(
-                                    '${(progressPercent * 100).toInt()}% (Hari ke-$progressDays/280)',
-                                    style: const TextStyle(color: AppTheme.primaryRose, fontSize: 12, fontWeight: FontWeight.w800),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 6),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: LinearProgressIndicator(
-                                  value: progressPercent,
-                                  backgroundColor: const Color(0xFFF1F5F9),
-                                  color: AppTheme.primaryRose,
-                                  minHeight: 8,
-                                ),
-                              ),
-                            ],
-                          ),
                           const SizedBox(height: 18),
                           Container(
-                            padding: const EdgeInsets.all(14),
+                            padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               color: const Color(0xFFF8FAFC),
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: const Color(0xFFF1F5F9)),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Progres Kehamilan',
+                                      style: TextStyle(color: Color(0xFF475569), fontSize: 12.5, fontWeight: FontWeight.w700),
+                                    ),
+                                    Text(
+                                      '${(progressPercent * 100).toInt()}% (Hari ke-$progressDays/280)',
+                                      style: const TextStyle(color: AppTheme.primaryRose, fontSize: 12.5, fontWeight: FontWeight.w800),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: LinearProgressIndicator(
+                                    value: progressPercent,
+                                    backgroundColor: const Color(0xFFE2E8F0),
+                                    color: AppTheme.primaryRose,
+                                    minHeight: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 14),
+                          Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: AppTheme.primaryRose.withValues(alpha: 0.06),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: AppTheme.primaryRose.withValues(alpha: 0.2)),
                             ),
                             child: Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(8),
+                                  padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(14),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppTheme.primaryRose.withValues(alpha: 0.1),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
                                   ),
-                                  child: const Icon(Icons.child_friendly_rounded, color: AppTheme.primaryRose, size: 20),
+                                  child: const Icon(Icons.child_friendly_rounded, color: AppTheme.primaryRose, size: 22),
                                 ),
-                                const SizedBox(width: 12),
+                                const SizedBox(width: 14),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Text('Analogi Perkembangan Janin', style: TextStyle(color: Color(0xFF64748B), fontSize: 11)),
-                                      const SizedBox(height: 2),
+                                      const Text('Analogi Perkembangan Janin', style: TextStyle(color: Color(0xFF64748B), fontSize: 11.5, fontWeight: FontWeight.w600)),
+                                      const SizedBox(height: 3),
                                       Text(
                                         pregnancy.fetalSizeFruitAnalogy,
-                                        style: const TextStyle(color: Color(0xFF0F172A), fontWeight: FontWeight.w800, fontSize: 14),
+                                        style: const TextStyle(color: Color(0xFF0F172A), fontWeight: FontWeight.w900, fontSize: 15),
                                       ),
                                     ],
                                   ),
@@ -460,17 +489,18 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 22),
                           SizedBox(
                             width: double.infinity,
-                            height: 54,
+                            height: 56,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: AppTheme.primaryTeal,
+                                backgroundColor: AppTheme.primaryRose,
                                 foregroundColor: Colors.white,
-                                elevation: 0,
+                                elevation: 4,
+                                shadowColor: AppTheme.primaryRose.withValues(alpha: 0.35),
                                 alignment: Alignment.center,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
                               ),
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => FetalAnatomyPage(pregnancy: pregnancy)));
@@ -479,11 +509,15 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.auto_awesome_rounded, size: 20),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    'Lihat Anatomi & Perkembangan Janin',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.0),
+                                  SizedBox(width: 10),
+                                  Flexible(
+                                    child: Text(
+                                      'Lihat Anatomi & Perkembangan Janin',
+                                      textAlign: TextAlign.center,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.5),
+                                    ),
                                   ),
                                 ],
                               ),
