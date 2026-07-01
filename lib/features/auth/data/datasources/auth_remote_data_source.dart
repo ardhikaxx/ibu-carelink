@@ -111,7 +111,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (errStr.contains('MissingPluginException') ||
           errStr.contains('UnsupportedError') ||
           errStr.contains('10:') ||
-          errStr.contains('sign_in_failed')) {
+          errStr.contains('sign_in_failed') ||
+          errStr.contains('PigeonUserDetails') ||
+          errStr.contains('subtype') ||
+          errStr.contains('type cast')) {
         String uid = 'google_fallback_user';
         if (firebaseAuth.currentUser != null) {
           uid = firebaseAuth.currentUser!.uid;
