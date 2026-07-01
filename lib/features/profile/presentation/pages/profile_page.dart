@@ -359,23 +359,24 @@ class ProfilePage extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: SizedBox(
-                            height: 48,
-                            child: OutlinedButton.icon(
-                              style: OutlinedButton.styleFrom(
-                                side: BorderSide(color: Colors.grey.shade300, width: 1.2),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                              ),
-                              onPressed: () {
-                                Navigator.of(dialogContext).pop();
-                                context.read<AuthBloc>().add(LogoutEvent());
-                                Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(builder: (_) => const LoginPage()),
-                                  (route) => false,
-                                );
-                              },
-                              icon: Icon(Icons.logout_rounded, size: 18, color: Colors.grey.shade700),
-                              label: Text(
+                          child: OutlinedButton.icon(
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+                              side: BorderSide(color: Colors.grey.shade300, width: 1.2),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            ),
+                            onPressed: () {
+                              Navigator.of(dialogContext).pop();
+                              context.read<AuthBloc>().add(LogoutEvent());
+                              Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(builder: (_) => const LoginPage()),
+                                (route) => false,
+                              );
+                            },
+                            icon: Icon(Icons.logout_rounded, size: 18, color: Colors.grey.shade700),
+                            label: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
                                 'Keluar',
                                 style: TextStyle(
                                   color: Colors.grey.shade700,
@@ -388,19 +389,20 @@ class ProfilePage extends StatelessWidget {
                         ),
                         const SizedBox(width: 12),
                         Expanded(
-                          child: SizedBox(
-                            height: 48,
-                            child: ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppTheme.primaryRose,
-                                foregroundColor: Colors.white,
-                                elevation: 3,
-                                shadowColor: AppTheme.primaryRose.withValues(alpha: 0.4),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                              ),
-                              onPressed: () => Navigator.of(dialogContext).pop(),
-                              icon: const Icon(Icons.verified_user_rounded, size: 18),
-                              label: const Text(
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+                              backgroundColor: AppTheme.primaryRose,
+                              foregroundColor: Colors.white,
+                              elevation: 3,
+                              shadowColor: AppTheme.primaryRose.withValues(alpha: 0.4),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            ),
+                            onPressed: () => Navigator.of(dialogContext).pop(),
+                            icon: const Icon(Icons.verified_user_rounded, size: 18),
+                            label: const FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
                                 'Tetap Masuk',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
