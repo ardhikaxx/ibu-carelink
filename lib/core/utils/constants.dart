@@ -114,61 +114,188 @@ class AppConstants {
     },
   ];
 
-  // CDC / Pediatric Developmental Milestones
+  // KPSP Kemenkes RI / Denver II Developmental Milestones
   static const List<Map<String, dynamic>> developmentalMilestones = [
+    // 0-3 Bulan (ageMonths: 3)
     {
-      'id': 'm_2_1',
-      'ageMonths': 2,
-      'domain': 'Sosial-Emosional',
-      'description': 'Menginisiasi senyum sosial ketika diajak bicara atau merespons senyuman'
-    },
-    {
-      'id': 'm_2_2',
-      'ageMonths': 2,
+      'id': 'm_3_1',
+      'ageMonths': 3,
       'domain': 'Motorik Kasar',
-      'description': 'Dapat mengangkat kepala sedikit saat dalam posisi tengkurap (tummy time)'
+      'description': 'Bayi dapat mengangkat kepala tegak 90 derajat saat posisi tengkurap (tummy time)'
     },
+    {
+      'id': 'm_3_2',
+      'ageMonths': 3,
+      'domain': 'Motorik Halus',
+      'description': 'Bayi dapat mengikuti gerak benda atau mainan yang digerakkan dari kiri ke kanan'
+    },
+    {
+      'id': 'm_3_3',
+      'ageMonths': 3,
+      'domain': 'Bicara & Bahasa',
+      'description': 'Mengeluarkan suara ocehan bergumam (cooing/babbling) dan tertawa keras'
+    },
+    {
+      'id': 'm_3_4',
+      'ageMonths': 3,
+      'domain': 'Sosialisasi & Kemandirian',
+      'description': 'Menginisiasi senyuman sosial dan menatap mata ibu saat diajak berbicara'
+    },
+
+    // 4-6 Bulan (ageMonths: 6)
     {
       'id': 'm_6_1',
       'ageMonths': 6,
       'domain': 'Motorik Kasar',
-      'description': 'Berguling dari terlentang ke tengkurap dan sebaliknya secara aktif'
+      'description': 'Berguling secara mandiri dari terlentang ke tengkurap dan sebaliknya'
     },
     {
       'id': 'm_6_2',
       'ageMonths': 6,
-      'domain': 'Bahasa',
-      'description': 'Mengeluarkan suara ocehan (babbling) merespons percakapan'
+      'domain': 'Motorik Halus',
+      'description': 'Dapat memegang mainan atau kerincingan dengan kedua tangan'
     },
+    {
+      'id': 'm_6_3',
+      'ageMonths': 6,
+      'domain': 'Bicara & Bahasa',
+      'description': 'Menoleh seketika ke arah suara panggil atau bunyi mainan'
+    },
+    {
+      'id': 'm_6_4',
+      'ageMonths': 6,
+      'domain': 'Sosialisasi & Kemandirian',
+      'description': 'Meraih benda atau makanan yang ada dalam jangkauannya'
+    },
+
+    // 7-9 Bulan (ageMonths: 9)
+    {
+      'id': 'm_9_1',
+      'ageMonths': 9,
+      'domain': 'Motorik Kasar',
+      'description': 'Dapat duduk mandiri tanpa ditopang selama minimal 60 detik'
+    },
+    {
+      'id': 'm_9_2',
+      'ageMonths': 9,
+      'domain': 'Motorik Halus',
+      'description': 'Mengambil benda kecil atau makanan remah menggunakan ibu jari dan telunjuk (menjimpit)'
+    },
+    {
+      'id': 'm_9_3',
+      'ageMonths': 9,
+      'domain': 'Bicara & Bahasa',
+      'description': 'Mengulang suku kata ganda tanpa arti seperti "ma-ma-ma" atau "da-da-da"'
+    },
+    {
+      'id': 'm_9_4',
+      'ageMonths': 9,
+      'domain': 'Sosialisasi & Kemandirian',
+      'description': 'Bisa bermain cilukba (peek-a-boo) dan melambaikan tangan (da-dah)'
+    },
+
+    // 10-12 Bulan (ageMonths: 12)
     {
       'id': 'm_12_1',
       'ageMonths': 12,
       'domain': 'Motorik Kasar',
-      'description': 'Dapat berdiri sendiri dan mencoba melangkah sambil berpegangan'
+      'description': 'Dapat berdiri sendiri tanpa berpegangan selama beberapa saat dan mulai merambat'
     },
     {
       'id': 'm_12_2',
       'ageMonths': 12,
-      'domain': 'Bahasa',
-      'description': 'Mengucapkan suku kata bermakna seperti "mama" atau "papa"'
+      'domain': 'Motorik Halus',
+      'description': 'Memasukkan mainan atau benda ke dalam wadah dan mengambilnya kembali'
     },
+    {
+      'id': 'm_12_3',
+      'ageMonths': 12,
+      'domain': 'Bicara & Bahasa',
+      'description': 'Mengucapkan minimal 1-2 kata bermakna spesifik (contoh: "mama", "papa", "mimi")'
+    },
+    {
+      'id': 'm_12_4',
+      'ageMonths': 12,
+      'domain': 'Sosialisasi & Kemandirian',
+      'description': 'Menunjukkan rasa ingin tahu dan menunjuk benda yang diinginkan dengan telunjuk'
+    },
+
+    // 13-18 Bulan (ageMonths: 18)
+    {
+      'id': 'm_18_1',
+      'ageMonths': 18,
+      'domain': 'Motorik Kasar',
+      'description': 'Berjalan mandiri dengan lancar dan mulai mencoba naik tangga dengan merambat'
+    },
+    {
+      'id': 'm_18_2',
+      'ageMonths': 18,
+      'domain': 'Motorik Halus',
+      'description': 'Menyusun atau menumpuk minimal 2-3 kubus/balok mainan tanpa jatuh'
+    },
+    {
+      'id': 'm_18_3',
+      'ageMonths': 18,
+      'domain': 'Bicara & Bahasa',
+      'description': 'Dapat memahami perintah sederhana (contoh: "ambil bolanya", "kembalikan ke ibu")'
+    },
+    {
+      'id': 'm_18_4',
+      'ageMonths': 18,
+      'domain': 'Sosialisasi & Kemandirian',
+      'description': 'Belajar makan dan minum sendiri menggunakan sendok atau cangkir'
+    },
+
+    // 19-24 Bulan (ageMonths: 24)
     {
       'id': 'm_24_1',
       'ageMonths': 24,
       'domain': 'Motorik Kasar',
-      'description': 'Berlari dan menendang bola dengan keseimbangan yang baik'
+      'description': 'Berlari dengan lancar tanpa mudah terjatuh dan menendang bola kecil ke depan'
     },
     {
       'id': 'm_24_2',
       'ageMonths': 24,
-      'domain': 'Kognitif',
-      'description': 'Menggabungkan dua kata menjadi kalimat pendek (contoh: "mau minum")'
+      'domain': 'Motorik Halus',
+      'description': 'Menyusun minimal 4-6 menara kubus dan mulai mencoret-coret kertas secara spontan'
     },
+    {
+      'id': 'm_24_3',
+      'ageMonths': 24,
+      'domain': 'Bicara & Bahasa',
+      'description': 'Menggabungkan 2 kata menjadi kalimat sederhana (contoh: "mau minum", "ibu pergi")'
+    },
+    {
+      'id': 'm_24_4',
+      'ageMonths': 24,
+      'domain': 'Sosialisasi & Kemandirian',
+      'description': 'Membantu atau meniru kegiatan rumah tangga sederhana seperti membereskan mainan'
+    },
+
+    // 25-36 Bulan (ageMonths: 36)
     {
       'id': 'm_36_1',
       'ageMonths': 36,
+      'domain': 'Motorik Kasar',
+      'description': 'Dapat melompat dengan kedua kaki bersamaan dan berdiri dengan satu kaki selama 2 detik'
+    },
+    {
+      'id': 'm_36_2',
+      'ageMonths': 36,
       'domain': 'Motorik Halus',
-      'description': 'Dapat melepaskan dan mengenakan pakaian sederhana sendiri'
+      'description': 'Meniru garis vertikal/horizontal dan belajar membuka pakaian sederhana sendiri'
+    },
+    {
+      'id': 'm_36_3',
+      'ageMonths': 36,
+      'domain': 'Bicara & Bahasa',
+      'description': 'Berbicara dalam kalimat 3 kata atau lebih dan dapat menyebutkan nama lengkapnya'
+    },
+    {
+      'id': 'm_36_4',
+      'ageMonths': 36,
+      'domain': 'Sosialisasi & Kemandirian',
+      'description': 'Mulai menunjukkan kemandirian saat buang air (toilet training) dan mencuci tangan'
     },
   ];
 

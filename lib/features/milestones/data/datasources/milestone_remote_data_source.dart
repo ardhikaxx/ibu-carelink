@@ -18,26 +18,43 @@ class MilestoneRemoteDataSourceImpl implements MilestoneRemoteDataSource {
       final colRef = firestore.collection('users').doc(userId).collection('children').doc(childId).collection('milestones');
       final snap = await colRef.orderBy('maxMonthBand').get();
 
-      if (snap.docs.isEmpty) {
-        // Inisialisasi KPSP RI / Denver II jika belum ada
+      String getBand(int m) {
+        if (m <= 3) return '0-3 bln';
+        if (m <= 6) return '4-6 bln';
+        if (m <= 9) return '7-9 bln';
+        if (m <= 12) return '10-12 bln';
+        if (m <= 18) return '13-18 bln';
+        if (m <= 24) return '19-24 bln';
+        return '25-36 bln';
+      }
+
+      if (snap.docs.isEmpty || snap.docs.length < AppConstants.developmentalMilestones.length) {
+        final existingTitles = snap.docs.map((d) => d.data()['title'] ?? '').toSet();
         final batch = firestore.batch();
-        final List<MilestoneModel> initialList = [];
+        bool hasNew = false;
+
         for (var item in AppConstants.developmentalMilestones) {
-          final docRef = colRef.doc();
-          final m = MilestoneModel(
-            id: docRef.id,
-            childId: childId,
-            title: item['description'],
-            domain: item['domain'],
-            targetAgeBand: '${item['ageMonths']} Bulan',
-            maxMonthBand: item['ageMonths'],
-            isAchieved: false,
-          );
-          batch.set(docRef, m.toFirestore());
-          initialList.add(m);
+          final desc = item['description'] as String;
+          if (!existingTitles.contains(desc)) {
+            final docRef = colRef.doc();
+            final m = MilestoneModel(
+              id: docRef.id,
+              childId: childId,
+              title: desc,
+              domain: item['domain'],
+              targetAgeBand: getBand(item['ageMonths']),
+              maxMonthBand: item['ageMonths'],
+              isAchieved: false,
+            );
+            batch.set(docRef, m.toFirestore());
+            hasNew = true;
+          }
         }
-        await batch.commit();
-        return initialList;
+        if (hasNew) {
+          await batch.commit();
+          final updatedSnap = await colRef.orderBy('maxMonthBand').get();
+          return updatedSnap.docs.map((doc) => MilestoneModel.fromFirestore(doc.data(), doc.id, childId)).toList();
+        }
       }
 
       return snap.docs.map((doc) => MilestoneModel.fromFirestore(doc.data(), doc.id, childId)).toList();

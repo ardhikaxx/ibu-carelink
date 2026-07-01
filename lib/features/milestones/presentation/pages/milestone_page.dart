@@ -6,6 +6,7 @@ import '../../../child_growth/domain/entities/child_entity.dart';
 import '../bloc/milestone_bloc.dart';
 import '../bloc/milestone_event.dart';
 import '../bloc/milestone_state.dart';
+import '../../domain/entities/milestone_entity.dart';
 
 class MilestonePage extends StatefulWidget {
   final ChildEntity child;
@@ -19,7 +20,30 @@ class MilestonePage extends StatefulWidget {
 
 class _MilestonePageState extends State<MilestonePage> {
   String _selectedBand = '0-3 bln';
-  final List<String> _ageBands = ['0-3 bln', '4-6 bln', '7-9 bln', '10-12 bln', '13-18 bln', '19-24 bln'];
+  final List<String> _ageBands = ['0-3 bln', '4-6 bln', '7-9 bln', '10-12 bln', '13-18 bln', '19-24 bln', '25-36 bln'];
+
+  bool _matchesBand(MilestoneEntity m, String band) {
+    if (m.targetAgeBand == band) return true;
+    final month = m.maxMonthBand;
+    switch (band) {
+      case '0-3 bln':
+        return month <= 3;
+      case '4-6 bln':
+        return month > 3 && month <= 6;
+      case '7-9 bln':
+        return month > 6 && month <= 9;
+      case '10-12 bln':
+        return month > 9 && month <= 12;
+      case '13-18 bln':
+        return month > 12 && month <= 18;
+      case '19-24 bln':
+        return month > 18 && month <= 24;
+      case '25-36 bln':
+        return month > 24 && month <= 36;
+      default:
+        return false;
+    }
+  }
 
   @override
   void initState() {
@@ -45,7 +69,7 @@ class _MilestonePageState extends State<MilestonePage> {
 
           if (state is MilestoneLoaded) {
             final all = state.milestones;
-            final bandFiltered = all.where((m) => m.targetAgeBand == _selectedBand).toList();
+            final bandFiltered = all.where((m) => _matchesBand(m, _selectedBand)).toList();
 
             // Calculate overall domain progress
             int grossTotal = all.where((m) => m.domain.contains('Motorik Kasar')).length;
