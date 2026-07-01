@@ -8,7 +8,7 @@ import '../../../kick_counter/presentation/pages/kick_counter_page.dart';
 import '../bloc/pregnancy_bloc.dart';
 import '../bloc/pregnancy_event.dart';
 import '../bloc/pregnancy_state.dart';
-import 'fetal_3d_view_page.dart';
+import 'fetal_anatomy_page.dart';
 import 'symptom_log_page.dart';
 
 class PregnancyDashboardPage extends StatefulWidget {
@@ -392,14 +392,14 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                               ),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (_) => Fetal3DViewPage(pregnancy: pregnancy)));
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => FetalAnatomyPage(pregnancy: pregnancy)));
                               },
-                              icon: const Icon(Icons.view_in_ar_rounded, size: 20),
+                              icon: const Icon(Icons.child_care_rounded, size: 20),
                               label: const Padding(
                                 padding: EdgeInsets.only(bottom: 2),
                                 child: Text(
-                                  'Lihat Analogi & Model Janin 3D',
-                                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.5, height: 1.35),
+                                  'Lihat Anatomi & Perkembangan Janin',
+                                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.0, height: 1.35),
                                 ),
                               ),
                             ),

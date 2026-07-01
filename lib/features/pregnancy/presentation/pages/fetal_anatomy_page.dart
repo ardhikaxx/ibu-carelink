@@ -3,9 +3,9 @@ import '../../../../core/utils/theme.dart';
 import '../../../../core/widgets/custom_floating_header.dart';
 import '../../domain/entities/pregnancy_entity.dart';
 
-class Fetal3DViewPage extends StatelessWidget {
+class FetalAnatomyPage extends StatelessWidget {
   final PregnancyEntity pregnancy;
-  const Fetal3DViewPage({super.key, required this.pregnancy});
+  const FetalAnatomyPage({super.key, required this.pregnancy});
 
   @override
   Widget build(BuildContext context) {

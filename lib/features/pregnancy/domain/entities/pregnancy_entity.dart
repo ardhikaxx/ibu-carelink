@@ -21,7 +21,7 @@ class PregnancyEntity extends Equatable {
   int get gestationalWeeks => DateHelper.calculateGestationalWeeks(hpht);
   int get trimester => DateHelper.calculateTrimester(gestationalWeeks);
 
-  /// Metafora analogi buah 3D untuk ukuran janin berdasarkan usia minggu (12 Tahapan Anatomi)
+  /// Metafora analogi buah untuk ukuran janin berdasarkan usia minggu (12 Tahapan Anatomi)
   String get fetalSizeFruitAnalogy {
     final w = gestationalWeeks;
     if (w <= 3) return 'Biji Selasih / Zigot (~0.1 cm)';
