@@ -72,7 +72,7 @@ class _MainNavPageState extends State<MainNavPage> {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: const Text(
-                          'PRO',
+                          'PLUS',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 8.5,
@@ -84,9 +84,9 @@ class _MainNavPageState extends State<MainNavPage> {
                     ],
                   ),
                   const SizedBox(height: 2),
-                  Text(
-                    _currentIndex == 0 ? 'Pemantauan Kehamilan Digital' : 'Pertumbuhan & Kembang Bayi',
-                    style: const TextStyle(
+                  const Text(
+                    'Sahabat Kesehatan Ibu, Bayi & Balita',
+                    style: TextStyle(
                       color: Color(0xFF64748B),
                       fontSize: 11.5,
                       fontWeight: FontWeight.w600,
