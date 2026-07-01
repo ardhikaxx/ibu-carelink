@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ibu_carelink/core/utils/theme.dart';
 
 class CustomFloatingHeader extends StatelessWidget implements PreferredSizeWidget {
   final Widget? titleWidget;
@@ -75,17 +76,44 @@ class CustomFloatingHeader extends StatelessWidget implements PreferredSizeWidge
                     const SizedBox(width: 12),
                   Expanded(
                     child: titleWidget ??
-                        Text(
-                          title ?? '',
-                          style: const TextStyle(
-                            color: Color(0xFF0F172A),
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16,
-                            letterSpacing: -0.3,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                        (title == 'Ibu CareLink'
+                            ? RichText(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(
+                                  children: const [
+                                    TextSpan(
+                                      text: 'Ibu ',
+                                      style: TextStyle(
+                                        color: AppTheme.primaryRose,
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 18.5,
+                                        letterSpacing: -0.5,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'CareLink',
+                                      style: TextStyle(
+                                        color: Color(0xFF0F172A),
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 18.5,
+                                        letterSpacing: -0.3,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Text(
+                                title ?? '',
+                                style: const TextStyle(
+                                  color: Color(0xFF0F172A),
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 16,
+                                  letterSpacing: -0.3,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              )),
                   ),
                   if (actions != null) ...actions!,
                 ],
