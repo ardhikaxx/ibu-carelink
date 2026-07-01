@@ -464,23 +464,28 @@ class _PregnancyDashboardPageState extends State<PregnancyDashboardPage> {
                           SizedBox(
                             width: double.infinity,
                             height: 54,
-                            child: ElevatedButton.icon(
+                            child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppTheme.primaryTeal,
                                 foregroundColor: Colors.white,
                                 elevation: 0,
+                                alignment: Alignment.center,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                               ),
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => FetalAnatomyPage(pregnancy: pregnancy)));
                               },
-                              icon: const Icon(Icons.auto_awesome_rounded, size: 20),
-                              label: const Padding(
-                                padding: EdgeInsets.only(bottom: 2),
-                                child: Text(
-                                  'Lihat Anatomi & Perkembangan Janin',
-                                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.0, height: 1.35),
-                                ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.auto_awesome_rounded, size: 20),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    'Lihat Anatomi & Perkembangan Janin',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.0),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
