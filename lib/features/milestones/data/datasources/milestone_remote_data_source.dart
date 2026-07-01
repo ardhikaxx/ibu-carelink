@@ -15,7 +15,7 @@ class MilestoneRemoteDataSourceImpl implements MilestoneRemoteDataSource {
   @override
   Future<List<MilestoneModel>> getMilestones(String userId, String childId) async {
     try {
-      final colRef = firestore.collection('users').doc(userId).collection('children').doc(childId).collection('milestones');
+      final colRef = firestore.collection('users').doc(userId).collection('children').doc(childId).collection('developmental_milestones');
       final snap = await colRef.orderBy('maxMonthBand').get();
 
       String getBand(int m) {
@@ -71,7 +71,7 @@ class MilestoneRemoteDataSourceImpl implements MilestoneRemoteDataSource {
           .doc(userId)
           .collection('children')
           .doc(model.childId)
-          .collection('milestones')
+          .collection('developmental_milestones')
           .doc(model.id);
       await ref.set(model.toFirestore(), SetOptions(merge: true));
       return model;

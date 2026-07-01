@@ -68,8 +68,11 @@ service cloud.firestore {
           allow delete: if isOwner(userId);
         }
 
-        // Subkoleksi Developmental Milestones
+        // Subkoleksi Developmental Milestones & Milestones
         match /developmental_milestones/{milestoneId} {
+          allow read, write: if isOwner(userId);
+        }
+        match /milestones/{milestoneId} {
           allow read, write: if isOwner(userId);
         }
       }
